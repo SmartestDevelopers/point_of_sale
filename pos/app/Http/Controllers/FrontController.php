@@ -17,6 +17,7 @@ class FrontController extends Controller
         return view('index');
     }
 
+   
     /**
      * Show the form for creating a new resource.
      *
