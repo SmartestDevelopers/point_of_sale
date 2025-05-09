@@ -12,15 +12,18 @@
 
 
 	<!--begin::Global Theme Styles(used by all pages)-->
-	<link href="assets/css/stylec619.css?v=1.0" rel="stylesheet" type="text/css" />
+	
+	<link href="{{ asset('point-of-sale/assets/css/stylec619.css') }}" rel="stylesheet" type="text/css" />
 	<!--end::Global Theme Styles-->
 
-	<link href="{{ asset('pos/public/assets/api/pace/pace-theme-flat-top.css')}}" rel="stylesheet" type="text/css" />
-	<link href="{{ asset('pos/public/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet" type="text/css" />
-	<link href="{{ asset('pos/public/assets/api/datatable/jquery.dataTables.min.css;)}}" rel="stylesheet" type="text/css" />
+	<!--end::Global Theme Styles-->
+	<link href="{{ asset('point-of-sale/assets/api/pace/pace-theme-flat-top.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('point-of-sale/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('point-of-sale/assets/api/datatable/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
+	<link rel="shortcut icon" href="{{ asset('point-of-sale/assets/media/logos/favicon.html') }}" />
 
 
-	<link rel="shortcut icon" href="assets/media/logos/favicon.html" />
+	<link rel="shortcut icon" href="{{ asset('point-of-sale/assets/media/logos/favicon.html') }}" />
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -1594,7 +1597,10 @@
 										Edit Profile
 									</a>
 
-									<a href="#" class="dropdown-item">
+									<a href="{{ route('logout') }} class="dropdown-item"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
 										<span class="svg-icon svg-icon-xl svg-icon-primary me-2">
 											<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
 												viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1604,7 +1610,17 @@
 												<line x1="12" y1="2" x2="12" y2="12"></line>
 											</svg>
 										</span>
-										Logout
+										<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
 									</a>
 								</div>
 
@@ -1618,6 +1634,10 @@
 					<!--end::Container-->
 				</div>
 				<!--end::Header-->
+				<div class="content d-flex flex-column flex-column-fluid" id="tc_content">
+					@yield('content')
+				</div>
+
 
 	
 				<div class="footer bg-white py-4 d-flex flex-lg-column" id="tc_footer">
@@ -1755,17 +1775,20 @@
 
 		</div>
 	</div>	
-	<script src="{{ asset('point_of_sale/pos/public/assets/js/plugin.bundle.min.js')}}"></script>
-	<script src="{{ asset('point_of_sale/pos/public/assets/js/bootstrap.bundle.min.js')}}"></script>
-	<script src="{{ asset('point_of_sale/pos/public/assets/api/jqueryvalidate/jquery.validate.min.js')}}"></script>
-	<script src="{{ asset('point_of_sale/pos/public/assets/api/apexcharts/apexcharts.js')}}"></script>
-	<script src="{{ asset('point_of_sale/pos/public/assets/api/apexcharts/scriptcharts.js')}}"></script> 
-	<script src="{{ asset('point_of_sale/pos/public/assets/api/pace/pace.js')}}"></script>
-	<script src="{{ asset('point_of_sale/pos/public/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js')}}"></script>
-	<script src="{{ asset('point_of_sale/pos/public/assets/api/quill/quill.min.js')}}"></script>
-	<script src="{{ asset('point_of_sale/pos/public/assets/api/datatable/jquery.dataTables.min.js')}}"></script>
 	
-	<script src="{{ asset('point_of_sale/pos/public/assets/js/script.bundle.js')}}"></script>
+</body>
+<!--end::Body-->
+
+<script src="{{ asset('point-of-sale/assets/js/plugin.bundle.min.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/api/jqueryvalidate/jquery.validate.min.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/api/apexcharts/apexcharts.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/api/apexcharts/scriptcharts.js') }}"></script> 
+	<script src="{{ asset('point-of-sale/assets/api/pace/pace.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/api/quill/quill.min.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/api/datatable/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/js/script.bundle.js') }}"></script>
 	<script>
 		var options = {
 	  debug: 'info',
@@ -1777,16 +1800,9 @@
 	  theme: 'snow'
 	};
 	var editor = new Quill('#editor', options);
-	
-	
 	jQuery(document).ready( function () {
 		jQuery('#myTable').DataTable();
 	} );
 	</script>
-
-</body>
-<!--end::Body-->
-
-
 
 </html>

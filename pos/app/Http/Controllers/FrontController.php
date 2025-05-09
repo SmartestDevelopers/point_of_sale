@@ -14,9 +14,12 @@ class FrontController extends Controller
     public function index()
     {
         //
-        return view('index');
+
+        return redirect('login');
+        //return view('index');
     }
 
+   
     /**
      * Show the form for creating a new resource.
      *
