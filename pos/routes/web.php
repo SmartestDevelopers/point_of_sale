@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'FrontController@index')->name('index');
 
-Route::get('/catalog', 'CatalogController@index')->name('index');
+Route::get('/product-list', 'ProductController@index')->name('index');
 
 Route::get('/expense', 'ExpenseController@index')->name('index');
 
