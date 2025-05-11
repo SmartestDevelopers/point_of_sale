@@ -26,23 +26,25 @@ Route::get('/product-list', 'ProductController@index')->name('index');
 
 Route::get('/expense-list', 'ExpenseController@index')->name('index');
 
-Route::get('/media', 'MediaController@index')->name('index');
+Route::get('/media-manage', 'MediaController@index')->name('index');
 
-Route::get('/people', 'PeopleController@index')->name('index');
+Route::get('/customer-list', 'CustomerController@index')->name('index');
 
-Route::get('/report', 'ReportController@index')->name('index');
+Route::get('/profit-loss-report', 'ReportController@index')->name('index');
 
 Route::get('/record', 'RecordController@index')->name('index');
 
-Route::get('/quotation', 'QuotationController@index')->name('index');
+Route::get('/quotations-list', 'QuotationController@index')->name('index');
 
-Route::get('/purchase', 'PurchaseController@index')->name('index');
+Route::get('/purchase-list', 'PurchaseController@index')->name('index');
 
-Route::get('/return', 'ReturnController@index')->name('index');
+Route::get('/sale-return', 'ReturnController@index')->name('index');
 
-Route::get('/sell-order', 'SellOrderController@index')->name('index');
+Route::get('/order-list', 'SellOrderController@index')->name('index');
 
-Route::get('/setting', 'SettingController@index')->name('index');
+Route::get('/business-setting-general', 'SettingController@index')->name('index');
+
+Route::get('/accounts-list', 'AccountsController@index')->name('index');
 
 
 

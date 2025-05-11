@@ -219,7 +219,7 @@
 															</div>
 															<div class="thumbnail-imges ">
 																<a class="img-select d-block" href="javascript:void(0);">
-																<img class="img-fluid" src="assets/images/carousel/slide2.jpg" alt="image">
+																<img class="img-fluid" src="{{ url('assets/images/carousel/slide2.jpg')}}" alt="image">
 															</a>
 															</div>
 														</div>
@@ -2191,7 +2191,7 @@
 															</div>
 															<div class="thumbnail-imges mb-2 ">
 																<a class="img-select d-block" href="javascript:void(0);">
-																<img class="img-fluid" src="assets/images/carousel/element-banner4-2.jpg" alt="image">
+																<img class="img-fluid" src="{{ asset('point-of-sale/assets/images/carousel/element-banner4-2.jpg')}}" alt="image">
 															</a>
 															</div>
 														</div>
@@ -2247,7 +2247,7 @@
 															</div>
 															<div class="thumbnail-imges mb-2 ">
 																<a class="img-select d-block" href="javascript:void(0);">
-																<img class="img-fluid" src="assets/images/carousel/full-banner.jpg" alt="image">
+																<img class="img-fluid" src="{{ asset('point-of-sale/assets/images/carousel/full-banner.jpg')}}" alt="image">
 															</a>
 															</div>
 														</div>
@@ -4591,7 +4591,7 @@
 															</div>
 															<div class="thumbnail-imges mb-2 ">
 																<a class="img-select d-block" href="javascript:void(0);">
-																<img class="img-fluid" src="assets/images/carousel/element-banner4-2.jpg" alt="image">
+																<img class="img-fluid" src="{{ asset('point-of-sale/assets/images/carousel/element-banner4-2.jpg')}}" alt="image">
 															</a>
 															</div>
 														</div>

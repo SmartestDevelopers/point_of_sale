@@ -14,7 +14,7 @@ class SellOrderController extends Controller
     public function index()
     {
         //
-        return view('viewsellorder');
+        return view('sellorder.viewsellorder');
     }
 
     /**

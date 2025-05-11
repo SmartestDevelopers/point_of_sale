@@ -139,7 +139,7 @@
 									<div class="collapse nav-collapse" id="media" data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="media-manage.html" class="nav-link sub-nav-link">
+												<a href="{{ url('media-manage')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -149,7 +149,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="{{ url('/media/viewmedia')}}" class="nav-link sub-nav-link">
+												<a href="{{ url('media-manage')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -319,7 +319,7 @@
 									<div class="collapse nav-collapse" id="catalogPurchase"  data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="purchase-list.html" class="nav-link sub-nav-link">
+												<a href="{{url('purchase-list')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -355,7 +355,7 @@
 									<div class="collapse nav-collapse" id="order"  data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="order-list.html" class="nav-link sub-nav-link">
+												<a href="{{url('order-list')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -411,7 +411,7 @@
 									<div class="collapse nav-collapse" id="Quotations"  data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="quotations-list.html" class="nav-link sub-nav-link">
+												<a href="{{url('quotations-list')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -445,7 +445,7 @@
 									<div class="collapse nav-collapse" id="Returns" data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="sale-return.html" class="nav-link sub-nav-link">
+												<a href="{{ url('sale-return')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -548,7 +548,7 @@
 													</a>
 												</li>
 												<li class="nav-item">
-													<a href="customer-list.html" class="nav-link sub-nav-link">
+													<a href="{{url('customer-list')}}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -583,7 +583,7 @@
 									<div class="collapse nav-collapse" id="account" data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="accounts-list.html" class="nav-link sub-nav-link">
+												<a href="{{url('accounts-list')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -681,7 +681,7 @@
 									<div class="collapse nav-collapse" id="reports" data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="profit-loss-report.html" class="nav-link sub-nav-link">
+												<a href="{{url('profit-loss-report')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -809,7 +809,7 @@
 													<div class="collapse nav-collapse" id="settingB" data-bs-parent="#accordion3">
 														<ul class="nav flex-column">
 															<li class="nav-item">
-																<a href="bussiness-setting.html#general"  class="nav-link mini-sub-nav-link">
+																<a href="{{url('business-setting-general')}}"  class="nav-link mini-sub-nav-link">
 																
 																	<span class="nav-text">General</span>
 																</a>

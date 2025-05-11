@@ -14,7 +14,7 @@ class ReturnController extends Controller
     public function index()
     {
         //
-        return view('viewreturn');
+        return view('return.viewreturn');
     }
 
     /**
