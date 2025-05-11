@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -23,7 +24,7 @@ Route::get('/', 'FrontController@index')->name('index');
 
 Route::get('/product-list', 'ProductController@index')->name('index');
 
-Route::get('/expense', 'ExpenseController@index')->name('index');
+Route::get('/expense-list', 'ExpenseController@index')->name('index');
 
 Route::get('/media', 'MediaController@index')->name('index');
 
