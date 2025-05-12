@@ -82,4 +82,11 @@ class ProductController extends Controller
     {
         //
     }
+
+
+
+    public function addProduct()
+    {
+        return view('catalog.addproduct');
+    }
 }

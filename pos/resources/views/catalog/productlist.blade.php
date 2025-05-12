@@ -29,7 +29,7 @@
 														</h3>
 													</div>
 												    <div class="icons d-flex">
-														<a href="add-product.html" class="ms-2" >
+														<a href="{{url('add-product')}}" class="ms-2" >
 															<span class="bg-secondary h-30px font-size-h5 w-30px d-flex align-items-center justify-content-center  rounded-circle shadow-sm ">
 															
 																<svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-plus white" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
