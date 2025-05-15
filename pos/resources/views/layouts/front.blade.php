@@ -1780,7 +1780,10 @@
 </body>
 <!--end::Body-->
 
-<script src="{{ asset('point-of-sale/assets/js/plugin.bundle.min.js') }}"></script>
+
+
+
+	<script src="{{ asset('point-of-sale/assets/js/plugin.bundle.min.js') }}"></script>
 	<script src="{{ asset('point-of-sale/assets/js/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('point-of-sale/assets/api/jqueryvalidate/jquery.validate.min.js') }}"></script>
 	<script src="{{ asset('point-of-sale/assets/api/apexcharts/apexcharts.js') }}"></script>
@@ -1789,8 +1792,36 @@
 	<script src="{{ asset('point-of-sale/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 	<script src="{{ asset('point-of-sale/assets/api/quill/quill.min.js') }}"></script>
 	<script src="{{ asset('point-of-sale/assets/api/datatable/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/api/multiple-select/multiple-select.min.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/js/sweetalert.js') }}"></script>
+	<script src="{{ asset('point-of-sale/assets/js/sweetalert1.js') }}"></script>
 	<script src="{{ asset('point-of-sale/assets/js/script.bundle.js') }}"></script>
-	<script>
+	
+<script>
+	jQuery(function() {
+        jQuery('.english-select').multipleSelect({
+      filter: true,
+      filterAcceptOnEnter: true
+    })
+  });
+  jQuery(function() {
+        jQuery('.arabic-select').multipleSelect({
+      filter: true,
+      filterAcceptOnEnter: true
+    })
+  });
+jQuery(document).ready( function () {
+	jQuery('#productUnitTable').dataTable( {
+    "pagingType": "simple_numbers",
+  
+    "columnDefs": [ {
+      "targets"  : 'no-sort',
+      "orderable": false,
+    }]
+});
+});
+
+
 		var options = {
 	  debug: 'info',
 	  modules: {

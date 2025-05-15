@@ -27,6 +27,10 @@ Route::get('/add-product', 'ProductController@addProduct')->name('addProduct');
 
 
 
+
+Route::resource('product-units', 'ProductUnits');
+
+
 Route::get('/expense-list', 'ExpenseController@index')->name('index');
 
 Route::get('/media-manage', 'MediaController@index')->name('index');
