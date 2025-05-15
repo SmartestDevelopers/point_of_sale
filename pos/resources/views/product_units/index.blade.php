@@ -88,13 +88,18 @@
 																	</tr>
 																</thead>
 																<tbody class="kt-table-tbody text-dark">
+
+																@php
+																	$number = 1;
+
+																@endphp
 																	@foreach($product_units as $product_unit)
-<tr class="kt-table-row kt-table-row-level-0">
-																		<td  >#01</td>
+																	<tr class="kt-table-row kt-table-row-level-0">
+																		<td  >{{$number++}}</td>
 																		<td class="text-center">
-																			kg
+																			{{ $product_unit->unit_name }} 
 																		</td>
-																		<td class="text-center">In Active</td>
+																		<td class="text-center">{{ $product_unit->status }} </td>
 																		
 																		<td>
 																			<div class="card-toolbar text-end">

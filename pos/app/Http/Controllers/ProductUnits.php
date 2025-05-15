@@ -20,12 +20,19 @@ class ProductUnits extends Controller
         (1) DB QUERY
         (2) Eloquent ORM
         */
-        $units = DB::table('product_units')->get(); 
+        $product_units = DB::table('product_units')->get(); 
 
+
+// echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
+
+// $browser = get_browser(null, true);
+// print_r($browser);
+
+        // die();
         // dd($units);
         // die();
 
-        return view('product_units.index', compact('units'));
+        return view('product_units.index', compact('product_units'));
     }
 
     /**
