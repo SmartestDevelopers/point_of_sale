@@ -30,6 +30,10 @@ Route::get('/add-product', 'ProductController@addProduct')->name('addProduct');
 
 Route::resource('product-units', 'ProductUnits');
 
+Route::post('/product-units/{id}', 'ProductUnits@update')->name('update');
+
+
+
 
 Route::get('/expense-list', 'ExpenseController@index')->name('index');
 

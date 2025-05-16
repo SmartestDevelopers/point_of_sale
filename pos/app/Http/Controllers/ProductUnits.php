@@ -23,10 +23,10 @@ class ProductUnits extends Controller
         $product_units = DB::table('product_units')->get(); 
 
 
-// echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
+        // echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
 
-// $browser = get_browser(null, true);
-// print_r($browser);
+        // $browser = get_browser(null, true);
+        // print_r($browser);
 
         // die();
         // dd($units);
@@ -54,6 +54,26 @@ class ProductUnits extends Controller
     public function store(Request $request)
     {
         //
+
+        $rows = $request->all();
+
+        // dd($rows);
+
+        $unit_name = $rows['unit_name'];
+        $status = $rows['status'];
+
+        //insert these values into the database
+        $insert = DB::table('product_units')->insert([
+            'unit_name' => $unit_name,
+            'status' => $status
+        ]);
+        //  dd($insert);
+         if($insert){
+            return redirect()->back()->with('success', 'Product Unit Created Successfully');
+         }else{
+            return redirect()->back()->with('error', 'Product Unit Creation Failed');
+         }
+
     }
 
     /**
@@ -88,6 +108,20 @@ class ProductUnits extends Controller
     public function update(Request $request, $id)
     {
         //
+        // update record in the database
+        $rows = $request->all();
+        $unit_name = $rows['unit_name'];
+        $status = $rows['status'];
+        $update = DB::table('product_units')->where('id', $id)->update([
+            'unit_name' => $unit_name,
+            'status' => $status
+        ]);
+        if($update){
+            return redirect()->back()->with('success', 'Product Unit Updated Successfully');
+         }else{
+            return redirect()->back()->with('error', 'Product Unit Update Failed');
+         }
+        // dd($update);
     }
 
     /**
