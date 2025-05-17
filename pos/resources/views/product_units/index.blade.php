@@ -25,13 +25,7 @@
 									<div class="row">
 										<div class="col-lg-12 col-xl-12 px-4">
 											<div class="card card-custom gutter-b bg-transparent shadow-none border-0" >
-												<div class="card-header align-items-center  border-bottom-dark px-0">
-													<div class="card-title mb-0">
-														<h3 class="card-label mb-0 font-weight-bold text-body">Product Units
-														</h3>
-
-														
-														@if (session('success'))
+												@if (session('success'))
 															<div class="alert alert-success mt-2">
 																{{ session('success') }}
 															</div>
@@ -41,6 +35,12 @@
 																{{ session('error') }}
 															</div>
 														@endif
+												<div class="card-header align-items-center  border-bottom-dark px-0">
+												
+														
+													<div class="card-title mb-0">
+														<h3 class="card-label mb-0 font-weight-bold text-body">Product Units
+														</h3>
 													</div>
 												    <div class="icons d-flex">
 
@@ -168,7 +168,8 @@
 
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
-																					<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
+																					<a class="dropdown-item" title="Delete" href="{{url('product-unit-delete',$product_unit->id)}}">Delete</a>
+																					
 																				</div>
 																			</div>
 																		</td>

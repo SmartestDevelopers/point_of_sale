@@ -20,9 +20,7 @@ class ProductUnits extends Controller
         (1) DB QUERY
         (2) Eloquent ORM
         */
-        $product_units = DB::table('product_units')->get(); 
-
-
+        $product_units = DB::table('product_units')->where('is_deleted',0)->get(); 
         // echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
 
         // $browser = get_browser(null, true);
@@ -132,6 +130,22 @@ class ProductUnits extends Controller
      */
     public function destroy($id)
     {
-        //
+    
+        echo "Product Unit Deleted Successfully";
+    }
+
+
+    public function productUnitDelete($id)
+    {
+
+        
+         $delete = DB::table('product_units')->where('id', $id)->update(['is_deleted' => 1]);
+        // $delete = DB::table('product_units')->where('id', $id)->delete();
+        if($delete){
+            return redirect()->back()->with('success', 'Product Unit Deleted Successfully');
+         }else{
+            return redirect()->back()->with('error', 'Product Unit Deletion Failed');
+         }
+      
     }
 }
