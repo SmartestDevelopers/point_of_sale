@@ -27,7 +27,6 @@ Route::get('/add-product', 'ProductController@addProduct')->name('addProduct');
 
 
 
-
 Route::resource('product-units', 'ProductUnits');
 
 Route::get('product-unit-delete/{id}','ProductUnits@productUnitDelete');
@@ -56,7 +55,13 @@ Route::get('/business-setting-general', 'SettingController@index')->name('index'
 
 Route::get('/accounts-list', 'AccountsController@index')->name('index');
 
+Route::resource('product-brands', 'ProductBrands');
 
+Route::resource('product-categories', 'ProductCategoriesController');
+
+Route::resource('product-reviews', 'ProductReviewController');
+
+Route::resource('product-variations', 'ProductVariationsController');
 
 
 

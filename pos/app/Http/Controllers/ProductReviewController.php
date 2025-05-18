@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-
-class ProductBrands extends Controller
+class ProductReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class ProductBrands extends Controller
     {
         //
 
-        $product_brands = DB::table('product_brands')->get(); 
+        $product_reviews = DB::table('product_reviews')->get(); 
 
-        return view('product_brands.index', compact('product_brands'));
+        return view('product_review.index', compact('product_review'));
     }
 
     /**
