@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class ProductController extends Controller
 {
@@ -87,6 +88,8 @@ class ProductController extends Controller
 
     public function addProduct()
     {
-        return view('catalog.addproduct');
+        $productUnits = DB::table('product_units')->where('is_deleted','0')->get();
+        $productCategories = DB::table('product_categories')->where('is_deleted','0')->get();
+        return view('catalog.addproduct', compact('productUnits', 'productCategories'));
     }
 }

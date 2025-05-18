@@ -106,14 +106,87 @@
 										<div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
 											<div class="card card-custom gutter-b bg-white border-0" >
 												<div class="card-header border-0 align-items-center">
-													<h3 class="card-label mb-0 font-weight-bold text-body">General Information
+													<h3 class="card-label mb-0 font-weight-bold text-body">Product Information
 													</h3>
 												</div>
 											
 											
 												<div class="card-body" id="printableTable">
 													<div class="row">
-														<div class="col-md-6 col-12">
+
+													<h2 class="mb-4">Add New Product</h2>
+    <form>
+      <!-- Product Name -->
+	  <div class="row">
+
+      <div class="col-md-4 mb-3">
+        <label for="productName" class="form-label">Product Name</label>
+        <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+      </div>
+
+      <!-- Product Category -->
+      <div class="col-md-4 mb-3">
+        <label for="productCategory" class="form-label">Product Category</label>
+        <select class="form-select" id="productCategory" required>
+          <option selected disabled>Choose category</option>
+          <option value="Beverages">Beverages</option>
+          <option value="Snacks">Snacks & Confectionery</option>
+          <option value="Dairy">Dairy & Eggs</option>
+          <option value="Fruits">Fruits & Vegetables</option>
+          <option value="Bakery">Bakery & Breads</option>
+          <option value="Meat">Meat & Seafood</option>
+          <option value="Frozen">Frozen Foods</option>
+          <option value="Household">Household Supplies</option>
+          <option value="Health">Health & Personal Care</option>
+          <option value="Grocery">Groceries & Dry Goods</option>
+        </select>
+      </div>
+
+      <!-- Product Unit -->
+      <div class="col-md-4 mb-3">
+        <label for="productUnit" class="form-label">Product Unit</label>
+        <select class="form-select" id="productUnit" required>
+          <option selected disabled>Choose unit</option>
+          <option value="pcs">Piece (pcs)</option>
+          <option value="kg">Kilogram (kg)</option>
+          <option value="g">Gram (g)</option>
+          <option value="L">Liter (L)</option>
+          <option value="ml">Milliliter (ml)</option>
+          <option value="pack">Pack</option>
+          <option value="box">Box</option>
+          <option value="dozen">Dozen</option>
+          <option value="m">Meter (m)</option>
+          <option value="sqm">Square Meter (sqm)</option>
+        </select>
+      </div>
+
+      <!-- Price -->
+      <div class="col-md-4 mb-3">
+        <label for="productPrice" class="form-label">Price</label>
+        <input type="number" class="form-control" id="productPrice" placeholder="Enter price" step="0.01" required>
+      </div>
+
+      <!-- Product Code -->
+      <div class="col-md-4 mb-3">
+        <label for="productCode" class="form-label">Product Code</label>
+        <input type="text" class="form-control" id="productCode" placeholder="e.g., SKU12345" required>
+      </div>
+
+      <!-- Product Image -->
+      <div class="col-md-4 mb-3">
+        <label for="productImage" class="form-label">Product Image</label>
+        <input class="form-control" type="file" id="productImage" accept="image/*">
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+	</div>
+  </div>
+
+
+
+														<div class="col-md-4 col-12">
 															<div class="bg-light h-300px mb-3  d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#quickViewModal">
 																<i class="fas fa-plus"></i>
 															</div>
@@ -199,20 +272,24 @@
 																  </div>
 															  </div>
 														</div>
-														<div class="col-md-6 col-12">
+														<div class="col-md-4 col-12">
+															<label >Units</label>
+															<select class="single-select w-100 mb-3 categories-select">
+																
+																@foreach($productUnits as $rowUnit)
+
+																<option value="{{$rowUnit->id}}">{{$rowUnit->unit_name}}</option>
+																@endforeach
+																
+															  </select>
+															 
+
 															<label >Categories</label>
 															<select class="single-select w-100 mb-3 categories-select">
-																<option value="1">abc</option>
-																<option value="2">bcd</option>
-																<option value="3">cde</option>
-																<option value="4">def</option>
-																<option value="5">efg</option>
-																<option value="6">fgh</option>
-																<option value="7">ghi</option>
-																<option value="8">hij</option>
-																<option value="9">ijk</option>
-																<option value="10">jkl</option>
-																<option value="11">klm</option>
+																@foreach($productCategories as $rowCategories)
+																	<option value="{{$rowCategories->id}}">{{$rowCategories->category_name}}</option>
+																@endforeach
+																
 															  </select>
 															  <ul class="nav nav-pills lang-tab" id="pills-tab1" role="tablist">
 																<li class="nav-item ">
@@ -299,7 +376,7 @@
 												<div class="card-body">
 													<form>
 														<div class="form-group row">
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<div class="switch-h d-flex justify-content-between align-items-center border p-2 mb-3">
 																	<h4 class="font-size-h4 text-dark mb-0">In Active</h4>
 																	<div class="custom-control switch custom-switch-info custom-switch form-check form-switch custom-control-inline me-0">
@@ -309,7 +386,7 @@
 																	  </div>
 																</div>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<div class="switch-h d-flex justify-content-between align-items-center border p-2 mb-3">
 																	<h4 class="font-size-h4 text-dark mb-0">Is Feature</h4>
 																	<div class="custom-control switch custom-switch-info custom-switch form-check form-switch custom-control-inline me-0">
@@ -319,7 +396,7 @@
 																	  </div>
 																</div>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label >Units</label>
 																<fieldset class="form-group mb-3">
 																	<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
@@ -329,19 +406,19 @@
 																	  </select>
 																</fieldset>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label >Product Weight</label>
 																<fieldset class="form-group mb-3">
 																	<input type="text" id="weight" class="form-control round bg-transparent text-dark" placeholder="Enter Weight">
 																</fieldset>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label >Minimum Order</label>
 																<fieldset class="form-group mb-3">
 																	<input type="text" id="type" class="form-control round bg-transparent text-dark" placeholder="Type Here">
 																</fieldset>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label >Maximum Order</label>
 																<fieldset class="form-group mb-3">
 																	<input type="text" id="type-max" class="form-control round bg-transparent text-dark" placeholder="Type Here">
@@ -371,19 +448,19 @@
 												<div class="card-body">
 													<form>
 														<div class="form-group row">
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label >Price</label>
 																<fieldset class="form-group mb-3">
 																	<input type="text" id="weight1" class="form-control round bg-transparent text-dark" placeholder="Enter Price">
 																</fieldset>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label >Discount</label>
 																<fieldset class="form-group mb-3">
 																	<input type="text" id="type2" class="form-control round bg-transparent text-dark" placeholder="Enter Discount">
 																</fieldset>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label >Flash</label>
 																<div class="switch-h d-flex justify-content-between align-items-center border p-2 mb-3">
 																	<h4 class="font-size-h4 text-dark mb-0">Flash Sale</h4>
@@ -394,7 +471,7 @@
 																	  </div>
 																</div>
 															</div>
-															<div class="col-md-6">
+															<div class="col-md-4">
 																<label >Units</label>
 																<fieldset class="form-group mb-3">
 																	<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
@@ -406,7 +483,7 @@
 															</div>
 															<div class="col-12 px-4">
 																<div class="row">
-																	<div class="col-md-6">
+																	<div class="col-md-4">
 																		<label >Product Type</label>
 																		<fieldset class="form-group mb-3">
 																			<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
@@ -421,7 +498,7 @@
 															</div>
 															<div class="col-12 px-4">
 																<div class="row">
-																	<div class="col-md-6">
+																	<div class="col-md-4">
 																		<label >Select</label>
 																		<fieldset class="form-group mb-3 d-flex">
 																			<select id="slc" class="js-Select js-states form-control bg-transparent" name="state">
@@ -437,7 +514,7 @@
 															</div>
 															<div class="col-12 px-4">
 																<div class="row">
-																	<div  id="Size" class="col-md-6 selected-input" style="display: none;">
+																	<div  id="Size" class="col-md-4 selected-input" style="display: none;">
 																		<div class="bg-light p-2 d-flex align-items-center  position-relative mb-3"  >
 																			<label  class="mr-3 mb-0">Size</label>
 																		
@@ -462,7 +539,7 @@
 															</div>
 															<div class="col-12 px-4">
 																<div class="row">
-																	<div  id="Color" class="col-md-6 selected-input" style="display: none;">
+																	<div  id="Color" class="col-md-4 selected-input" style="display: none;">
 																		<div class="bg-light p-2 d-flex align-items-center position-relative"  >
 																			<label  class="mr-3 mb-0">Color</label>
 																			

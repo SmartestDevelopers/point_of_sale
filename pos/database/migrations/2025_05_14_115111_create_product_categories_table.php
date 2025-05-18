@@ -18,7 +18,7 @@ class CreateProductCategoriesTable extends Migration
             $table->string('category_name');
             $table->string('category_code');
             $table->string('description');
-            $table->string('action');
+            $table->string('is_deleted')->default('0');
             $table->timestamps();
         });
     }

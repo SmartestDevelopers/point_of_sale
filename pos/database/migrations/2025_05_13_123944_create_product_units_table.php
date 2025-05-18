@@ -17,7 +17,7 @@ class CreateProductUnitsTable extends Migration
             $table->id();
             $table->string('unit_name');
             $table->string('status');
-            $table->string('action');
+            $table->string('is_deleted')->default('0');
             $table->timestamps();
         });
     }
