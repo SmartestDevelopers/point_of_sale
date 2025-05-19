@@ -23,12 +23,54 @@
 									<div class="row">
 										<div class="col-lg-12 col-xl-12 px-4">
 											<div class="card card-custom gutter-b bg-transparent shadow-none border-0" >
+												@if (session('success'))
+															<div class="alert alert-success mt-2">
+																{{ session('success') }}
+															</div>
+														@endif
+														@if (session('error'))
+															<div class="alert alert-danger mt-2">
+																{{ session('error') }}
+															</div>
+														@endif
 												<div class="card-header align-items-center  border-bottom-dark px-0">
 													<div class="card-title mb-0">
 														<h3 class="card-label mb-0 font-weight-bold text-body">Product Brands
 														</h3>
 													</div>
 												    <div class="icons d-flex">
+																											<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add Product Unit
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+	<form id="productBrandForm" method="POST" action="{{ route('product-brands.store') }}">
+		@csrf
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Brand Name</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+				<Label>Brands Name</Label>
+				<input type="text" class="form-control" id="brands_name" name="brands_name" placeholder="Enter Brands Name">
+				<Label class="mt-3">Note</Label>
+				<<input type="text" class="form-control" id="note" name="note" placeholder="Enter Note">
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+	</form>
+  </div>
+</div>
+
 														<button  class="btn ms-2 p-0" 
 														id="kt_notes_panel_toggle" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																			data-original-title="Check out more demos" >

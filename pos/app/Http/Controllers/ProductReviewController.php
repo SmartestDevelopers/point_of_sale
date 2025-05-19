@@ -17,7 +17,7 @@ class ProductReviewController extends Controller
 
         $product_reviews = DB::table('product_reviews')->get(); 
 
-        return view('product_review.index', compact('product_review'));
+        return view('product_review.index', compact('product_reviews'));
     }
 
     /**
