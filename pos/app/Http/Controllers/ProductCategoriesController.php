@@ -39,6 +39,23 @@ class ProductCategoriesController extends Controller
     public function store(Request $request)
     {
         //
+        
+        // dd($request->all());
+
+        $result = $request->all();
+ 
+
+        $category_name = $result['category_name'];
+        $category_code = $result['category_code'];
+        $description = $result['description'];
+
+        $category = DB::table('product_categories')->insert([
+            'category_name' => $category_name,
+            'category_code' => $category_code,
+            'description' => $description,
+        ]);
+        return redirect()->back()->with('success', 'Product Category Created Successfully');
+
     }
 
     /**

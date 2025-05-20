@@ -92,4 +92,25 @@ class ProductController extends Controller
         $productCategories = DB::table('product_categories')->where('is_deleted','0')->get();
         return view('catalog.addproduct', compact('productUnits', 'productCategories'));
     }
+
+    public function submitProduct(Request $request){
+        //dd($request->all());
+           
+        $result = $request->all();
+        $product_name = $result['product_name'];
+        $product_category = $result['product_category'];
+        $product_unit = $result['product_unit'];
+        $product_price = $result['product_price'];
+        $product_code = $result['product_code'];
+        
+        DB::table('products')->insert([
+            'product_name' => $product_name,
+            'product_category' => $product_category,
+            'product_unit' => $product_unit,
+            'product_price' => $product_price,
+            'product_code' => $product_code,
+        ]);
+        return redirect('product-list')->with('success', 'Product Created Successfully');
+
+    }
 }

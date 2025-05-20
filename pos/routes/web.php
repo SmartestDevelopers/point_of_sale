@@ -24,6 +24,7 @@ Route::get('/', 'FrontController@index')->name('index');
 
 Route::get('/product-list', 'ProductController@index')->name('index');
 Route::get('/add-product', 'ProductController@addProduct')->name('addProduct');
+Route::post('/submit-product', 'ProductController@submitProduct')->name('submitProduct');
 
 
 

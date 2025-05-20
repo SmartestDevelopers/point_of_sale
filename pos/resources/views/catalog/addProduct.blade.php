@@ -115,68 +115,51 @@
 													<div class="row">
 
 													<h2 class="mb-4">Add New Product</h2>
-    <form>
+    <form action="{{url('submit-product')}}" method="POST">
+	@csrf
       <!-- Product Name -->
 	  <div class="row">
 
       <div class="col-md-4 mb-3">
         <label for="productName" class="form-label">Product Name</label>
-        <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+        <input type="text" name="product_name" class="form-control" id="productName" placeholder="Enter product name" required>
       </div>
 
       <!-- Product Category -->
       <div class="col-md-4 mb-3">
         <label for="productCategory" class="form-label">Product Category</label>
-        <select class="form-select" id="productCategory" required>
-          <option selected disabled>Choose category</option>
-          <option value="Beverages">Beverages</option>
-          <option value="Snacks">Snacks & Confectionery</option>
-          <option value="Dairy">Dairy & Eggs</option>
-          <option value="Fruits">Fruits & Vegetables</option>
-          <option value="Bakery">Bakery & Breads</option>
-          <option value="Meat">Meat & Seafood</option>
-          <option value="Frozen">Frozen Foods</option>
-          <option value="Household">Household Supplies</option>
-          <option value="Health">Health & Personal Care</option>
-          <option value="Grocery">Groceries & Dry Goods</option>
+        <select name="product_category" class="form-select" id="productCategory" required>
+		@foreach($productCategories as $rowCategories)
+			<option value="{{$rowCategories->id}}">{{$rowCategories->category_name}}</option>
+		@endforeach
         </select>
       </div>
 
       <!-- Product Unit -->
       <div class="col-md-4 mb-3">
         <label for="productUnit" class="form-label">Product Unit</label>
-        <select class="form-select" id="productUnit" required>
-          <option selected disabled>Choose unit</option>
-          <option value="pcs">Piece (pcs)</option>
-          <option value="kg">Kilogram (kg)</option>
-          <option value="g">Gram (g)</option>
-          <option value="L">Liter (L)</option>
-          <option value="ml">Milliliter (ml)</option>
-          <option value="pack">Pack</option>
-          <option value="box">Box</option>
-          <option value="dozen">Dozen</option>
-          <option value="m">Meter (m)</option>
-          <option value="sqm">Square Meter (sqm)</option>
+        <select name="product_unit" class="form-select" id="productUnit" required>
+
+		@foreach($productUnits as $rowUnits)
+			<option value="{{$rowUnits->id}}">{{$rowUnits->unit_name}}</option>
+		@endforeach
+
         </select>
       </div>
 
       <!-- Price -->
       <div class="col-md-4 mb-3">
         <label for="productPrice" class="form-label">Price</label>
-        <input type="number" class="form-control" id="productPrice" placeholder="Enter price" step="0.01" required>
+        <input type="number" name="product_price" class="form-control" id="productPrice" placeholder="Enter price" step="0.01" required>
       </div>
 
       <!-- Product Code -->
       <div class="col-md-4 mb-3">
         <label for="productCode" class="form-label">Product Code</label>
-        <input type="text" class="form-control" id="productCode" placeholder="e.g., SKU12345" required>
+        <input type="text" name="product_code" class="form-control" id="productCode" placeholder="e.g., SKU12345" required>
       </div>
 
-      <!-- Product Image -->
-      <div class="col-md-4 mb-3">
-        <label for="productImage" class="form-label">Product Image</label>
-        <input class="form-control" type="file" id="productImage" accept="image/*">
-      </div>
+
 
       <!-- Submit Button -->
       <button type="submit" class="btn btn-primary">Add Product</button>
