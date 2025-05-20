@@ -156,15 +156,52 @@
 																					</span>
 																				</button>
 																				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton"  style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
+																					<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $product_unit->id }}">
+  Edit Product Unit
+</button>
+
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
-																					<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
+																					<a class="dropdown-item" title="Delete" href="{{url('product-unit-delete',$product_unit->id)}}">Delete</a>
+																					
 																				</div>
-																				</div>
+																			</div>
 																		</td>
-																	
 																	</tr>
-																	
+
+																	<!-- Modal -->
+<div class="modal fade" id="editModal{{ $product_unit->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+	<form id="productUnitForm" method="POST" action="{{ route('product-units.update', $product_unit->id) }}">
+		@csrf
+		
+		<input type="hidden" name="id" value="{{ $product_unit->id }}">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Product Unit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <Label>Unit Name</Label>
+				<input type="text" class="form-control" id="unit_name" name="unit_name" value="{{ $product_unit->unit_name }} " placeholder="Enter Unit Name">
+				<Label class="mt-3">Status</Label>
+				<select class="form-select" id="status" name="status">
+					<option value="{{ $product_unit->status }}">{{ $product_unit->status }}</option>
+					<option value="active">Active</option>
+					<option value="inactive">Inactive</option>
+				</select>
+				
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update changes</button>
+      </div>
+	  </form>
+    </div>
+  </div>
+</div>
+
 																	@endforeach
 																</tbody>
 															</table>
