@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SettingController extends Controller
+class WarehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,6 @@ class SettingController extends Controller
     public function index()
     {
         //
-        return view('setting.viewsetting');
-    }
-
-    public function warehouse()
-    {
-        return view('setting.warehouselist');
     }
 
     /**

@@ -39,6 +39,18 @@ Route::get('/expense-list', 'ExpenseController@index')->name('index');
 Route::get('/media-manage', 'MediaController@index')->name('index');
 
 Route::get('/customer-list', 'CustomerController@index')->name('index');
+Route::get('/add-customer', 'CustomerController@addCustomer')->name('addCustomer');
+Route::post('/submit-customer', 'CustomerController@submitCustomer')->name('submitCustomer');
+Route::get('/customer-edit/{id}', 'CustomerController@editCustomer')->name('editCustomer');
+Route::post('/customer-update/{id}', 'CustomerController@updateCustomer')->name('updateCustomer');
+Route::get('/customer-delete/{id}', 'CustomerController@deleteCustomer')->name('deleteCustomer');
+
+Route::get('/supplier-list', 'SupplierController@index')->name('index');
+Route::get('/add-supplier', 'SupplierController@addSupplier')->name('addSupplier');
+Route::post('/submit-supplier', 'SupplierController@submitSupplier')->name('submitSupplier');
+Route::get('/supplier-edit/{id}', 'SupplierController@editSupplier')->name('editSupplier');
+Route::post('/supplier-update/{id}', 'SupplierController@updateSupplier')->name('updateSupplier');
+Route::get('/supplier-delete/{id}', 'SupplierController@deleteSupplier')->name('deleteSupplier');
 
 Route::get('/profit-loss-report', 'ReportController@index')->name('index');
 
@@ -54,6 +66,13 @@ Route::get('/order-list', 'SellOrderController@index')->name('index');
 
 Route::get('/business-setting-general', 'SettingController@index')->name('index');
 
+Route::get('/warehouse', 'SettingController@index')->name('warehouse');
+Route::get('/add-warehouse', 'SettingController@addWarehouse')->name('addWarehouse');
+Route::post('/submit-warehouse', 'SettingController@submitWarehouse')->name('submitWarehouse');
+Route::get('/warehouse-edit/{id}', 'SettingController@editWarehouse')->name('editWarehouse');
+Route::post('/warehouse-update/{id}', 'SettingController@updateWarehouse')->name('updateWarehouse');
+Route::get('/warehouse-delete/{id}', 'SettingController@deleteWarehouse')->name('deleteWarehouse');
+
 Route::get('/accounts-list', 'AccountsController@index')->name('index');
 
 Route::resource('product-brands', 'ProductBrands');
@@ -63,6 +82,7 @@ Route::resource('product-categories', 'ProductCategoriesController');
 Route::resource('product-reviews', 'ProductReviewController');
 
 Route::resource('product-variations', 'ProductVariationsController');
+
 
 
 

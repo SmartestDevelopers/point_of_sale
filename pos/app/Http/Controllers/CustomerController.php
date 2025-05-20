@@ -17,6 +17,7 @@ class CustomerController extends Controller
         return view('people.customerlist');
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
