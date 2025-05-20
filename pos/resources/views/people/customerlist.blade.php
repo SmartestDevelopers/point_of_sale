@@ -25,12 +25,68 @@
 									<div class="row">
 										<div class="col-lg-12 col-xl-12 px-4">
 											<div class="card card-custom gutter-b bg-transparent shadow-none border-0" >
+												@if (session('success'))
+															<div class="alert alert-success mt-2">
+																{{ session('success') }}
+															</div>
+														@endif
+														@if (session('error'))
+															<div class="alert alert-danger mt-2">
+																{{ session('error') }}
+															</div>
+														@endif
 												<div class="card-header align-items-center  border-bottom-dark px-0">
 													<div class="card-title mb-0">
 														<h3 class="card-label mb-0 font-weight-bold text-body">Customer 
 														</h3>
 													</div>
 												    <div class="icons d-flex">
+														<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add Customer
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+	<form id="customerListForm" method="POST" action="{{ route('add-customer.store') }}">
+		@csrf
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+				<Label>Customer Group</Label>
+				<input type="text" class="form-control" id="customer_group" name="customer_group" value="{{ $customer_list->customer_group }} " placeholder="Enter Customer Group">
+				<Label>Name</Label>
+				<input type="text" class="form-control" id="name" name="name" value="{{ $customer_list->name }} " placeholder="Enter Name">
+				<Label>Company Nmae</Label>
+				<input type="text" class="form-control" id="company_name" name="company_name" value="{{ $customer_list->company_name }} " placeholder="Enter Company Name">
+				<Label>Email</Label>
+				<input type="email" class="form-control" id="email" name="email" value="{{ $customer_list->email }} " placeholder="Enter Email">
+				<Label>Phone Number</Label>
+				<input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $customer_list->phone_number }} " placeholder="Enter Phone Number">
+				<Label>Tax Number</Label>
+				<input type="text" class="form-control" id="tax_number" name="tax_number" value="{{ $customer_list->tax_number }} " placeholder="Enter Tax Number">
+				<Label>Address</Label>
+				<input type="text" class="form-control" id="address" name="address" value="{{ $customer_list->address }} " placeholder="Enter Address">
+				<Label>Balance</Label>
+				<input type="text" class="form-control" id="balance" name="balance" value="{{ $customer_list->balance }} " placeholder="Enter Balance">
+	
+				
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+	</form>
+  </div>
+</div>
+
 														<button  class="btn ms-2 p-0" 
 														id="kt_notes_panel_toggle" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																			data-original-title="Check out more demos" >
@@ -126,13 +182,13 @@
 																				</button>
 																				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton"  style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
 																					<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $product_unit->id }}">
-  Edit Product Unit
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $customer_list->id }}">
+  Edit Customer List
 </button>
 
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
-																					<a class="dropdown-item" title="Delete" href="{{url('product-unit-delete',$product_unit->id)}}">Delete</a>
+																					<a class="dropdown-item" title="Delete" href="{{url('customer-delete',$customer_list->id)}}">Delete</a>
 																					
 																				</div>
 																			</div>
@@ -140,27 +196,35 @@
 																	</tr>
 
 																	<!-- Modal -->
-<div class="modal fade" id="editModal{{ $product_unit->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $customer_list->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-	<form id="productUnitForm" method="POST" action="{{ route('product-units.update', $product_unit->id) }}">
+	<form id="customerListForm" method="POST" action="{{ route('customer-update.update', $customer_list->id) }}">
 		@csrf
 		
-		<input type="hidden" name="id" value="{{ $product_unit->id }}">
+		<input type="hidden" name="id" value="{{ $customer_list->id }}">
       <div class="modal-header">
         <h5 class="modal-title" id="editModalLabel">Edit Product Unit</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <Label>Unit Name</Label>
-				<input type="text" class="form-control" id="unit_name" name="unit_name" value="{{ $product_unit->unit_name }} " placeholder="Enter Unit Name">
-				<Label class="mt-3">Status</Label>
-				<select class="form-select" id="status" name="status">
-					<option value="{{ $product_unit->status }}">{{ $product_unit->status }}</option>
-					<option value="active">Active</option>
-					<option value="inactive">Inactive</option>
-				</select>
-				
+        <Label>Customer Group</Label>
+				<input type="text" class="form-control" id="customer_group" name="customer_group" value="{{ $customer_list->customer_group }} " placeholder="Enter Customer Group">
+				<Label>Name</Label>
+				<input type="text" class="form-control" id="name" name="name" value="{{ $customer_list->name }} " placeholder="Enter Name">
+				<Label>Company Nmae</Label>
+				<input type="text" class="form-control" id="company_name" name="company_name" value="{{ $customer_list->company_name }} " placeholder="Enter Company Name">
+				<Label>Email</Label>
+				<input type="email" class="form-control" id="email" name="email" value="{{ $customer_list->email }} " placeholder="Enter Email">
+				<Label>Phone Number</Label>
+				<input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $customer_list->phone_number }} " placeholder="Enter Phone Number">
+				<Label>Tax Number</Label>
+				<input type="text" class="form-control" id="tax_number" name="tax_number" value="{{ $customer_list->tax_number }} " placeholder="Enter Tax Number">
+				<Label>Address</Label>
+				<input type="text" class="form-control" id="address" name="address" value="{{ $customer_list->address }} " placeholder="Enter Address">
+				<Label>Balance</Label>
+				<input type="text" class="form-control" id="balance" name="balance" value="{{ $customer_list->balance }} " placeholder="Enter Balance">
+	
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

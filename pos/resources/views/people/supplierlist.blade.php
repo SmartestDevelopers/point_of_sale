@@ -24,6 +24,16 @@
 									<div class="row">
 										<div class="col-lg-12 col-xl-12 px-4">
 											<div class="card card-custom gutter-b bg-transparent shadow-none border-0" >
+                                                @if (session('success'))
+															<div class="alert alert-success mt-2">
+																{{ session('success') }}
+															</div>
+														@endif
+														@if (session('error'))
+															<div class="alert alert-danger mt-2">
+																{{ session('error') }}
+															</div>
+														@endif
 												<div class="card-header align-items-center  border-bottom-dark px-0">
 													<div class="card-title mb-0">
 														<h3 class="card-label mb-0 font-weight-bold text-body">Supplier 
@@ -98,14 +108,14 @@
 																	$number = 1;
 
 																@endphp
-																	@foreach($product_suppliers as $product_supplier)
+																	@foreach($supplier_lists as $supplier_list)
 																	<tr class="kt-table-row kt-table-row-level-0">
 																		<td>
 																			<div class="h-45px w-45px d-flex align-items-center">
 																				<img class="img-fluid" src="../admin/assets/images/profiles/biller.html" alt="product">
 																			</div>
 																		</td>
-																		<td >$product_suppliers as $name</td>
+																		<td >$supplier_lists as $name</td>
 																		<td class="">$product_suppliers as $company_name</td>
 																		<td class="">$product_suppliers as $vat_number</td>
 																		<td class="">
@@ -150,8 +160,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <Label>Unit Name</Label>
-				<input type="text" class="form-control" id="unit_name" name="unit_name" value="{{ $product_unit->unit_name }} " placeholder="Enter Unit Name">
+        <Label>Name</Label>
+				<input type="text" class="form-control" id="name" name="name" value="{{ $supplier_list->name }} " placeholder="Enter Supplier Name">
+                <Label>Company Name</Label>
+				<input type="text" class="form-control" id="company_name" name="company_name" value="{{ $supplier_list->company_name }} " placeholder="Enter Company Name">
 				<Label class="mt-3">Status</Label>
 				<select class="form-select" id="status" name="status">
 					<option value="{{ $product_unit->status }}">{{ $product_unit->status }}</option>
@@ -168,7 +180,6 @@
     </div>
   </div>
 </div>
-
 																	@endforeach
 																</tbody>
 															</table>

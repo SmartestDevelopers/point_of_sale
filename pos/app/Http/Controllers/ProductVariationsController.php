@@ -39,6 +39,26 @@ class ProductVariationsController extends Controller
     public function store(Request $request)
     {
         //
+
+        $rows = $request->all();
+
+        // dd($rows);
+
+        $unit_name = $rows['unit_name'];
+        $status = $rows['status'];
+
+        //insert these values into the database
+        $insert = DB::table('product_units')->insert([
+            'unit_name' => $unit_name,
+            'status' => $status
+        ]);
+        //  dd($insert);
+         if($insert){
+            return redirect()->back()->with('success', 'Product Unit Created Successfully');
+         }else{
+            return redirect()->back()->with('error', 'Product Unit Creation Failed');
+         }
+
     }
 
     /**
