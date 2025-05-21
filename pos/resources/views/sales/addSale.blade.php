@@ -48,6 +48,21 @@
                 <td class="row-index text-center"> 
                     Code ${count}
                 </td> 
+				<td class="row-index text-center"> 
+                    Quantity ${count}
+                </td> 
+				<td class="row-index text-center"> 
+                    Cost ${count}
+                </td> 
+				<td class="row-index text-center"> 
+                    Discount ${count}
+                </td> 
+				<td class="row-index text-center"> 
+                    Tax ${count}
+                </td> 
+				<td class="row-index text-center"> 
+                    Subtotal ${count}
+                </td> 
                 <td class="text-center"> 
                     <button class="btn btn-danger remove"
                         type="button">Remove
@@ -176,6 +191,21 @@
                           </th>
                            <th class="text-center">
                               Code
+                          </th>
+						  <th class="text-center">
+                              Quantity
+                          </th>
+						  <th class="text-center">
+                              Cost
+                          </th>
+						  <th class="text-center">
+                              Discount
+                          </th>
+						  <th class="text-center">
+                              Tax
+                          </th>
+						  <th class="text-center">
+                              Subtotal
                           </th>
                         <th class="text-center">
                               Remove Row
