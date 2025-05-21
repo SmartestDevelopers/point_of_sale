@@ -66,6 +66,7 @@ Route::get('/order-list', 'SellOrderController@index')->name('index');
 
 Route::get('/business-setting-general', 'SettingController@index')->name('index');
 
+
 Route::get('/warehouse', 'SettingController@index')->name('warehouse');
 Route::get('/add-warehouse', 'SettingController@addWarehouse')->name('addWarehouse');
 Route::post('/submit-warehouse', 'SettingController@submitWarehouse')->name('submitWarehouse');
@@ -82,6 +83,9 @@ Route::resource('product-categories', 'ProductCategoriesController');
 Route::resource('product-reviews', 'ProductReviewController');
 
 Route::resource('product-variations', 'ProductVariationsController');
+Route::resource('sales', 'SalesController');
+
+
 
 
 

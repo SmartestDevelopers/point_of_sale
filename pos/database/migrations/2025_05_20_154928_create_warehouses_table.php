@@ -17,10 +17,7 @@ class CreateWarehousesTable extends Migration
             $table->id();
             $table->string('warehouse');
             $table->string('phone_number');
-            $table->string('email');
             $table->string('address');
-            $table->string('number_of_product');
-            $table->string('stock-quantity');
             $table->string('is_deleted')->default('0');
             $table->timestamps();
         });

@@ -375,7 +375,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="add-sale.html" class="nav-link sub-nav-link">
+												<a href="{{route('sales.create')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1796,8 +1796,48 @@
 	<script src="{{ asset('point-of-sale/assets/js/sweetalert.js') }}"></script>
 	<script src="{{ asset('point-of-sale/assets/js/sweetalert1.js') }}"></script>
 	<script src="{{ asset('point-of-sale/assets/js/script.bundle.js') }}"></script>
+
+
 	
 <script>
+
+	var options = {
+	  debug: 'info',
+	  modules: {
+		toolbar: '#toolbar'
+	  },
+	  placeholder: 'Compose an epic...',
+	  readOnly: true,
+	  theme: 'snow'
+	};
+	var editor = new Quill('#editor', options);
+	
+	
+	jQuery(document).ready( function () {
+		jQuery('#myTable2').dataTable( {
+		
+	  
+		"pagingType": "simple_numbers",
+		"order": [],
+		"columnDefs": [ {
+		  "targets"  : 'no-sort',
+		  "orderable": false,
+		}]
+	});
+	});
+	
+	jQuery(document).ready(function() {
+		jQuery('#orderTable').DataTable({
+			"pagingType": "simple_numbers",
+	  
+		"columnDefs": [ {
+		  "targets"  : 'no-sort',
+		  "orderable": false,
+		}]
+		});
+	} );
+	
+
 	jQuery(function() {
         jQuery('.english-select').multipleSelect({
       filter: true,

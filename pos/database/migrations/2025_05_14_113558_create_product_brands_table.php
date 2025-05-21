@@ -17,7 +17,7 @@ class CreateProductBrandsTable extends Migration
             $table->id();
             $table->string('brands_name');
             $table->string('note');
-            $table->string('action');
+            
             $table->timestamps();
         });
     }

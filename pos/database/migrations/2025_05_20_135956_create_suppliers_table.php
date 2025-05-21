@@ -22,6 +22,7 @@ class CreateSuppliersTable extends Migration
             $table->string('email');
             $table->string('phone_number');
             $table->string('address');
+            $table->string('balance');
             $table->string('is_deleted')->default('0');
             $table->timestamps();
         });

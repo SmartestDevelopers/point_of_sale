@@ -17,7 +17,7 @@ class CreateProductVariationsTable extends Migration
             $table->id();
             $table->string('options');
             $table->string('values');
-            $table->string('action');
+            
             $table->timestamps();
         });
     }
