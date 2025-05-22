@@ -1861,7 +1861,6 @@ jQuery(document).ready( function () {
 });
 });
 
-
 		var options = {
 	  debug: 'info',
 	  modules: {
@@ -1875,6 +1874,31 @@ jQuery(document).ready( function () {
 	jQuery(document).ready( function () {
 		jQuery('#myTable').DataTable();
 	} );
+
+		jQuery(function() {
+        jQuery('.english-select').multipleSelect({
+      filter: true,
+      filterAcceptOnEnter: true
+    })
+  });
+  jQuery(function() {
+        jQuery('.arabic-select').multipleSelect({
+      filter: true,
+      filterAcceptOnEnter: true
+    })
+  });
+jQuery(document).ready( function () {
+	jQuery('#customerListTable').dataTable( {
+    "pagingType": "simple_numbers",
+  
+    "columnDefs": [ {
+      "targets"  : 'no-sort',
+      "orderable": false,
+    }]
+});
+});
+
+
 	</script>
 
 </html>

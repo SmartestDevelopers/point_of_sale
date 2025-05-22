@@ -13,16 +13,9 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+    
         $supplier_lists = DB::table('suppliers')->where('is_deleted',0)->get(); 
-        // echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
-
-        // $browser = get_browser(null, true);
-        // print_r($browser);
-
-        // die();
-        // dd($units);
-        // die();
+    
 
         return view('people.supplierlist', compact('supplier_lists'));
     }
@@ -39,7 +32,7 @@ class SupplierController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource /data/record/supplier-record in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

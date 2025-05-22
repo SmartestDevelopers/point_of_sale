@@ -40,9 +40,9 @@ Route::get('/media-manage', 'MediaController@index')->name('index');
 
 Route::get('/customer-list', 'CustomerController@index')->name('index');
 Route::get('/add-customer', 'CustomerController@addCustomer')->name('addCustomer');
-Route::post('/submit-customer', 'CustomerController@submitCustomer')->name('submitCustomer');
+Route::post('/submit-customer', 'CustomerController@store')->name('add-customer.store');
 Route::get('/customer-edit/{id}', 'CustomerController@editCustomer')->name('editCustomer');
-Route::post('/customer-update/{id}', 'CustomerController@updateCustomer')->name('updateCustomer');
+Route::post('/customer-update/{id}', 'CustomerController@updateCustomer')->name('customer-update.update');
 Route::get('/customer-delete/{id}', 'CustomerController@deleteCustomer')->name('deleteCustomer');
 
 Route::get('/supplier-list', 'SupplierController@index')->name('index');

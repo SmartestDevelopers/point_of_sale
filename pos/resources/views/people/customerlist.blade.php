@@ -59,21 +59,21 @@
       <div class="modal-body">
         
 				<Label>Customer Group</Label>
-				<input type="text" class="form-control" id="customer_group" name="customer_group" value="{{ $customer_list->customer_group }} " placeholder="Enter Customer Group">
+				<input type="text" class="form-control" id="customer_group" name="customer_group" value="" placeholder="Enter Customer Group">
 				<Label>Name</Label>
-				<input type="text" class="form-control" id="name" name="name" value="{{ $customer_list->name }} " placeholder="Enter Name">
+				<input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter Name">
 				<Label>Company Nmae</Label>
-				<input type="text" class="form-control" id="company_name" name="company_name" value="{{ $customer_list->company_name }} " placeholder="Enter Company Name">
+				<input type="text" class="form-control" id="company_name" name="company_name" value="" placeholder="Enter Company Name">
 				<Label>Email</Label>
-				<input type="email" class="form-control" id="email" name="email" value="{{ $customer_list->email }} " placeholder="Enter Email">
+				<input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter Email">
 				<Label>Phone Number</Label>
-				<input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $customer_list->phone_number }} " placeholder="Enter Phone Number">
+				<input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter Phone Number">
 				<Label>Tax Number</Label>
-				<input type="text" class="form-control" id="tax_number" name="tax_number" value="{{ $customer_list->tax_number }} " placeholder="Enter Tax Number">
+				<input type="text" class="form-control" id="tax_number" name="tax_number"  placeholder="Enter Tax Number">
 				<Label>Address</Label>
-				<input type="text" class="form-control" id="address" name="address" value="{{ $customer_list->address }} " placeholder="Enter Address">
+				<input type="text" class="form-control" id="address" name="address"  placeholder="Enter Address">
 				<Label>Balance</Label>
-				<input type="text" class="form-control" id="balance" name="balance" value="{{ $customer_list->balance }} " placeholder="Enter Balance">
+				<input type="text" class="form-control" id="balance" name="balance"  placeholder="Enter Balance">
 	
 				
 		
@@ -158,19 +158,19 @@
 																	@foreach($customer_lists as $customer_list)
 																	<tr class="kt-table-row kt-table-row-level-0">
 																		<td>
-																			{{ $customer_lists->customer_group}}
+																			{{ $customer_list->customer_group}}
 																		</td>
-																		<td >{{ $customer_lists->name}}</td>
-																		<td class="">{{ $customer_lists->company_name}}</td>
+																		<td >{{ $customer_list->name}}</td>
+																		<td class="">{{ $customer_list->company_name}}</td>
 																	
 																		<td class="">
-																		{{ $customer_lists->email}}
+																		{{ $customer_list->email}}
 																		</td>
 																	
-																		<td class="">{{ $customer_lists->phone_number}}</td>
-																		<td class="">{{ $customer_lists->tax_number}}</td>
-																		<td class="">{{ $customer_lists->address}}</td>
-																		<td class="">{{ $customer_listsgroups->balance}}</td>
+																		<td class="">{{ $customer_list->phone_number}}</td>
+																		<td class="">{{ $customer_list->tax_number}}</td>
+																		<td class="">{{ $customer_list->address}}</td>
+																		<td class="">{{ $customer_list->balance}}</td>
 																		<td>
 																			<div class="card-toolbar text-end">
 																				<button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
