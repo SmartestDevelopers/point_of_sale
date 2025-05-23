@@ -71,6 +71,9 @@
 															<a class="nav-link active" id="general-tab2" data-bs-toggle="pill" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
 														</li>
 														<li class="nav-item" >
+															<a class="nav-link" id="general-tab-warehouse" data-bs-toggle="pill" href="#warehouse" role="tab" aria-controls="warehouse" aria-selected="true">Warehouse</a>
+														</li>
+														<li class="nav-item" >
 															<a class="nav-link" id="pos-tab" data-bs-toggle="pill" href="#pos" role="tab" aria-controls="pos" aria-selected="false">POS</a>
 														</li>
 														<li class="nav-item" >
@@ -219,6 +222,49 @@
 			
 															</div>	
                                                         </div>
+
+
+
+														<div class="tab-pane fade show active" id="warehouse" role="tabpanel" >
+															<div class="form-group row">
+															<h1>Warehouse  Listing</h1>
+																
+																<div class="row">
+
+
+																<div style="border:1px solid #000" class="col-md-6">
+																	<h2>Warehouse Form </h2>
+
+																	<form method="POST" action="{{route('submitWarehouse')}}">
+																	@csrf
+																		<label>Add Warehouse</label>
+																		<input class="form-control" name="warehouse_name" type="text"/>
+																		<label>Warehouse Address</label>
+																		<input class="form-control" name="warehouse_address" type="text"/>
+																		<label>Warehouse PHone</label>
+																		<input class="form-control" name="warehouse_phone" type="text"/>
+																		<hr/>
+																		<input class="form-control" class="btn btn-primary white me-2" name="submit" type="submit"/>
+																	</form>
+
+																</div>
+
+																<div style="border:1px solid #000" class="col-md-6">
+																<h2>Warehouse Listing </h2>
+
+																{{$warehouses}}
+
+																
+																</div>
+
+
+
+																</div>
+															</div>	
+                                                        </div>
+
+
+
                                                         <div class="tab-pane fade " id="pos" role="tabpanel" aria-labelledby="pos-tab">
 															<div class="form-group row">
 																<div class="col-md-6">

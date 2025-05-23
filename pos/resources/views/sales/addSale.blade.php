@@ -111,13 +111,9 @@
 											<form>
 												<div class="form-group row">
 													<div class="col-md-2">
-														<label  class="text-body">Select Quotation(if any)</label>
+														<label  class="text-body">Select Date</label>
 														<fieldset class="form-group mb-3">
-															<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-																<option value="AL">5522-655</option>
-																  
-																<option value="WY">00151-444</option>
-															  </select>
+															<input class="form-control" name="sale_date" type="date"/>
 														</fieldset>
 													</div>
 
@@ -127,7 +123,6 @@
 														<fieldset class="form-group mb-3">
 															<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
 																<option value="AL">Warehouse 1</option>
-																  
 																<option value="WY">Warehouse 2</option>
 															  </select>
 														</fieldset>

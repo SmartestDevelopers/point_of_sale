@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+
 class SettingController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class SettingController extends Controller
     public function index()
     {
         //
-        return view('setting.viewsetting');
+        $warehouses = DB::table('warehouses')->get();
+        return view('setting.viewsetting', compact('warehouses'));
     }
 
     public function warehouse()
@@ -86,5 +89,34 @@ class SettingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function submitWarehouse(Request $request){
+    
+            //dd($request->all());
+
+            // echo "<pre>";
+            // print_r($abc);
+            // echo "</pre>";
+
+            $abc = $request->all();
+
+            $name = $abc['warehouse_name'];
+
+            $address = $abc['warehouse_address'];
+            
+            $phone = $abc['warehouse_phone'];
+
+            
+            $insert = DB::table('warehouses')->insert([
+                'warehouse' =>$name,
+                'address' =>$address,
+                'phone_number' =>$phone
+                ]);
+
+            return redirect()->back()->with('success', 'Warehouse Created Successfully');
+
+
     }
 }

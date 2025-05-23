@@ -69,7 +69,9 @@ Route::get('/business-setting-general', 'SettingController@index')->name('index'
 
 Route::get('/warehouse', 'SettingController@index')->name('warehouse');
 Route::get('/add-warehouse', 'SettingController@addWarehouse')->name('addWarehouse');
+
 Route::post('/submit-warehouse', 'SettingController@submitWarehouse')->name('submitWarehouse');
+
 Route::get('/warehouse-edit/{id}', 'SettingController@editWarehouse')->name('editWarehouse');
 Route::post('/warehouse-update/{id}', 'SettingController@updateWarehouse')->name('updateWarehouse');
 Route::get('/warehouse-delete/{id}', 'SettingController@deleteWarehouse')->name('deleteWarehouse');
