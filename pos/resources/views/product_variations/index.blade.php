@@ -159,8 +159,8 @@
 
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
-																					<a class="dropdown-item" title="Delete" href="{{url('product-variations/{product_variation}',$product_variation->id)}}">Delete</a>
-																					
+																					<a class="dropdown-item" title="Delete" href="{{ route('product-variations.destroy', $product_variation->id) }}">Delete</a>
+
 																				</div>
 																			</div>
 																		</td>
