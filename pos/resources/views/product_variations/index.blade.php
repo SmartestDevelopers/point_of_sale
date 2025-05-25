@@ -48,7 +48,7 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-	<form id="productVariationForm" method="POST" action="{{ route('product-variations.store') }}">
+	<form id="productUnitForm" method="POST" action="{{ route('product-variations.store') }}">
 		@csrf
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Product Variation</h5>
@@ -153,13 +153,13 @@
 																				</button>
 																				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton"  style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
 																					<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $product_unit->id }}">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $product_variation->id }}">
   Edit Product Variations
 </button>
 
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
-																					<a class="dropdown-item" title="Delete" href="{{url('product-unit-delete',$product_unit->id)}}">Delete</a>
+																					<a class="dropdown-item" title="Delete" href="{{url('product-variations/{product_variation}',$product_variation->id)}}">Delete</a>
 																					
 																				</div>
 																			</div>
@@ -167,26 +167,22 @@
 																	</tr>
 
 																	<!-- Modal -->
-<div class="modal fade" id="editModal{{ $product_unit->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $product_variation->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-	<form id="productVariationForm" method="POST" action="{{ route('product-units.update', $product_unit->id) }}">
+	<form id="productUnitForm" method="POST" action="{{ route('product-variations.update', $product_variation->id) }}">
 		@csrf
 		
-		<input type="hidden" name="id" value="{{ $product_unit->id }}">
+		<input type="hidden" name="id" value="{{ $product_variation->id }}">
       <div class="modal-header">
         <h5 class="modal-title" id="editModalLabel">Edit Product Variation</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <Label>Product Variations</Label>
-				<input type="text" class="form-control" id="product_" name="unit_name" value="{{ $product_unit->unit_name }} " placeholder="Enter Unit Name">
-				<Label class="mt-3">Status</Label>
-				<select class="form-select" id="status" name="status">
-					<option value="{{ $product_unit->status }}">{{ $product_unit->status }}</option>
-					<option value="active">Active</option>
-					<option value="inactive">Inactive</option>
-				</select>
+				<input type="text" class="form-control" id="options" name="options" value="{{ $product_variation->options }} " placeholder="Edit">
+				
+				<input type="text" class="form-control" id="values" name="options" value="{{ $product_variation->values }} " placeholder="Edit">
 				
       </div>
       <div class="modal-footer">

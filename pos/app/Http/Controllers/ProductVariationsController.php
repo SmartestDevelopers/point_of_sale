@@ -44,19 +44,19 @@ class ProductVariationsController extends Controller
 
         // dd($rows);
 
-        $unit_name = $rows['unit_name'];
-        $status = $rows['status'];
+        $options = $rows['options'];
+        $values = $rows['values'];
 
         //insert these values into the database
-        $insert = DB::table('product_units')->insert([
-            'unit_name' => $unit_name,
-            'status' => $status
+        $insert = DB::table('product_variations')->insert([
+            'options' => $options,
+            'values' => $values
         ]);
         //  dd($insert);
          if($insert){
-            return redirect()->back()->with('success', 'Product Unit Created Successfully');
+            return redirect()->back()->with('success', 'Product Variation Created Successfully');
          }else{
-            return redirect()->back()->with('error', 'Product Unit Creation Failed');
+            return redirect()->back()->with('error', 'Product Variation Creation Failed');
          }
 
     }
@@ -93,6 +93,20 @@ class ProductVariationsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // update record in the database
+        $rows = $request->all();
+        $options = $rows['options'];
+        $values = $rows['values'];
+        $update = DB::table('product_variations')->where('id', $id)->update([
+            'options' => $options,
+            'values' => $values
+        ]);
+        if($update){
+            return redirect()->back()->with('success', 'Product Unit Updated Successfully');
+         }else{
+            return redirect()->back()->with('error', 'Product Unit Update Failed');
+         }
+        // dd($update);
     }
 
     /**
@@ -104,5 +118,20 @@ class ProductVariationsController extends Controller
     public function destroy($id)
     {
         //
+        echo "Product Variation Deleted Successfully";
+    }
+
+    public function productVariationDelete($id)
+    {
+
+        
+         $delete = DB::table('product_variations')->where('id', $id)->update(['is_deleted' => 1]);
+        // $delete = DB::table('product_units')->where('id', $id)->delete();
+        if($delete){
+            return redirect()->back()->with('success', 'Product Variation Deleted Successfully');
+         }else{
+            return redirect()->back()->with('error', 'Product Variation Deletion Failed');
+         }
+      
     }
 }

@@ -90,6 +90,20 @@ class ProductCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // update record in the database
+        $rows = $request->all();
+        $unit_name = $rows['unit_name'];
+        $status = $rows['status'];
+        $update = DB::table('product_units')->where('id', $id)->update([
+            'unit_name' => $unit_name,
+            'status' => $status
+        ]);
+        if($update){
+            return redirect()->back()->with('success', 'Product Unit Updated Successfully');
+         }else{
+            return redirect()->back()->with('error', 'Product Unit Update Failed');
+         }
+        // dd($update);
     }
 
     /**
@@ -101,5 +115,20 @@ class ProductCategoriesController extends Controller
     public function destroy($id)
     {
         //
+        echo "Product Unit Deleted Successfully";
+    }
+
+    public function productUnitDelete($id)
+    {
+
+        
+         $delete = DB::table('product_units')->where('id', $id)->update(['is_deleted' => 1]);
+        // $delete = DB::table('product_units')->where('id', $id)->delete();
+        if($delete){
+            return redirect()->back()->with('success', 'Product Unit Deleted Successfully');
+         }else{
+            return redirect()->back()->with('error', 'Product Unit Deletion Failed');
+         }
+      
     }
 }
