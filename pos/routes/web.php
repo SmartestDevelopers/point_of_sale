@@ -85,6 +85,10 @@ Route::resource('product-categories', 'ProductCategoriesController');
 Route::resource('product-reviews', 'ProductReviewController');
 
 Route::resource('product-variations', 'ProductVariationsController');
+
+
+Route::get('productVariationDelete/{id}','ProductVariationsController@productVariationDelete');
+
 Route::resource('sales', 'SalesController');
 
 

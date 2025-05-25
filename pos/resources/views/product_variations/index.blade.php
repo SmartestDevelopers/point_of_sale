@@ -159,7 +159,18 @@
 
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
+																					
 																					<a class="dropdown-item" title="Delete" href="{{ route('product-variations.destroy', $product_variation->id) }}">Delete</a>
+																					<form action="{{ route('product-variations.destroy', $product_variation->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+																						@csrf
+																						@method('DELETE')
+																						<button type="submit" class="dropdown-item" title="Delete">Delete</button>
+																					</form>
+
+																					<a class="dropdown-item" title="Delete" href="{{ url('productVariationDelete', $product_variation->id) }}">Delete</a>
+
+
+																					
 
 																				</div>
 																			</div>

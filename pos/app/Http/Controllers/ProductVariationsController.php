@@ -117,12 +117,16 @@ class ProductVariationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //  delete record from the database
         echo "Product Variation Deleted Successfully";
+
+        // is all clear here?
     }
 
     public function productVariationDelete($id)
     {
+        // echo "Line 128";
+        // die();
 
         
          $delete = DB::table('product_variations')->where('id', $id)->update(['is_deleted' => 1]);
