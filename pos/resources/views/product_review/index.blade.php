@@ -55,8 +55,11 @@
       </div>
       <div class="modal-body">
         
+	  			<Label>Order ID</Label>
+				<input type="text" class="form-control" id="orders_id" name="orders_id" placeholder="Enter Order ID">
+
 				<Label>Products Name</Label>
-				<input type="text" class="form-control" id="products_name" name="products_name" placeholder="Enter Product Name">
+				<input type="text" class="form-control" id="product_names" name="product_names" placeholder="Enter Product Name">
 				<Label class="mt-3">Reviews Text</Label>
 				<input type="text" class="form-control" id="reviews_text" name="reviews_text" placeholder="Enter Review Text">
 				<Label>Date</Label>
@@ -127,8 +130,9 @@
 																@foreach($product_reviews as $product_review)
 
 																<td>{{$number++}}</td>
-																<td>{{ $product_review->products_name }}</td>
-																<td>{{ $product_review->review_text }}</td>
+																<td>{{ $product_review->orders_id }}</td>
+																<td>{{ $product_review->product_names }}</td>
+																<td>{{ $product_review->reviews_text }}</td>
 																<td>{{ $product_review->date }}</td>
 																<td>
 																	<div class="card-toolbar text-end">
@@ -147,7 +151,7 @@
 
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
-																					<a class="dropdown-item" title="Delete" href="{{url('ProductReviewsController',$product_review->id)}}">Delete</a>
+																					<a class="dropdown-item" title="Delete" href="{{url('productReviewDelete',$product_review->id)}}">Delete</a>
 																					
 																				</div>
 																			</div>
@@ -155,20 +159,27 @@
 																	</tr>
 
 																	<!-- Modal -->
-<div class="modal fade" id="editModal{{ $product_unit->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $product_review->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
 	<form id="productUnitForm" method="POST" action="{{ route('product-reviews.update', $product_review->id) }}">
 		@csrf
-		@method
+		@method('PUT') <!-- or PATCH -->
 		<input type="hidden" name="id" value="{{ $product_review->id }}">
       <div class="modal-header">
         <h5 class="modal-title" id="editModalLabel">Edit Product Review</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <Label>Unit Name</Label>
-				<input type="text" class="form-control" id="unit_name" name="unit_name" value="{{ $product_review->unit_name }} " placeholder="Enter Unit Name">
+
+	  <Label>Order ID</Label>
+				<input type="text" class="form-control" id="orders_id" name="orders_id" value="{{ $product_review->orders_id }} "placeholder="Enter Order ID">
+				<Label>Products Name</Label>
+				<input type="text" class="form-control" id="product_names" name="product_names" value="{{ $product_review->product_names }} "placeholder="Enter Product Name">
+				<Label class="mt-3">Reviews Text</Label>
+				<input type="text" class="form-control" id="reviews_text" name="reviews_text" value="{{ $product_review->reviews_text }} "placeholder="Enter Review Text">
+				<Label>Date</Label>
+				<input type="date" class="form-control" id="date" name="date"value="{{ $product_review->date }} ">
 				
 				
       </div>

@@ -44,14 +44,16 @@ class ProductReviewController extends Controller
 
         // dd($rows);
 
-        $products_name = $rows['products_name'];
-        $reviews_name = $rows['reviews_name'];
+        $orders_id = $rows['orders_id'];
+        $product_names = $rows['product_names'];
+        $reviews_text = $rows['reviews_text'];
         $date = $rows['date'];
 
         //insert these values into the database
         $insert = DB::table('product_reviews')->insert([
-            'products_name' => $products_name,
-            'reviews_name' => $reviews_name,
+            'orders_id' => $orders_id,
+            'product_names' => $product_names,
+            'reviews_text' => $reviews_text,
             'date' => $date
         ]);
         //  dd($insert);
@@ -97,18 +99,20 @@ class ProductReviewController extends Controller
         //
         // update record in the database
         $rows = $request->all();
-       $products_name = $rows['products_name'];
-        $reviews_name = $rows['reviews_name'];
+        $orders_id = $rows['orders_id'];
+       $product_names = $rows['product_names'];
+        $reviews_text = $rows['reviews_text'];
         $date = $rows['date'];
-        $update = DB::table('product_units')->where('id', $id)->update([
-             'products_name' => $products_name,
-            'reviews_name' => $reviews_name,
+        $update = DB::table('product_reviews')->where('id', $id)->update([
+            'orders_id' => $orders_id,
+             'product_names' => $product_names,
+            'reviews_text' => $reviews_text,
             'date' => $date
         ]);
         if($update){
-            return redirect()->back()->with('success', 'Product Unit Updated Successfully');
+            return redirect()->back()->with('success', 'Product Review Updated Successfully');
          }else{
-            return redirect()->back()->with('error', 'Product Unit Update Failed');
+            return redirect()->back()->with('error', 'Product Review Update Failed');
          }
         // dd($update);
     }
