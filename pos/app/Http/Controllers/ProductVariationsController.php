@@ -132,6 +132,7 @@ class ProductVariationsController extends Controller
          $delete = DB::table('product_variations')->where('id', $id)->update(['is_deleted' => 1]);
         // $delete = DB::table('product_units')->where('id', $id)->delete();
         if($delete){
+            
             return redirect()->back()->with('success', 'Product Variation Deleted Successfully');
          }else{
             return redirect()->back()->with('error', 'Product Variation Deletion Failed');
