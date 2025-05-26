@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JavaScript Example</h1>
+    <p id="display"></p>
+    <hr/>
+    <input type="text" id="myInput"/>
+    <button onclick="displayInput()" id="myButton">Click Me!</button>
+    <p id="displayMyInput"></p>
+
+    <hr/>
+    <h2>Calculator</h2>
+    <input type="number" id="num1" placeholder="Enter first number"/>
+    <input type="number" id="num2" placeholder="Enter second number"/>
+    <button onclick="calculateSum()">Calculate Sum</button>
+    <p id="result"></p>
+
+
+
+
+
+
+    <script>
+        // console.log("Hello, World!");
+        // alert("Hello World!");
+        // confirm("Are you sure you want to proceed?");
+        // const userResponse = prompt("Please enter your name:");
+        // if (userResponse) {
+            // Display the user's name in the console
+            // document.getElementById("display").innerText = userResponse;
+        // } else {
+            // If no name was entered, log a different message
+            // console.log("No name entered.");
+        // }
+
+        function displayInput() {
+            const input = document.getElementById("myInput").value;
+            console.log(input);
+            document.getElementById("displayMyInput").innerText = input;
+        }
+
+
+        
+    </script>
+</body>
+</html>
