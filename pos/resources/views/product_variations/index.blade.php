@@ -193,7 +193,7 @@
         <Label>Product Variations</Label>
 				<input type="text" class="form-control" id="options" name="options" value="{{ $product_variation->options }} " placeholder="Edit">
 				
-				<input type="text" class="form-control" id="values" name="options" value="{{ $product_variation->values }} " placeholder="Edit">
+				<input type="text" class="form-control" id="values" name="values" value="{{ $product_variation->values }} " placeholder="Edit">
 				
       </div>
       <div class="modal-footer">

@@ -91,23 +91,23 @@ class ProductVariationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-        // update record in the database
-        $rows = $request->all();
-        $options = $rows['options'];
-        $values = $rows['values'];
-        $update = DB::table('product_variations')->where('id', $id)->update([
-            'options' => $options,
-            'values' => $values
-        ]);
-        if($update){
-            return redirect()->back()->with('success', 'Product Unit Updated Successfully');
-         }else{
-            return redirect()->back()->with('error', 'Product Unit Update Failed');
-         }
-        // dd($update);
+{
+    $request->validate([
+        'options' => 'required|string|max:255',
+        'values' => 'required|string|max:255',
+    ]);
+
+    $data = $request->only(['options', 'values']);
+
+    $updated = DB::table('product_variations')->where('id', $id)->update($data);
+
+    if ($updated) {
+        return redirect()->back()->with('success', 'Product Variation updated successfully.');
+    } else {
+        return redirect()->back()->with('info', 'No changes were made.');
     }
+}
+
 
     /**
      * Remove the specified resource from storage.

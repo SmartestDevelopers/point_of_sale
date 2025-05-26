@@ -88,6 +88,7 @@ Route::resource('product-variations', 'ProductVariationsController');
 
 
 Route::get('productVariationDelete/{id}','ProductVariationsController@productVariationDelete');
+Route::post('/product-variations/{id}', 'ProductVariationsController@update');
 
 Route::resource('sales', 'SalesController');
 
