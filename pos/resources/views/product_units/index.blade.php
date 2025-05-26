@@ -44,7 +44,7 @@
 													</div>
 												    <div class="icons d-flex">
 
-													<!-- Button trigger modal -->
+											 		<!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add Product Unit
 </button>
@@ -206,6 +206,7 @@
     </div>
   </div>
 </div>
+
 
                                                                     @endforeach
 															

@@ -90,6 +90,16 @@ Route::resource('product-variations', 'ProductVariationsController');
 Route::get('productVariationDelete/{id}','ProductVariationsController@productVariationDelete');
 Route::post('/product-variations/{id}', 'ProductVariationsController@update');
 
+Route::get('productBrandDelete/{id}','ProductBrands@productBrandDelete');
+Route::post('/product-brands/{id}', 'ProductBrands@update');
+
+Route::get('productCategoryDelete/{id}','ProductCategoriesController@productCategoryDelete');
+Route::post('/product-category/{id}', 'ProductCategoriesController@update');
+
+Route::get('productReviewDelete/{id}','ProductReviewsController@productReviewDelete');
+Route::post('/product-review/{id}', 'ProductReviewsControllerr@update');
+
+
 Route::resource('sales', 'SalesController');
 
 
