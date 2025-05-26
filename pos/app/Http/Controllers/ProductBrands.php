@@ -45,19 +45,19 @@ class ProductBrands extends Controller
 
         // dd($rows);
 
-        $unit_name = $rows['unit_name'];
-        $status = $rows['status'];
+        $brands_name = $rows['brands_name'];
+        $note = $rows['note'];
 
         //insert these values into the database
-        $insert = DB::table('product_units')->insert([
-            'unit_name' => $unit_name,
-            'status' => $status
+        $insert = DB::table('product_brands')->insert([
+            'brands_name' => $brands_name,
+            'note' => $note
         ]);
         //  dd($insert);
          if($insert){
-            return redirect()->back()->with('success', 'Product Unit Created Successfully');
+            return redirect()->back()->with('success', 'Product Brand Created Successfully');
          }else{
-            return redirect()->back()->with('error', 'Product Unit Creation Failed');
+            return redirect()->back()->with('error', 'Product Brand Creation Failed');
          }
 
     }
@@ -96,11 +96,11 @@ class ProductBrands extends Controller
         //
         // update record in the database
         $rows = $request->all();
-        $unit_name = $rows['unit_name'];
-        $status = $rows['status'];
-        $update = DB::table('product_units')->where('id', $id)->update([
-            'unit_name' => $unit_name,
-            'status' => $status
+        $brands_name = $rows['brands_name'];
+        $note = $rows['note'];
+        $update = DB::table('product_brands')->where('id', $id)->update([
+            'brands_name' => $brands_name,
+            'note' => $note
         ]);
         if($update){
             return redirect()->back()->with('success', 'Product Unit Updated Successfully');
@@ -118,20 +118,19 @@ class ProductBrands extends Controller
      */
     public function destroy($id)
     {
-        //
-        echo "Product Unit Deleted Successfully";
+        echo "Product Brand Deleted Successfully";
     }
 
-    public function productUnitDelete($id)
+    public function productBrandDelete($id)
     {
 
         
-         $delete = DB::table('product_units')->where('id', $id)->update(['is_deleted' => 1]);
+         $delete = DB::table('product_brands')->where('id', $id)->update(['is_deleted' => 1]);
         // $delete = DB::table('product_units')->where('id', $id)->delete();
         if($delete){
-            return redirect()->back()->with('success', 'Product Unit Deleted Successfully');
+            return redirect()->back()->with('success', 'Product Brand Deleted Successfully');
          }else{
-            return redirect()->back()->with('error', 'Product Unit Deletion Failed');
+            return redirect()->back()->with('error', 'Product Brand Deletion Failed');
          }
       
     }

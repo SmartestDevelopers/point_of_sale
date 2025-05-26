@@ -154,13 +154,14 @@
 																				</button>
 																				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton1"  style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
 																					<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $product_unit->id }}">
-  Edit Product Unit
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $product_brand->id }}">
+  Edit Product Brand
 </button>
 
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
-																					<a class="dropdown-item" title="Delete" href="{{url('product-unit-delete',$product_unit->id)}}">Delete</a>
+																					
+																					<a class="dropdown-item" title="Delete" href="{{url('productBrandDelete',$product_brand->id)}}">Delete</a>
 																					
 																				</div>
 																			</div>
@@ -168,27 +169,23 @@
 																	</tr>
 
 																	<!-- Modal -->
-<div class="modal fade" id="editModal{{ $product_unit->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $product_brand->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-	<form id="productUnitForm" method="POST" action="{{ route('product-units.update', $product_unit->id) }}">
+	<form id="productUnitForm" method="POST" action="{{ route('product-brands.update', $product_brand->id) }}">
 		@csrf
 		
-		<input type="hidden" name="id" value="{{ $product_unit->id }}">
+		<input type="hidden" name="id" value="{{ $product_brand->id }}">
       <div class="modal-header">
         <h5 class="modal-title" id="editModalLabel">Edit Product Unit</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <Label>Unit Name</Label>
-				<input type="text" class="form-control" id="unit_name" name="unit_name" value="{{ $product_unit->unit_name }} " placeholder="Enter Unit Name">
-				<Label class="mt-3">Status</Label>
-				<select class="form-select" id="status" name="status">
-					<option value="{{ $product_unit->status }}">{{ $product_unit->status }}</option>
-					<option value="active">Active</option>
-					<option value="inactive">Inactive</option>
-				</select>
-				
+        
+	  <Label>Unit Name</Label>
+				<input type="text" class="form-control" id="brands_name" name="brands_name" value="{{ $product_brand->brands_name }} " placeholder="Enter Brand Name">
+				<Label>Note</Label>
+				<input type="text" class="form-control" id="note" name="note" value="{{ $product_brand->note }} " placeholder="Enter Note">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

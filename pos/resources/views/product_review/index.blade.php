@@ -141,13 +141,13 @@
 																		</button>
 																		<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" >
 																		<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $product_unit->id }}">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $product_review->id }}">
   Edit Reviews
 </button>
 
 																					<a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																					data-original-title="Check out more demos">Edit</a>
-																					<a class="dropdown-item" title="Delete" href="{{url('product--delete',$product_unit->id)}}">Delete</a>
+																					<a class="dropdown-item" title="Delete" href="{{url('ProductReviewsController',$product_review->id)}}">Delete</a>
 																					
 																				</div>
 																			</div>
@@ -158,23 +158,18 @@
 <div class="modal fade" id="editModal{{ $product_unit->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-	<form id="productUnitForm" method="POST" action="{{ route('product-units.update', $product_unit->id) }}">
+	<form id="productUnitForm" method="POST" action="{{ route('product-reviews.update', $product_review->id) }}">
 		@csrf
-		
-		<input type="hidden" name="id" value="{{ $product_unit->id }}">
+		@method
+		<input type="hidden" name="id" value="{{ $product_review->id }}">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Edit Product Unit</h5>
+        <h5 class="modal-title" id="editModalLabel">Edit Product Review</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <Label>Unit Name</Label>
-				<input type="text" class="form-control" id="unit_name" name="unit_name" value="{{ $product_unit->unit_name }} " placeholder="Enter Unit Name">
-				<Label class="mt-3">Status</Label>
-				<select class="form-select" id="status" name="status">
-					<option value="{{ $product_unit->status }}">{{ $product_unit->status }}</option>
-					<option value="active">Active</option>
-					<option value="inactive">Inactive</option>
-				</select>
+				<input type="text" class="form-control" id="unit_name" name="unit_name" value="{{ $product_review->unit_name }} " placeholder="Enter Unit Name">
+				
 				
       </div>
       <div class="modal-footer">

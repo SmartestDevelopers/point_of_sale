@@ -44,19 +44,21 @@ class ProductReviewController extends Controller
 
         // dd($rows);
 
-        $unit_name = $rows['unit_name'];
-        $status = $rows['status'];
+        $products_name = $rows['products_name'];
+        $reviews_name = $rows['reviews_name'];
+        $date = $rows['date'];
 
         //insert these values into the database
-        $insert = DB::table('product_units')->insert([
-            'unit_name' => $unit_name,
-            'status' => $status
+        $insert = DB::table('product_reviews')->insert([
+            'products_name' => $products_name,
+            'reviews_name' => $reviews_name,
+            'date' => $date
         ]);
         //  dd($insert);
          if($insert){
-            return redirect()->back()->with('success', 'Product Unit Created Successfully');
+            return redirect()->back()->with('success', 'Product Review Created Successfully');
          }else{
-            return redirect()->back()->with('error', 'Product Unit Creation Failed');
+            return redirect()->back()->with('error', 'Product Review Creation Failed');
          }
 
     }
@@ -95,11 +97,13 @@ class ProductReviewController extends Controller
         //
         // update record in the database
         $rows = $request->all();
-        $unit_name = $rows['unit_name'];
-        $status = $rows['status'];
+       $products_name = $rows['products_name'];
+        $reviews_name = $rows['reviews_name'];
+        $date = $rows['date'];
         $update = DB::table('product_units')->where('id', $id)->update([
-            'unit_name' => $unit_name,
-            'status' => $status
+             'products_name' => $products_name,
+            'reviews_name' => $reviews_name,
+            'date' => $date
         ]);
         if($update){
             return redirect()->back()->with('success', 'Product Unit Updated Successfully');
@@ -121,11 +125,11 @@ class ProductReviewController extends Controller
         echo "Product Unit Deleted Successfully";
     }
 
-    public function productUnitDelete($id)
+    public function productReviewDelete($id)
     {
 
         
-         $delete = DB::table('product_units')->where('id', $id)->update(['is_deleted' => 1]);
+         $delete = DB::table('product_reviews')->where('id', $id)->update(['is_deleted' => 1]);
         // $delete = DB::table('product_units')->where('id', $id)->delete();
         if($delete){
             return redirect()->back()->with('success', 'Product Unit Deleted Successfully');

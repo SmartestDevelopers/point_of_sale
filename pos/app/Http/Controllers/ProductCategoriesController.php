@@ -92,16 +92,18 @@ class ProductCategoriesController extends Controller
         //
         // update record in the database
         $rows = $request->all();
-        $unit_name = $rows['unit_name'];
-        $status = $rows['status'];
-        $update = DB::table('product_units')->where('id', $id)->update([
-            'unit_name' => $unit_name,
-            'status' => $status
+        $category_name = $rows['category_name'];
+        $category_code = $rows['category_code'];
+        $description = $rows['description'];
+        $update = DB::table('product_categories')->where('id', $id)->update([
+            'category_name' => $category_name,
+            'category_code' => $category_code,
+            'description' => $description,
         ]);
         if($update){
-            return redirect()->back()->with('success', 'Product Unit Updated Successfully');
+            return redirect()->back()->with('success', 'Product Category Updated Successfully');
          }else{
-            return redirect()->back()->with('error', 'Product Unit Update Failed');
+            return redirect()->back()->with('error', 'Product Category Update Failed');
          }
         // dd($update);
     }
@@ -115,19 +117,19 @@ class ProductCategoriesController extends Controller
     public function destroy($id)
     {
         //
-        echo "Product Unit Deleted Successfully";
+        echo "Product Category Deleted Successfully";
     }
 
-    public function productUnitDelete($id)
+    public function productCategoryDelete($id)
     {
 
         
-         $delete = DB::table('product_units')->where('id', $id)->update(['is_deleted' => 1]);
+         $delete = DB::table('product_categories')->where('id', $id)->update(['is_deleted' => 1]);
         // $delete = DB::table('product_units')->where('id', $id)->delete();
         if($delete){
-            return redirect()->back()->with('success', 'Product Unit Deleted Successfully');
+            return redirect()->back()->with('success', 'Product Category Deleted Successfully');
          }else{
-            return redirect()->back()->with('error', 'Product Unit Deletion Failed');
+            return redirect()->back()->with('error', 'Product Category Deletion Failed');
          }
       
     }
