@@ -238,11 +238,11 @@
 																	<form method="POST" action="{{route('submitWarehouse')}}">
 																	@csrf
 																		<label>Add Warehouse</label>
-																		<input class="form-control" name="warehouse_name" type="text"/>
+																		<input class="form-control" name="warehouse" type="text"/>
 																		<label>Warehouse Address</label>
-																		<input class="form-control" name="warehouse_address" type="text"/>
+																		<input class="form-control" name="address" type="text"/>
 																		<label>Warehouse PHone</label>
-																		<input class="form-control" name="warehouse_phone" type="text"/>
+																		<input class="form-control" name="phone" type="text"/>
 																		<hr/>
 																		<input class="form-control" class="btn btn-primary white me-2" name="submit" type="submit"/>
 																	</form>

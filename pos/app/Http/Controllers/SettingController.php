@@ -102,11 +102,11 @@ class SettingController extends Controller
 
             $abc = $request->all();
 
-            $name = $abc['warehouse_name'];
+            $name = $abc['warehouse'];
 
-            $address = $abc['warehouse_address'];
+            $address = $abc['address'];
             
-            $phone = $abc['warehouse_phone'];
+            $phone = $abc['phone'];
 
             
             $insert = DB::table('warehouses')->insert([
