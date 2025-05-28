@@ -20,9 +20,20 @@
     <button onclick="calculateSum()">Calculate Sum</button>
     <p id="result"></p>
 
+    <input type="number" id="changeWidth"/>
+    <button onclick="changeWidth()">Change Width</button>
+    
+    
+    <input type="number" id="changePadding"/>
+    <button onclick="changePadding()">Change Padding</button>
 
 
+    <hr/>
 
+    <div id="myBox" style="padding:10px; width:200px; border:1px solid #000">
+        My Box
+    </div>
+    
 
 
     <script>
@@ -44,8 +55,29 @@
             document.getElementById("displayMyInput").innerText = input;
         }
 
+        function calculateSum()
+        {
+            const num1 = document.getElementById("num1").value;
+            const num2 = document.getElementById("num2").value;
+            // in javascript + is used for concatenate. what is concatenate? it merge two variables
+            const result = parseInt(num1) + parseInt(num2);
+            document.getElementById("result").innerText = result;
 
-        
+
+        }
+
+        function changeWidth()
+        {
+            const myWidth = document.getElementById("changeWidth").value;
+            document.getElementById("myBox").style.width = myWidth + "px";
+            }
+
+         function changePadding()
+        {
+            const myPadding = document.getElementById("changePadding").value;
+            document.getElementById("myBox").style.padding = myPadding + "px";
+            }
+
     </script>
 </body>
 </html>
