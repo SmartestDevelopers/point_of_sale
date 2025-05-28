@@ -73,8 +73,8 @@ Route::get('/add-warehouse', 'SettingController@addWarehouse')->name('addWarehou
 Route::post('/submit-warehouse', 'SettingController@submitWarehouse')->name('submitWarehouse');
 
 Route::get('/warehouse-edit/{id}', 'SettingController@editWarehouse')->name('editWarehouse');
-Route::post('/warehouse-update/{id}', 'SettingController@updateWarehouse')->name('updateWarehouse');
-Route::get('/warehouse-delete/{id}', 'SettingController@deleteWarehouse')->name('deleteWarehouse');
+Route::post('/warehouse-update/{id}', 'SettingController@update')->name('warehouse.update');
+Route::get('/warehouse-delete/{id}', 'SettingController@deleteWarehouse');
 
 Route::get('/accounts-list', 'AccountsController@index')->name('index');
 

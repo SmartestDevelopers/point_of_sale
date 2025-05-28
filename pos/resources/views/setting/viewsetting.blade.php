@@ -250,564 +250,107 @@
 																</div>
 
 																<div style="border:1px solid #000" class="col-md-6">
-																<h2>Warehouse Listing </h2>
+																	<h2>Warehouse Listing </h2>
+																	<table class="table table-bordered">
+																			<thead>
+															<tr>
+																<th>ID</th>
+																<th>Warehouse</th>
+																<th>Address</th>
+																<th>Phone</th>
+																<th class=" no-sort text-end">Action</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+															@php
+																	$number = 1;
 
-																{{$warehouses}}
+																@endphp
+																@foreach($warehouses as $warehouse)
 
+																<td>{{$number++}}</td>
+																<td>{{ $warehouse->warehouse }}</td>
+																<td>{{ $warehouse->address }}</td>
+																<td>{{ $warehouse->phone_number }}</td>
+																<td class="text-end">
 																
-																</div>
+																<!-- Edit Warehouse Modal -->
+<div class="modal fade" id="editModal{{ $warehouse->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $warehouse->id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="POST" id="editWarehouseForm{{ $warehouse->id }}" action="{{ route('warehouse.update', $warehouse->id) }}">
+      @csrf
+      <!-- @method('PUT') -->
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel{{ $warehouse->id }}">Edit Warehouse</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" name="id" value="{{ $warehouse->id }}">
+          
+          <div class="mb-3">
+            <label for="editWarehouseName{{ $warehouse->id }}" class="form-label">Warehouse Name</label>
+            <input type="text" class="form-control" name="warehouse" id="editWarehouseName{{ $warehouse->id }}" value="{{ $warehouse->warehouse }}" placeholder="Edit warehouse name">
+          </div>
+
+          <div class="mb-3">
+            <label for="editWarehouseAddress{{ $warehouse->id }}" class="form-label">Warehouse Address</label>
+            <input type="text" class="form-control" name="address" id="editWarehouseAddress{{ $warehouse->id }}" value="{{ $warehouse->address }}" placeholder="Edit warehouse address">
+          </div>
+
+          <div class="mb-3">
+            <label for="editWarehousePhone{{ $warehouse->id }}" class="form-label">Warehouse Phone</label>
+            <input type="text" class="form-control" name="phone_number" id="editWarehousePhone{{ $warehouse->id }}" value="{{ $warehouse->phone_number }}" placeholder="Edit phone number">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Update Warehouse</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
 
 
+<!-- Add this before the Delete link inside the action <td> -->
+<button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal{{ $warehouse->id }}">
+    Edit
+</button>
 
-																</div>
-															</div>	
-                                                        </div>
+<!-- Existing delete link -->
+<a class="btn btn-sm btn-danger" title="Delete" href="{{ url('warehouse-delete', $warehouse->id) }}">Delete</a>
 
 
+																<!-- <a class="dropdown-item" title="Delete" href="{{ url('warehouse-delete', $warehouse->id) }}">Delete</a> -->
+            </td>
+																 <!-- your action buttons -->
+        </tr>
+    @endforeach
+</tbody>
 
-                                                        <div class="tab-pane fade " id="pos" role="tabpanel" aria-labelledby="pos-tab">
-															<div class="form-group row">
-																<div class="col-md-6">
-																	<label >Default Customer</label>
-																	<fieldset class="form-group mb-3">
-																		<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-																			<option value="AL">dhiman(+8820115121)</option>
-																			  
-																			<option value="WY">par(+33003)</option>
-																			
-																			<option value="WY">rar(+0123456789)</option>
-																		  </select>
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Warehouse </label>
-																	<fieldset class="form-group mb-3">
-																		<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-																			<option value="AL">Warehouse  1</option>
-																			  
-																			<option value="WY">Warehouse  2</option>
-																		  </select>
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Default Biller</label>
-																	<fieldset class="form-group mb-3">
-																		<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-																			<option value="AL">David</option>
-																			  
-																			<option value="WY">Miller</option>
-																		  </select>
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Select Product</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-12">
-																	<button type="submit" class="btn btn-primary">Submit</button>
-																</div>
-			
-															</div>	
-														</div>
-														<div class="tab-pane fade " id="email" role="tabpanel" aria-labelledby="email-tab">
-															<div class="form-group row">
-																<div class="col-md-6">
-																	<label >SMTP</label>
-																	<fieldset class="form-group mb-3">
-																		<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-																			<option value="ac">Active</option>
-																			  
-																			<option value="ia">In Active</option>
-																		  </select>
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Mail Engine</label>
-																	<fieldset class="form-group mb-3">
-																		<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-																			<option value="SMTP">SMTP</option>
-																			  
-																			<option value="SM">Send Mail</option>
-																		  </select>
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >SMTP Host</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="SMTP Host">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >SMTP Port</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="SMTP Port">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Encryption</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="Encryption">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >SMTP Username</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="SMTP Username">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >SMTP Password </label>
-																	<fieldset class="form-group mb-3">
-																		<input type="password" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >From Email</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="email" class="form-control border-dark"  placeholder="From Email">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >From Name</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="email" class="form-control border-dark"  placeholder="From Name">
-																	</fieldset>
-																</div>
-																<div class="col-md-12">
-																	<button type="submit" class="btn btn-primary">Submit</button>
-																</div>
-			
-															</div>	
-														</div>
-														<div class="tab-pane fade " id="sms" role="tabpanel" aria-labelledby="sms-tab">
-															<div class="form-group row">
-																<div class="col-md-12">
-																	<label >Gateway</label>
-																	<fieldset class="form-group mb-3">
-																		<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-																			<option value="AL">Twilio</option>
-																		  </select>
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >ACCOUNT SID</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark" id="ACCOUNTInput" placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >AUTH TOKEN</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark" id="AUTHInput" placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Twilio Number</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-12">
-																	<button type="submit" class="btn btn-primary">Submit</button>
-																</div>
-			
-															</div>	
-														</div>
-														<div class="tab-pane fade " id="notification" role="tabpanel" aria-labelledby="notification-tab">
-															<div class="form-group row">
-																<div class="col-md-6">
-																	<label >Default Notification</label>
-																	<fieldset class="form-group mb-3">
-																		<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-																			<option value="AL">FCM</option>
-																			  
-																			<option value="WY">One Signal</option>
-																			
-																		  </select>
-																	</fieldset>
-																</div>
-																<div class="col-md-6"></div>
-																<div class="col-md-6">
-																	<label >Onesignal App ID</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="" value="6053d948-b8f6-472a-87e4-379fa89f78d8">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Onsignal Sender ID</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="" value="50877237723">
-																	</fieldset>
-																</div>
-																<div class="col-md-12">
-																	<button type="submit" class="btn btn-primary">Submit</button>
-																</div>
-			
-															</div>	
-														</div>
-														<div class="tab-pane fade " id="invoice" role="tabpanel" aria-labelledby="invoice-tab">
-															<div class="form-group row">
-															
-																<div class="col-md-6">
-																	<label >Invoice Address</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Invoice Email</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="email" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Mobile Number</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="number" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Phone Number</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="number" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Phone Number</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="number" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >AInvoice Logo</label>
-																	<fieldset class="form-group mb-3 border-dark rounded p-1">
-																		<input type="file" class="d-block w-100" id="img" name="img" accept="image/*">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Invoice  Prefix</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="number" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Invoice Footer Content</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="number" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-12">
-																	<button type="submit" class="btn btn-primary">Submit</button>
-																</div>
-			
-															</div>	
-														</div>
-														<div class="tab-pane fade " id="barcodes" role="tabpanel" aria-labelledby="barcodes-tab">
-															<div class="form-group row">
-																<div class="col-md-12">
-																	<label >Sticker Sheet setting Name</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-12">
-																	<label >Sticker Sheet setting Description</label>
-																	<fieldset class="form-group mb-5">
-																		<textarea class="form-control"  rows="3" placeholder="Sticker Sheet setting Description"></textarea>
-																	</fieldset>
-																</div>
-																<div class="col-md-12">
-																	<fieldset>
-																		<div class="checkbox mb-5">
-																		  <input type="checkbox" class="checkbox-input" id="checkbox12" >
-																		  <label for="checkbox12">Continous feed or rolls</label>
-																		</div>
-																	  </fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Additional top margin (In Inches)</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Height of sticker (In Inches)</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Width of sticker (In Inches)</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Height of sticker (In Inches)</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Paper width (In Inches)</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Paper height (In Inches)</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Stickers in one row</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Distance between two rows (In Inches)</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >Distance between two columns (In Inches)</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-6">
-																	<label >No. of Stickers per sheet</label>
-																	<fieldset class="form-group mb-3">
-																		<input type="text" class="form-control border-dark"  placeholder="">
-																	</fieldset>
-																</div>
-																<div class="col-md-12">
-																	<fieldset>
-																		<div class="checkbox mb-5">
-																		  <input type="checkbox" class="checkbox-input" id="checkbox1" >
-																		  <label for="checkbox1">Continous feed or rolls</label>
-																		</div>
-																	  </fieldset>
-																</div>
-																<div class="col-md-12">
-																	<button type="submit" class="btn btn-primary">Submit</button>
-																</div>
-															</div>	
-													
-														</div>
-														<div class="tab-pane fade " id="emailtemp" role="tabpanel" aria-labelledby="emailtemp-tab">
-														
-															<ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
-																<li class="nav-item">
-																	<a class="nav-link active" id="amazingDeal-tab-center" data-bs-toggle="pill" href="#amazingDeal-center" role="tab" aria-controls="amazingDeal-center" aria-selected="true">
-																	  Amazing Deals
-																</a>
-																</li>
-																<li class="nav-item">
-																	<a class="nav-link" id="forgetPassword-tab" data-bs-toggle="pill" href="#forgetPassword" role="tab" aria-controls="forgetPassword" aria-selected="false">
-																		Forgot Password
-																  </a>
-																</li>
-																<li class="nav-item">
-																	<a class="nav-link" id="newArrival-tab" data-bs-toggle="pill" href="#newArrival" role="tab" aria-controls="newArrival" aria-selected="false">
-																		New Arrival
-																	</a>
-																</li>
-																<li class="nav-item">
-																	<a class="nav-link" id="overallSale-tab" data-bs-toggle="pill" href="#overallSale" role="tab" aria-controls="overallSale" aria-selected="false">
-																		Overall Sale
-																	</a>
-																</li>
-																<li class="nav-item">
-																	<a class="nav-link" id="Sale-tab" data-bs-toggle="pill" href="#Sale" role="tab" aria-controls="Sale" aria-selected="false">
-																	 Sale
-																	</a>
-																</li>
-																<li class="nav-item">
-																	<a class="nav-link" id="signup-tab" data-bs-toggle="pill" href="#signup" role="tab" aria-controls="signup" aria-selected="false">
-																		Signup
-																	</a>
-																</li>
-																<li class="nav-item">
-																	<a class="nav-link" id="winterSale-tab" data-bs-toggle="pill" href="#winterSale" role="tab" aria-controls="winterSale" aria-selected="false">
-																		Winter Sale
-																	</a>
-																</li>
-															</ul>
-															<div class="row">
-				
-																<div class="col-12 px-4">
-																	<div class="tab-content" id="v-pills-tabContent">
-																		<div class="tab-pane fade show active" id="amazingDeal-center" role="tabpanel" aria-labelledby="amazingDeal-tab-center">
-																			<div class="form-group row">
-																				<div class="col-md-12">
-																					<label >Subject</label>
-																					<fieldset class="form-group mb-3">
-																						<input type="text" class="form-control border-dark"  placeholder="" value="Awesome Shop">
-																					</fieldset>
-																				</div>
-																				<div class="col-md-12">
-																					<label >Body</label>
-																					<fieldset class="form-group mb-3">
-																						<textarea class="form-control"  rows="8" placeholder="Label in Textarea" ></textarea>
-																					</fieldset>
-																				</div>
-																			
-																				<div class="col-md-12">
-																					<button type="submit" class="btn btn-primary">Submit</button>
-																				</div>
-							
-																			</div>	
-																		</div>
-																		<div class="tab-pane fade " id="forgetPassword" role="tabpanel" aria-labelledby="forgetPassword-tab">
-																			<div class="form-group row">
-																				<div class="col-md-12">
-																					<label >Subject</label>
-																					<fieldset class="form-group mb-3">
-																						<input type="text" class="form-control border-dark"  placeholder="" value="Awesome Shop">
-																					</fieldset>
-																				</div>
-																				<div class="col-md-12">
-																					<label >Body</label>
-																					<fieldset class="form-group mb-3">
-																						<textarea class="form-control"  rows="8" placeholder="Label in Textarea" ></textarea>
-																					</fieldset>
-																				</div>
-																			
-																				<div class="col-md-12">
-																					<button type="submit" class="btn btn-primary">Submit</button>
-																				</div>
-							
-																			</div>	
-																		</div>
-																		<div class="tab-pane fade " id="newArrival" role="tabpanel" aria-labelledby="newArrival-tab">
-																			<div class="form-group row">
-																				<div class="col-md-12">
-																					<label >Subject</label>
-																					<fieldset class="form-group mb-3">
-																						<input type="text" class="form-control border-dark"  placeholder="" value="Awesome Shop">
-																					</fieldset>
-																				</div>
-																				<div class="col-md-12">
-																					<label >Body</label>
-																					<fieldset class="form-group mb-3">
-																						<textarea class="form-control"  rows="8" placeholder="Label in Textarea" ></textarea>
-																					</fieldset>
-																				</div>
-																			
-																				<div class="col-md-12">
-																					<button type="submit" class="btn btn-primary">Submit</button>
-																				</div>
-							
-																			</div>	
-																		</div>
-																		<div class="tab-pane fade " id="overallSale" role="tabpanel" aria-labelledby="overallSale-tab">
-																			<div class="form-group row">
-																				<div class="col-md-12">
-																					<label >Subject</label>
-																					<fieldset class="form-group mb-3">
-																						<input type="text" class="form-control border-dark"  placeholder="" value="Awesome Shop">
-																					</fieldset>
-																				</div>
-																				<div class="col-md-12">
-																					<label >Body</label>
-																					<fieldset class="form-group mb-3">
-																						<textarea class="form-control"  rows="8" placeholder="Label in Textarea" ></textarea>
-																					</fieldset>
-																				</div>
-																			
-																				<div class="col-md-12">
-																					<button type="submit" class="btn btn-primary">Submit</button>
-																				</div>
-							
-																			</div>	
-																		</div>
-																		<div class="tab-pane fade " id="Sale" role="tabpanel" aria-labelledby="Sale-tab">
-																			<div class="form-group row">
-																				<div class="col-md-12">
-																					<label >Subject</label>
-																					<fieldset class="form-group mb-3">
-																						<input type="text" class="form-control border-dark"  placeholder="" value="Awesome Shop">
-																					</fieldset>
-																				</div>
-																				<div class="col-md-12">
-																					<label >Body</label>
-																					<fieldset class="form-group mb-3">
-																						<textarea class="form-control"  rows="8" placeholder="Label in Textarea" ></textarea>
-																					</fieldset>
-																				</div>
-																			
-																				<div class="col-md-12">
-																					<button type="submit" class="btn btn-primary">Submit</button>
-																				</div>
-							
-																			</div>	
-																		</div>
-																		<div class="tab-pane fade " id="signup" role="tabpanel" aria-labelledby="signup-tab">
-																			<div class="form-group row">
-																				<div class="col-md-12">
-																					<label >Subject</label>
-																					<fieldset class="form-group mb-3">
-																						<input type="text" class="form-control border-dark"  placeholder="" value="Awesome Shop">
-																					</fieldset>
-																				</div>
-																				<div class="col-md-12">
-																					<label >Body</label>
-																					<fieldset class="form-group mb-3">
-																						<textarea class="form-control"  rows="8" placeholder="Label in Textarea" ></textarea>
-																					</fieldset>
-																				</div>
-																			
-																				<div class="col-md-12">
-																					<button type="submit" class="btn btn-primary">Submit</button>
-																				</div>
-							
-																			</div>	
-																		</div>
-																		<div class="tab-pane fade " id="winterSale" role="tabpanel" aria-labelledby="winterSale-tab">
-																			<div class="form-group row">
-																				<div class="col-md-12">
-																					<label >Subject</label>
-																					<fieldset class="form-group mb-3">
-																						<input type="text" class="form-control border-dark"  placeholder="" value="Awesome Shop">
-																					</fieldset>
-																				</div>
-																				<div class="col-md-12">
-																					<label >Body</label>
-																					<fieldset class="form-group mb-3">
-																						<textarea class="form-control"  rows="8" placeholder="Label in Textarea" ></textarea>
-																					</fieldset>
-																				</div>
-																			
-																				<div class="col-md-12">
-																					<button type="submit" class="btn btn-primary">Submit</button>
-																				</div>
-							
+																										
 																			</div>	
 																		</div>
 																	</div>
 																</div>
 															</div>
 
-														</div>
-                                                      
+														</div> 
                                                     </div>
                                                 </div>
                                             </div>
 										</div>
-									
 									</div>
 								</div>
 							</div>			
-						</div>
-						
-					</div>
-					
+						</div>					
+					</div>				
 				</div>
 
-@endsection
+				@endsection
