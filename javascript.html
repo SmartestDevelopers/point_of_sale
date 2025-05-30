@@ -27,6 +27,33 @@
     <input type="number" id="changePadding"/>
     <button onclick="changePadding()">Change Padding</button>
 
+    <input type="number" id="changeHeight">
+    <button onclick="changeHeight()">Change Height</button><br/><br/>
+
+    <input type="number" id="changeBorderWidth">
+    <select id="changeBorderStyle">
+        <option value="solid">Solid</option>
+        <option value="dashed">Dashed</option>
+        <option value="dotted">Dotted</option>
+        <option value="double">Double</option>
+        <option value="grooved">Grooved</option>
+    </select>
+    <input type="color" id="changeBorderColor" value="#000000">
+    <button onclick="changeBorder()">Change Border</button><br/><br/>
+
+    <select id="boxSizing">
+        <option value="border-box">Border-Box</option>
+        <option value="inherit">Inherit</option>
+        <option value="content-box">Content-Box</option>
+    </select>
+
+    <button onclick="changeBoxSize()">Change Box-Size</button><br/><br/>
+
+    <input type="text" id="borderRadiusInput" placeholder="e.g. 10px 20px 30px or 10% ">
+    <button onclick="changeBorderRadius()">Change Border-Radius</button></body></html><br/><br/>
+
+    <input type="number" id="margin">
+    <button onclick="changeMargin()">Change Margin</button><br/><br/>
 
     <hr/>
 
@@ -59,7 +86,7 @@
         {
             const num1 = document.getElementById("num1").value;
             const num2 = document.getElementById("num2").value;
-            // in javascript + is used for concatenate. what is concatenate? it merge two variables
+             // in javascript + is used for concatenate. what is concatenate? it merge two variables
             const result = parseInt(num1) + parseInt(num2);
             document.getElementById("result").innerText = result;
 
@@ -77,6 +104,38 @@
             const myPadding = document.getElementById("changePadding").value;
             document.getElementById("myBox").style.padding = myPadding + "px";
             }
+
+        function changeHeight () 
+        {
+            const myHeight = document.getElementById("changeHeight").value;
+            document.getElementById("myBox").style.height = myHeight + "px";
+        }
+
+        function changeBorder()
+        {
+            const width = document.getElementById("changeBorderWidth").value;
+            const style = document.getElementById("changeBorderStyle").value;
+            const color = document.getElementById("changeBorderColor").value;
+            document.getElementById("myBox").style.border = `${width}px ${style} ${color}`;
+        }
+
+        function changeBoxSize ()
+        {
+            const boxsize = document.getElementById("boxSizing").value;
+            document.getElementById("myBox").style.boxSizing = boxsize;
+        }
+
+        function changeBorderRadius ()
+        {
+            const radius = document.getElementById("borderRadiusInput").value;
+            document.getElementById("myBox").style.borderRadius = radius;
+        }
+
+        function changeMargin ()
+        {
+            const myMargin = document.getElementById("margin").value;
+            document.getElementById("myBox").style.margin = myMargin + "px";
+        }
 
     </script>
 </body>

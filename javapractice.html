@@ -37,6 +37,16 @@
      <button onclick="divide()">Calculate Divide</button>
      <p id="division"></p>
 
+     <input type="number" id="changeWidth">
+     <button onclick="resizeWidth()">Change Width</button>
+
+     <input type="number" id="changePadding">
+     <button onclick="resizePadding()">Change Padding</button>
+
+     
+     <hr>
+     <div id="newBox" style="padding: 20px; width: 10px; border: 2px dotted #098765;">New Box</div>
+
     <script>
         function myData() {
             const display = document.getElementById("showOn").value;
@@ -70,6 +80,16 @@
             const num8 = document.getElementById("num8").value;
             const division = parseInt(num7) / parseInt(num8);
             document.getElementById("division").innerText = division;
+        }
+
+        function resizeWidth() {
+            const newWidth = document.getElementById("changeWidth").value;
+            document.getElementById("newBox").style.width = newWidth + "px";
+        }
+
+        function resizePadding() {
+            const newPadding = document.getElementById("changePadding").value;
+            document.getElementById("newBox").style.padding = newPadding + "px";
         }
     </script>
 </body>
