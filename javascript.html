@@ -55,6 +55,19 @@
     <input type="number" id="margin">
     <button onclick="changeMargin()">Change Margin</button><br/><br/>
 
+    <input type="number" id="fontSizeInput" placeholder="Enter font size in px">
+    <button onclick="fontSize()">Change Font-Size</button><br/br/>
+
+    <select  id="textAlign">
+        <option value="center">Center</option>
+        <option value="justify">Justify</option>
+        <option value="right">Right</option>
+        <option value="left">Left</option>
+        <option value="inherit">Inherit</option>
+        <option value="start">Start</option>
+    </select>
+    <button onclick="textAlign()">Apply Text Alignment</button><br/><br/>
+    
     <hr/>
 
     <div id="myBox" style="padding:10px; width:200px; border:1px solid #000">
@@ -135,6 +148,18 @@
         {
             const myMargin = document.getElementById("margin").value;
             document.getElementById("myBox").style.margin = myMargin + "px";
+        }
+
+        function fontSize ()
+        {
+            const myFontSize = document.getElementById("fontSizeInput").value;
+            document.getElementById("myBox").style.fontSize = myFontSize + "px";
+        }
+
+        function textAlign()
+        {
+            const alignmnet = document.getElementById("textAlign").value;
+            document.getElementById("myBox").style.textAlign = alignmnet;
         }
 
     </script>
