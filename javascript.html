@@ -67,7 +67,12 @@
         <option value="start">Start</option>
     </select>
     <button onclick="textAlign()">Apply Text Alignment</button><br/><br/>
-    
+
+    <input type="number" id="letterSpacing">
+    <button onclick="letterSpace()">Change Letter Space</button>
+
+    <input type="number" id="lineHeight">
+    <button onclick="lineHeightChange()">Change Line Height</button>
     <hr/>
 
     <div id="myBox" style="padding:10px; width:200px; border:1px solid #000">
@@ -162,6 +167,18 @@
             document.getElementById("myBox").style.textAlign = alignmnet;
         }
 
+        function letterSpace()
+        {
+            const letter = document.getElementById("letterSpacing").value;
+
+            document.getElementById("myBox").style.letterSpacing = letter + "px";
+        }
+
+        function lineHeightChange()
+        {
+            const line = document.getElementById("lineHeight").value;
+            document.getElementById("myBox").style.lineHeight = line + "px";
+        }
     </script>
 </body>
 </html>
