@@ -1,0 +1,18 @@
+<h2>To-Do List</h2>
+<input type="text" id="taskInput" placeholder="New task">
+<button onclick="addTask()">Add Task</button>
+<ul id="taskList"></ul>
+
+<script>
+  function addTask() {
+    const input = document.getElementById('taskInput');
+    const task = input.value.trim();
+    if (task) {
+      const li = document.createElement('li');
+      li.innerText = task;
+      li.onclick = () => li.style.textDecoration = 'line-through';
+      document.getElementById('taskList').appendChild(li);
+      input.value = '';
+    }
+  }
+</script>
