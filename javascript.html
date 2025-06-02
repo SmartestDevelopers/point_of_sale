@@ -27,7 +27,52 @@
     <input type="number" id="changePadding"/>
     <button onclick="changePadding()">Change Padding</button>
 
+    <input type="number" id="changeHeight">
+    <button onclick="changeHeight()">Change Height</button><br/><br/>
 
+    <input type="number" id="changeBorderWidth">
+    <select id="changeBorderStyle">
+        <option value="solid">Solid</option>
+        <option value="dashed">Dashed</option>
+        <option value="dotted">Dotted</option>
+        <option value="double">Double</option>
+        <option value="grooved">Grooved</option>
+    </select>
+    <input type="color" id="changeBorderColor" value="#000000">
+    <button onclick="changeBorder()">Change Border</button><br/><br/>
+
+    <select id="boxSizing">
+        <option value="border-box">Border-Box</option>
+        <option value="inherit">Inherit</option>
+        <option value="content-box">Content-Box</option>
+    </select>
+
+    <button onclick="changeBoxSize()">Change Box-Size</button><br/><br/>
+
+    <input type="text" id="borderRadiusInput" placeholder="e.g. 10px 20px 30px or 10% ">
+    <button onclick="changeBorderRadius()">Change Border-Radius</button></body></html><br/><br/>
+
+    <input type="number" id="margin">
+    <button onclick="changeMargin()">Change Margin</button><br/><br/>
+
+    <input type="number" id="fontSizeInput" placeholder="Enter font size in px">
+    <button onclick="fontSize()">Change Font-Size</button><br/br/>
+
+    <select  id="textAlign">
+        <option value="center">Center</option>
+        <option value="justify">Justify</option>
+        <option value="right">Right</option>
+        <option value="left">Left</option>
+        <option value="inherit">Inherit</option>
+        <option value="start">Start</option>
+    </select>
+    <button onclick="textAlign()">Apply Text Alignment</button><br/><br/>
+
+    <input type="number" id="letterSpacing">
+    <button onclick="letterSpace()">Change Letter Space</button>
+
+    <input type="number" id="lineHeight">
+    <button onclick="lineHeightChange()">Change Line Height</button>
     <hr/>
 
     <div id="myBox" style="padding:10px; width:200px; border:1px solid #000">
@@ -59,7 +104,7 @@
         {
             const num1 = document.getElementById("num1").value;
             const num2 = document.getElementById("num2").value;
-            // in javascript + is used for concatenate. what is concatenate? it merge two variables
+             // in javascript + is used for concatenate. what is concatenate? it merge two variables
             const result = parseInt(num1) + parseInt(num2);
             document.getElementById("result").innerText = result;
 
@@ -78,6 +123,62 @@
             document.getElementById("myBox").style.padding = myPadding + "px";
             }
 
+        function changeHeight () 
+        {
+            const myHeight = document.getElementById("changeHeight").value;
+            document.getElementById("myBox").style.height = myHeight + "px";
+        }
+
+        function changeBorder()
+        {
+            const width = document.getElementById("changeBorderWidth").value;
+            const style = document.getElementById("changeBorderStyle").value;
+            const color = document.getElementById("changeBorderColor").value;
+            document.getElementById("myBox").style.border = `${width}px ${style} ${color}`;
+        }
+
+        function changeBoxSize ()
+        {
+            const boxsize = document.getElementById("boxSizing").value;
+            document.getElementById("myBox").style.boxSizing = boxsize;
+        }
+
+        function changeBorderRadius ()
+        {
+            const radius = document.getElementById("borderRadiusInput").value;
+            document.getElementById("myBox").style.borderRadius = radius;
+        }
+
+        function changeMargin ()
+        {
+            const myMargin = document.getElementById("margin").value;
+            document.getElementById("myBox").style.margin = myMargin + "px";
+        }
+
+        function fontSize ()
+        {
+            const myFontSize = document.getElementById("fontSizeInput").value;
+            document.getElementById("myBox").style.fontSize = myFontSize + "px";
+        }
+
+        function textAlign()
+        {
+            const alignmnet = document.getElementById("textAlign").value;
+            document.getElementById("myBox").style.textAlign = alignmnet;
+        }
+
+        function letterSpace()
+        {
+            const letter = document.getElementById("letterSpacing").value;
+
+            document.getElementById("myBox").style.letterSpacing = letter + "px";
+        }
+
+        function lineHeightChange()
+        {
+            const line = document.getElementById("lineHeight").value;
+            document.getElementById("myBox").style.lineHeight = line + "px";
+        }
     </script>
 </body>
 </html>

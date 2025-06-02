@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Practice</title>
+</head>
+<body>
+    <h1>Javascript Arithmetic Operations</h1>
+    <p id="show"></p>
+    <hr>
+
+    <input type="text" id="showOn">
+    <button onclick="myData()" id="showButton" >Click me</button>
+    <p id="showOutput"></p>
+
+    <hr>
+    <h2>Calculator</h2>
+
+    <input type="number" name="digit1" id="digit1" placeholder="Enter number">
+     <input type="number" name="digit2" id="digit2" placeholder="Enter number">
+     <button onclick="sum()">Calculate Sum</button>
+     <p id="sumResult"></p>
+
+     <input type="number" id="num3">
+     <input type="number" id="num4">
+     <button onclick="subtract()">Calculate Subtract</button>
+     <p id="minusresult"></p>
+
+     <input type="number" id="num5" placeholder="Enter first number">
+     <input type="number" id="num6" placeholder="Enter second number">
+     <button onclick="multiply()">Calculate Multiply</button>
+     <p id="multiplication"></p>
+
+     <input type="number" id="num7" placeholder="Enter first number">
+     <input type="number" id="num8" placeholder="Enter second number">
+     <button onclick="divide()">Calculate Divide</button>
+     <p id="division"></p>
+
+     <input type="number" id="changeWidth">
+     <button onclick="resizeWidth()">Change Width</button>
+
+     <input type="number" id="changePadding">
+     <button onclick="resizePadding()">Change Padding</button>
+
+     
+     <hr>
+     <div id="newBox" style="padding: 20px; width: 10px; border: 2px dotted #098765;">New Box</div>
+
+    <script>
+        function myData() {
+            const display = document.getElementById("showOn").value;
+            console.log(display);
+            document.getElementById("showOutput").innerText = display;
+        }
+
+        function sum() {
+            const num1 = document.getElementById("digit1").value;
+            const num2 = document.getElementById("digit2").value;
+            const sumResult = parseInt (num1) + parseInt (num2);
+            document.getElementById ("sumResult").innerText = sumResult;
+        }
+
+        function subtract() {
+            const num3= document.getElementById("num3").value;
+            const num4= document.getElementById("num4").value;
+            const minusresult = parseInt(num3) - parseInt(num4);
+            document.getElementById("minusresult").innerText = minusresult;
+        }
+
+        function multiply() {
+            const num5 = document.getElementById("num5").value;
+            const num6 = document.getElementById("num6").value;
+            const multiplication = parseInt(num5) * parseInt(num6);
+            document.getElementById("multiplication").innerText = multiplication;
+        }
+
+        function divide() {
+            const num7 = document.getElementById("num7").value;
+            const num8 = document.getElementById("num8").value;
+            const division = parseInt(num7) / parseInt(num8);
+            document.getElementById("division").innerText = division;
+        }
+
+        function resizeWidth() {
+            const newWidth = document.getElementById("changeWidth").value;
+            document.getElementById("newBox").style.width = newWidth + "px";
+        }
+
+        function resizePadding() {
+            const newPadding = document.getElementById("changePadding").value;
+            document.getElementById("newBox").style.padding = newPadding + "px";
+        }
+    </script>
+</body>
+</html>

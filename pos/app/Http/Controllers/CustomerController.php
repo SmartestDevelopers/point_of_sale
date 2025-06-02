@@ -14,7 +14,7 @@ class CustomerController extends Controller
     public function index()
     {
         //
-        $customer_lists = DB::table('customers')->where('is_deleted',0)->get(); 
+         $customer_lists = DB::table('customers')->where('is_deleted',0)->get(); 
         // echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
 
         // $browser = get_browser(null, true);
@@ -38,6 +38,7 @@ class CustomerController extends Controller
         //
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
