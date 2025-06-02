@@ -80,7 +80,12 @@
 
     function calculateAge() {
     const dob = new Date(document.getElementById('dob').value);
+    console.log(dob);
     const today = new Date();
+    console.log(today);
+
+    console.log(today.getFullYear());
+    console.log(dob.getFullYear());
     const age = today.getFullYear() - dob.getFullYear();
     document.getElementById('ageResult').innerText = `Your age is ${age} years.`;
   }
