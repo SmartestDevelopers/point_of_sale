@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Life JS Examples</title>
+</head>
+<body>
+    <h1>BMI Calculator</h1>
+
+  <label for="weight">Weight (kg):</label>
+  <input type="number" id="weight" placeholder="e.g. 70"><br/><br/>
+
+  <label for="height">Height (m):</label>
+  <input type="number" id="height" step="0.01" placeholder="e.g. 1.75"><br/><br/>
+
+  <button onclick="calculateBMI()">Calculate BMI</button><br/><br/>
+
+  <p id="bmiResult"></p>
+  <br/><br/>
+
+  <h2>Age Calculator</h2>
+<input type="date" id="dob">
+<button onclick="calculateAge()">Calculate Age</button>
+<p id="ageResult"></p>
+
+<hr/><br/>
+<h2>Add to Cart</h2>
+<input type="text" id="item" placeholder="Item name">
+<button onclick="addItem()">Add</button>
+<ul id="cart"></ul><br/><br/>
+
+<h2>Password Strength Checker</h2>
+<input type="password" id="password" oninput="checkStrength()">
+<p id="strength"></p><br/><br/>
+
+<h2>Countdown Timer (10s)</h2>
+<p id="timer">10</p><br/><br/>
+
+<h2>CM to Inches</h2>
+<input type="number" id="cm" placeholder="Centimeters">
+<button onclick="convert()">Convert</button>
+<p id="inchResult"></p><br/><br/>
+
+<h2>Message Box</h2>
+<input type="text" id="message">
+<button onclick="postMessage()">Send</button>
+<div id="chatBox"></div>
+<br/><br/>
+
+
+
+
+    <script>
+        function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+
+      if (!weight || !height || height === 0) {
+        document.getElementById('bmiResult').innerText = 'Please enter valid weight and height.';
+        return;
+      }
+
+      const bmi = weight / (height * height);
+      let message = '';
+
+      if (bmi < 18.5) {
+        message = 'Underweight';
+      } else if (bmi >= 18.5 && bmi < 24.9) {
+        message = 'Normal weight';
+      } else if (bmi >= 25 && bmi < 29.9) {
+        message = 'Overweight';
+      } else {
+        message = 'Obese';
+      }
+
+      document.getElementById('bmiResult').innerText =
+        `Your BMI is ${bmi.toFixed(2)} — ${message}`;
+    }
+
+    function calculateAge() {
+    const dob = new Date(document.getElementById('dob').value);
+    const today = new Date();
+    const age = today.getFullYear() - dob.getFullYear();
+    document.getElementById('ageResult').innerText = `Your age is ${age} years.`;
+  }
+
+  function addItem() {
+    const item = document.getElementById('item').value;
+    if (item) {
+      const li = document.createElement('li');
+      li.innerText = item;
+      document.getElementById('cart').appendChild(li);
+      document.getElementById('item').value = '';
+    }
+  }
+
+  function checkStrength() {
+    const pass = document.getElementById('password').value;
+    let strength = 'Weak';
+    if (pass.length >= 8 && /[A-Z]/.test(pass) && /\d/.test(pass)) {
+      strength = 'Strong';
+    } else if (pass.length >= 6) {
+      strength = 'Medium';
+    }
+    document.getElementById('strength').innerText = `Strength: ${strength}`;
+  }
+
+  let timeLeft = 10;
+  const timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer').innerText = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      alert("Time's up!");
+    }
+  }, 1000);
+
+  function convert() {
+    const cm = parseFloat(document.getElementById('cm').value);
+    const inches = cm / 2.54;
+    document.getElementById('inchResult').innerText = `${inches.toFixed(2)} inches`;
+  }
+
+  function postMessage() {
+    const msg = document.getElementById('message').value;
+    if (msg) {
+      const p = document.createElement('p');
+      p.innerText = msg;
+      document.getElementById('chatBox').appendChild(p);
+      document.getElementById('message').value = '';
+    }
+  }
+
+
+    </script>
+</body>
+</html>
