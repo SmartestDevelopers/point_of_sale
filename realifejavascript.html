@@ -48,6 +48,11 @@
 <div id="chatBox"></div>
 <br/><br/>
 
+<h2>Temperature Converter</h2>
+<input type="number" id="celsius" placeholder="Enter °C">
+<button onclick="convertTemp()">Convert to °F</button>
+<p id="tempResult"></p><br/><br/>
+
 
 
 
@@ -132,6 +137,11 @@
     }
   }
 
+  function convertTemp() {
+    const celsius = parseFloat(document.getElementById("celsius").value);
+    const fahrenheit = (celsius * 9/5) + 32;
+    document.getElementById("tempResult").innerText = "Fahrenheit: " + fahrenheit.toFixed(1) + "°F";
+  }
 
     </script>
 </body>
