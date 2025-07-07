@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-white mb-0 px-0 py-2">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Sales</li>
+                <li class="breadcrumb-item active" aria-current="page">Purchases</li>
             </ol>
         </nav>
     </div>
@@ -19,11 +19,11 @@
                 <div class="card card-custom gutter-b bg-white border-0">
                     <div class="card-header align-items-center border-0">
                         <div class="card-title mb-0">
-                            <h3 class="card-label mb-0 font-weight-bold text-body">Sales List</h3>
+                            <h3 class="card-label mb-0 font-weight-bold text-body">Purchase List</h3>
                         </div>
                         <div class="card-toolbar">
-                            <a href="{{ route('sales.create') }}" class="btn btn-success font-weight-bold">
-                                <i class="fas fa-plus"></i> Add Sale
+                            <a href="{{ route('purchases.create') }}" class="btn btn-success font-weight-bold">
+                                <i class="fas fa-plus"></i> Add Purchase
                             </a>
                         </div>
                     </div>
@@ -40,9 +40,9 @@
                                 <thead>
                                     <tr class="text-left">
                                         <th>Reference No</th>
-                                        <th>Customer</th>
+                                        <th>Supplier</th>
                                         <th>Warehouse</th>
-                                        <th>Sale Status</th>
+                                        <th>Status</th>
                                         <th>Grand Total</th>
                                         <th>Paid Amount</th>
                                         <th>Payment Status</th>
@@ -51,36 +51,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($sales as $sale)
+                                    @forelse($purchases as $purchase)
                                     <tr>
-                                        <td>{{ $sale->reference_no }}</td>
-                                        <td>{{ $sale->customer_name }}</td>
-                                        <td>{{ $sale->warehouse_name }}</td>
+                                        <td>{{ $purchase->reference_no }}</td>
+                                        <td>{{ $purchase->supplier_name ?? 'N/A' }}</td>
+                                        <td>{{ $purchase->warehouse_name }}</td>
                                         <td>
-                                            @if($sale->sale_status == 1)
-                                                <span class="badge badge-success">Completed</span>
-                                            @elseif($sale->sale_status == 2)
+                                            @if($purchase->status == 1)
+                                                <span class="badge badge-success">Received</span>
+                                            @elseif($purchase->status == 2)
                                                 <span class="badge badge-warning">Pending</span>
                                             @else
-                                                <span class="badge badge-danger">Draft</span>
+                                                <span class="badge badge-danger">Ordered</span>
                                             @endif
                                         </td>
-                                        <td>${{ number_format($sale->grand_total, 2) }}</td>
-                                        <td>${{ number_format($sale->paid_amount, 2) }}</td>
+                                        <td>${{ number_format($purchase->grand_total, 2) }}</td>
+                                        <td>${{ number_format($purchase->paid_amount, 2) }}</td>
                                         <td>
-                                            @if($sale->payment_status == 1)
+                                            @if($purchase->payment_status == 1)
                                                 <span class="badge badge-success">Paid</span>
-                                            @elseif($sale->payment_status == 2)
+                                            @elseif($purchase->payment_status == 2)
                                                 <span class="badge badge-warning">Partial</span>
                                             @else
                                                 <span class="badge badge-danger">Due</span>
                                             @endif
                                         </td>
-                                        <td>{{ date('M d, Y', strtotime($sale->created_at)) }}</td>
+                                        <td>{{ date('M d, Y', strtotime($purchase->created_at)) }}</td>
                                         <td>
-                                            <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-sm btn-info">View</a>
-                                            <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                            <form action="{{ route('sales.destroy', $sale->id) }}" method="POST" style="display: inline-block;">
+                                            <a href="{{ route('purchases.show', $purchase->id) }}" class="btn btn-sm btn-info">View</a>
+                                            <a href="{{ route('purchases.edit', $purchase->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            <form action="{{ route('purchases.destroy', $purchase->id) }}" method="POST" style="display: inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
@@ -89,7 +89,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="9" class="text-center">No sales found</td>
+                                        <td colspan="9" class="text-center">No purchases found</td>
                                     </tr>
                                     @endforelse
                                 </tbody>

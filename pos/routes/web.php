@@ -29,6 +29,10 @@ Route::post('/submit-product', 'ProductController@submitProduct')->name('submitP
 
 
 Route::resource('product-units', 'ProductUnits');
+Route::resource('product-variations', 'ProductVariationsController');
+Route::resource('product-brands', 'ProductBrands');
+Route::resource('product-categories', 'ProductCategoriesController');
+Route::resource('product-reviews', 'ProductReviewController');
 
 Route::get('product-unit-delete/{id}','ProductUnits@productUnitDelete');
 
@@ -58,49 +62,26 @@ Route::get('/record', 'RecordController@index')->name('index');
 
 Route::get('/quotations-list', 'QuotationController@index')->name('index');
 
-Route::get('/purchase-list', 'PurchaseController@index')->name('index');
 
-Route::get('/sale-return', 'ReturnController@index')->name('index');
+Route::resource('sales', 'SaleController');
+Route::resource('return-sales', 'ReturnSaleController');
+Route::resource('purchases', 'PurchaseController');
+Route::resource('return-purchases', 'ReturnPurchaseController');
 
-Route::get('/order-list', 'SellOrderController@index')->name('index');
+Route::prefix('reports')->group(function () {
+    Route::get('/sales', 'ReportController@salesReport')->name('reports.sales');
+    Route::get('/purchases', 'ReportController@purchaseReport')->name('reports.purchases');
+    Route::get('/return-sales', 'ReportController@returnSalesReport')->name('reports.return_sales');
+    Route::get('/return-purchases', 'ReportController@returnPurchaseReport')->name('reports.return_purchases');
+    Route::get('/stock', 'ReportController@stockReport')->name('reports.stock');
+    Route::get('/customer-ledger', 'ReportController@customerLedger')->name('reports.customer_ledger');
+    Route::get('/supplier-ledger', 'ReportController@supplierLedger')->name('reports.supplier_ledger');
+    Route::get('/trial-balance', 'ReportController@trialBalance')->name('reports.trial_balance');
+    Route::get('/profit-loss', 'ReportController@profitLoss')->name('reports.profit_loss');
+    Route::get('/balance-sheet', 'ReportController@balanceSheet')->name('reports.balance_sheet');
+    Route::get('/cash-flow', 'ReportController@cashFlow')->name('reports.cash_flow');
+});
 
-Route::get('/business-setting-general', 'SettingController@index')->name('index');
-
-
-Route::get('/warehouse', 'SettingController@index')->name('warehouse');
-Route::get('/add-warehouse', 'SettingController@addWarehouse')->name('addWarehouse');
-
-Route::post('/submit-warehouse', 'SettingController@submitWarehouse')->name('submitWarehouse');
-
-Route::get('/warehouse-edit/{id}', 'SettingController@editWarehouse')->name('editWarehouse');
-Route::post('/warehouse-update/{id}', 'SettingController@update')->name('warehouse.update');
-Route::get('/warehouse-delete/{id}', 'SettingController@deleteWarehouse');
-
-Route::get('/accounts-list', 'AccountsController@index')->name('index');
-
-Route::resource('product-brands', 'ProductBrands');
-
-Route::resource('product-categories', 'ProductCategoriesController');
-
-Route::resource('product-reviews', 'ProductReviewController');
-
-Route::resource('product-variations', 'ProductVariationsController');
-
-
-Route::get('productVariationDelete/{id}','ProductVariationsController@productVariationDelete');
-Route::post('/product-variations/{id}', 'ProductVariationsController@update');
-
-Route::get('productBrandDelete/{id}','ProductBrands@productBrandDelete');
-Route::post('/product-brands/{id}', 'ProductBrands@update');
-
-Route::get('productCategoryDelete/{id}','ProductCategoriesController@productCategoryDelete');
-Route::post('/product-category/{id}', 'ProductCategoriesController@update');
-
-Route::get('productReviewDelete/{id}','ProductReviewController@productReviewDelete');
-Route::post('/product-review/{id}', 'ProductReviewControllerr@update');
-
-
-Route::resource('sales', 'SalesController');
 
 
 

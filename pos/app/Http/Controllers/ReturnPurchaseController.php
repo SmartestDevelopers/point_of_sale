@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PurchaseController extends Controller
+class ReturnPurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,20 +14,20 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = DB::table('purchases')
-            ->leftJoin('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
-            ->join('warehouses', 'purchases.warehouse_id', '=', 'warehouses.id')
-            ->join('users', 'purchases.user_id', '=', 'users.id')
+        $returnPurchases = DB::table('return_purchases')
+            ->leftJoin('suppliers', 'return_purchases.supplier_id', '=', 'suppliers.id')
+            ->join('warehouses', 'return_purchases.warehouse_id', '=', 'warehouses.id')
+            ->join('users', 'return_purchases.user_id', '=', 'users.id')
             ->select(
-                'purchases.*',
+                'return_purchases.*',
                 'suppliers.name as supplier_name',
-                'warehouses.warehouse as warehouse_name',
+                'warehouses.name as warehouse_name',
                 'users.name as user_name'
             )
-            ->orderBy('purchases.created_at', 'desc')
+            ->orderBy('return_purchases.created_at', 'desc')
             ->get();
 
-        return view('purchases.index', compact('purchases'));
+        return view('return_purchases.index', compact('returnPurchases'));
     }
 
     /**
@@ -40,8 +40,12 @@ class PurchaseController extends Controller
         $suppliers = DB::table('suppliers')->get();
         $warehouses = DB::table('warehouses')->get();
         $products = DB::table('products')->get();
+        $purchases = DB::table('purchases')
+            ->leftJoin('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+            ->select('purchases.id', 'purchases.reference_no', 'suppliers.name as supplier_name')
+            ->get();
         
-        return view('purchases.create', compact('suppliers', 'warehouses', 'products'));
+        return view('return_purchases.create', compact('suppliers', 'warehouses', 'products', 'purchases'));
     }
 
     /**
@@ -53,10 +57,8 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'reference_no' => 'required|unique:purchases',
+            'reference_no' => 'required|unique:return_purchases',
             'warehouse_id' => 'required',
-            'status' => 'required',
-            'payment_status' => 'required',
             'products' => 'required|array',
         ]);
 
@@ -64,14 +66,14 @@ class PurchaseController extends Controller
         
         try {
             // Generate reference number if not provided
-            $referenceNo = $request->reference_no ?: 'PUR-' . date('YmdHis') . '-' . rand(1000, 9999);
+            $referenceNo = $request->reference_no ?: 'RPR-' . date('YmdHis') . '-' . rand(1000, 9999);
             
-            // Insert purchase record
-            $purchaseId = DB::table('purchases')->insertGetId([
+            // Insert return purchase record
+            $returnPurchaseId = DB::table('return_purchases')->insertGetId([
                 'reference_no' => $referenceNo,
                 'user_id' => auth()->user()->id,
-                'warehouse_id' => $request->warehouse_id,
                 'supplier_id' => $request->supplier_id,
+                'warehouse_id' => $request->warehouse_id,
                 'item' => count($request->products),
                 'total_qty' => array_sum(array_column($request->products, 'qty')),
                 'total_discount' => $request->total_discount ?? 0,
@@ -79,22 +81,18 @@ class PurchaseController extends Controller
                 'total_cost' => $request->total_cost,
                 'order_tax_rate' => $request->order_tax_rate,
                 'order_tax' => $request->order_tax,
-                'order_discount' => $request->order_discount,
-                'shipping_cost' => $request->shipping_cost,
                 'grand_total' => $request->grand_total,
-                'paid_amount' => $request->paid_amount ?? 0,
-                'status' => $request->status,
-                'payment_status' => $request->payment_status,
                 'document' => $request->document,
-                'note' => $request->note,
+                'return_note' => $request->return_note,
+                'staff_note' => $request->staff_note,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
-            // Insert product purchases
+            // Insert product return purchases
             foreach ($request->products as $product) {
-                DB::table('product_purchases')->insert([
-                    'purchase_id' => $purchaseId,
+                DB::table('product_return_purchases')->insert([
+                    'return_purchase_id' => $returnPurchaseId,
                     'product_id' => $product['product_id'],
                     'variant_id' => $product['variant_id'] ?? null,
                     'qty' => $product['qty'],
@@ -110,11 +108,11 @@ class PurchaseController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('purchases.index')->with('success', 'Purchase created successfully!');
+            return redirect()->route('return-purchases.index')->with('success', 'Return purchase created successfully!');
             
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', 'Error creating purchase: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error creating return purchase: ' . $e->getMessage());
         }
     }
 
@@ -126,28 +124,28 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
-        $purchase = DB::table('purchases')
-            ->leftJoin('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
-            ->join('warehouses', 'purchases.warehouse_id', '=', 'warehouses.id')
-            ->join('users', 'purchases.user_id', '=', 'users.id')
+        $returnPurchase = DB::table('return_purchases')
+            ->leftJoin('suppliers', 'return_purchases.supplier_id', '=', 'suppliers.id')
+            ->join('warehouses', 'return_purchases.warehouse_id', '=', 'warehouses.id')
+            ->join('users', 'return_purchases.user_id', '=', 'users.id')
             ->select(
-                'purchases.*',
+                'return_purchases.*',
                 'suppliers.name as supplier_name',
                 'suppliers.email as supplier_email',
                 'suppliers.phone as supplier_phone',
-                'warehouses.warehouse as warehouse_name',
+                'warehouses.name as warehouse_name',
                 'users.name as user_name'
             )
-            ->where('purchases.id', $id)
+            ->where('return_purchases.id', $id)
             ->first();
 
-        $productPurchases = DB::table('product_purchases')
-            ->join('products', 'product_purchases.product_id', '=', 'products.id')
-            ->select('product_purchases.*', 'products.product_name', 'products.id as product_code')
-            ->where('product_purchases.purchase_id', $id)
+        $productReturnPurchases = DB::table('product_return_purchases')
+            ->join('products', 'product_return_purchases.product_id', '=', 'products.id')
+            ->select('product_return_purchases.*', 'products.name as product_name', 'products.code as product_code')
+            ->where('product_return_purchases.return_purchase_id', $id)
             ->get();
 
-        return view('purchases.show', compact('purchase', 'productPurchases'));
+        return view('return_purchases.show', compact('returnPurchase', 'productReturnPurchases'));
     }
 
     /**
@@ -158,18 +156,18 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-        $purchase = DB::table('purchases')->where('id', $id)->first();
+        $returnPurchase = DB::table('return_purchases')->where('id', $id)->first();
         $suppliers = DB::table('suppliers')->get();
         $warehouses = DB::table('warehouses')->get();
         $products = DB::table('products')->get();
         
-        $productPurchases = DB::table('product_purchases')
-            ->join('products', 'product_purchases.product_id', '=', 'products.id')
-            ->select('product_purchases.*', 'products.product_name')
-            ->where('product_purchases.purchase_id', $id)
+        $productReturnPurchases = DB::table('product_return_purchases')
+            ->join('products', 'product_return_purchases.product_id', '=', 'products.id')
+            ->select('product_return_purchases.*', 'products.name as product_name')
+            ->where('product_return_purchases.return_purchase_id', $id)
             ->get();
 
-        return view('purchases.edit', compact('purchase', 'suppliers', 'warehouses', 'products', 'productPurchases'));
+        return view('return_purchases.edit', compact('returnPurchase', 'suppliers', 'warehouses', 'products', 'productReturnPurchases'));
     }
 
     /**
@@ -182,21 +180,19 @@ class PurchaseController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'reference_no' => 'required|unique:purchases,reference_no,' . $id,
+            'reference_no' => 'required|unique:return_purchases,reference_no,' . $id,
             'warehouse_id' => 'required',
-            'status' => 'required',
-            'payment_status' => 'required',
             'products' => 'required|array',
         ]);
 
         DB::beginTransaction();
         
         try {
-            // Update purchase record
-            DB::table('purchases')->where('id', $id)->update([
+            // Update return purchase record
+            DB::table('return_purchases')->where('id', $id)->update([
                 'reference_no' => $request->reference_no,
-                'warehouse_id' => $request->warehouse_id,
                 'supplier_id' => $request->supplier_id,
+                'warehouse_id' => $request->warehouse_id,
                 'item' => count($request->products),
                 'total_qty' => array_sum(array_column($request->products, 'qty')),
                 'total_discount' => $request->total_discount ?? 0,
@@ -204,24 +200,20 @@ class PurchaseController extends Controller
                 'total_cost' => $request->total_cost,
                 'order_tax_rate' => $request->order_tax_rate,
                 'order_tax' => $request->order_tax,
-                'order_discount' => $request->order_discount,
-                'shipping_cost' => $request->shipping_cost,
                 'grand_total' => $request->grand_total,
-                'paid_amount' => $request->paid_amount ?? 0,
-                'status' => $request->status,
-                'payment_status' => $request->payment_status,
                 'document' => $request->document,
-                'note' => $request->note,
+                'return_note' => $request->return_note,
+                'staff_note' => $request->staff_note,
                 'updated_at' => now(),
             ]);
 
-            // Delete existing product purchases
-            DB::table('product_purchases')->where('purchase_id', $id)->delete();
+            // Delete existing product return purchases
+            DB::table('product_return_purchases')->where('return_purchase_id', $id)->delete();
 
-            // Insert updated product purchases
+            // Insert updated product return purchases
             foreach ($request->products as $product) {
-                DB::table('product_purchases')->insert([
-                    'purchase_id' => $id,
+                DB::table('product_return_purchases')->insert([
+                    'return_purchase_id' => $id,
                     'product_id' => $product['product_id'],
                     'variant_id' => $product['variant_id'] ?? null,
                     'qty' => $product['qty'],
@@ -237,11 +229,11 @@ class PurchaseController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('purchases.index')->with('success', 'Purchase updated successfully!');
+            return redirect()->route('return-purchases.index')->with('success', 'Return purchase updated successfully!');
             
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', 'Error updating purchase: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error updating return purchase: ' . $e->getMessage());
         }
     }
 
@@ -256,18 +248,18 @@ class PurchaseController extends Controller
         DB::beginTransaction();
         
         try {
-            // Delete product purchases first
-            DB::table('product_purchases')->where('purchase_id', $id)->delete();
+            // Delete product return purchases first
+            DB::table('product_return_purchases')->where('return_purchase_id', $id)->delete();
             
-            // Delete purchase
-            DB::table('purchases')->where('id', $id)->delete();
+            // Delete return purchase
+            DB::table('return_purchases')->where('id', $id)->delete();
             
             DB::commit();
-            return redirect()->route('purchases.index')->with('success', 'Purchase deleted successfully!');
+            return redirect()->route('return-purchases.index')->with('success', 'Return purchase deleted successfully!');
             
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', 'Error deleting purchase: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error deleting return purchase: ' . $e->getMessage());
         }
     }
 }
