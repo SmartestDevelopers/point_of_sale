@@ -101,7 +101,7 @@
 						  <div id="accordion">
 							<ul class="nav flex-column">
 								<li class="nav-item active">
-									<a href="index-2.html" class="nav-link">
+									<a href="{{url('index-2')}}" class="nav-link">
 										<span class="svg-icon nav-icon">
 											<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
 												viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -159,7 +159,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="media-setting.html" class="nav-link sub-nav-link">
+												<a href="{{url('media-setting')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -265,7 +265,7 @@
 															</li>
 					
 															<li class="nav-item">
-																<a href="add-product.html" class="nav-link mini-sub-nav-link" >
+																<a href="{{url('add-product')}}" class="nav-link mini-sub-nav-link" >
 																
 																	<span class="nav-text">Add Product</span>
 																</a>
@@ -290,12 +290,12 @@
 													<div class="collapse nav-collapse" id="catalogStock" data-bs-parent="#accordion1">
 														<ul class="nav flex-column">
 															<li class="nav-item">
-																<a href="stock-add.html" class="nav-link mini-sub-nav-link">
+																<a href="{{url('stock-add')}}" class="nav-link mini-sub-nav-link">
 																	<span class="nav-text">Add Stock</span>
 																</a>
 															</li>
 															<li class="nav-item">
-																<a href="stock-transfer.html" class="nav-link mini-sub-nav-link">
+																<a href="{{url('stock-transfer')}}" class="nav-link mini-sub-nav-link">
 																 	<span class="nav-text">Stock Transfer</span>
 																</a>
 															</li>
@@ -365,7 +365,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="order-detail.html" class="nav-link sub-nav-link">
+												<a href="{{url('order-detail')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -385,7 +385,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="pos.html" class="nav-link sub-nav-link">
+												<a href="{{url('pos')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -935,20 +935,20 @@
 															</li>
 					
 															<li class="nav-item">
-																<a href="app-setting.html#display" class="nav-link mini-sub-nav-link">
+																<a href="{{url('app-setting.html#display')}}" class="nav-link mini-sub-nav-link">
 																
 																	<span class="nav-text">Display In Menu/Sidebar</span>
 																</a>
 															</li>
 															
 															<li class="nav-item">
-																<a href="app-setting.html#notificationS" class="nav-link mini-sub-nav-link">
+																<a href="{{url('app-setting.html#notificationS')}}" class="nav-link mini-sub-nav-link">
 																
 																	<span class="nav-text">Local Notification</span>
 																</a>
 															</li>
 															<li class="nav-item">
-																<a href="app-setting.html#log-sign" class="nav-link mini-sub-nav-link">
+																<a href="{{url('app-setting.html#log-sign')}}" class="nav-link mini-sub-nav-link">
 																
 																	<span class="nav-text">Login/Signup</span>
 																</a>
@@ -969,7 +969,7 @@
 													</a>
 												</li>
 												<li class="nav-item">
-													<a href="language.html" class="nav-link sub-nav-link">
+													<a href="{{url('language')}}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -979,7 +979,7 @@
 													</a>
 												</li>
 												<li class="nav-item">
-													<a href="currency.html" class="nav-link sub-nav-link">
+													<a href="{{url('currency')}}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -989,7 +989,7 @@
 													</a>
 												</li>
 												<li class="nav-item">
-													<a href="payment.html" class="nav-link sub-nav-link">
+													<a href="{{url('payment')}}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -999,7 +999,7 @@
 													</a>
 												</li>
 												<li class="nav-item">
-													<a href="shippingmethods.html" class="nav-link sub-nav-link">
+													<a href="{{url('shippingmethods')}}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1009,7 +1009,7 @@
 													</a>
 												</li>
 												<li class="nav-item">
-													<a href="tax.html" class="nav-link sub-nav-link">
+													<a href="{{url('tax')}}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1019,7 +1019,7 @@
 													</a>
 												</li>
 												<li class="nav-item">
-													<a href="coupons.html" class="nav-link sub-nav-link">
+													<a href="{{url('coupons')}}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1060,7 +1060,7 @@
 									<div class="collapse nav-collapse" id="components" data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="buttons.html" class="nav-link sub-nav-link">
+												<a href="{{url('buttons')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1070,7 +1070,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="modals.html" class="nav-link sub-nav-link">
+												<a href="{{url('modals')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1080,7 +1080,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="alerts.html" class="nav-link sub-nav-link">
+												<a href="{{url('alerts')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1090,7 +1090,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="tabs.html" class="nav-link sub-nav-link">
+												<a href="{{url('tabs')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1100,7 +1100,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="carousel.html" class="nav-link sub-nav-link">
+												<a href="{{url('carousel')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1110,7 +1110,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="switcher.html" class="nav-link sub-nav-link">
+												<a href="{{url('switcher')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1137,7 +1137,7 @@
 										<ul class="nav flex-column">
 										
 											<li class="nav-item">
-												<a href="form-input.html" class="nav-link sub-nav-link">
+												<a href="{{url('form-input')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1148,7 +1148,7 @@
 											</li>
 	
 											<li class="nav-item">
-												<a href="form-select.html" class="nav-link sub-nav-link">
+												<a href="{{url('form-select')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1159,7 +1159,7 @@
 											</li>
 	
 											<li class="nav-item"> 
-												<a href="form-radio.html" class="nav-link sub-nav-link" >
+												<a href="{{url('form-radio')}}" class="nav-link sub-nav-link" >
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1170,7 +1170,7 @@
 											</li>
 	
 											<li class="nav-item">
-												<a href="form-checkbox.html" class="nav-link sub-nav-link">
+												<a href="{{url('form-checkbox')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1181,7 +1181,7 @@
 											</li>
 	
 											<li class="nav-item">
-												<a href="form-textarea.html" class="nav-link sub-nav-link">
+												<a href="{{url('form-textarea')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1191,7 +1191,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="form-editor.html" class="nav-link sub-nav-link">
+												<a href="{{url('form-editor')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1201,7 +1201,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a href="datepicker.html" class="nav-link sub-nav-link">
+												<a href="{{url('datepicker')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1212,7 +1212,7 @@
 											</li>
 										
 											<li class="nav-item">
-												<a href="form-validation.html" class="nav-link sub-nav-link">
+												<a href="{{url('form-validation')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
