@@ -21,7 +21,7 @@ class ReturnPurchaseController extends Controller
             ->select(
                 'return_purchases.*',
                 'suppliers.name as supplier_name',
-                'warehouses.name as warehouse_name',
+                'warehouses.warehouse as warehouse_name',
                 'users.name as user_name'
             )
             ->orderBy('return_purchases.created_at', 'desc')
@@ -132,8 +132,7 @@ class ReturnPurchaseController extends Controller
                 'return_purchases.*',
                 'suppliers.name as supplier_name',
                 'suppliers.email as supplier_email',
-                'suppliers.phone as supplier_phone',
-                'warehouses.name as warehouse_name',
+                'warehouses.warehouse as warehouse_name',
                 'users.name as user_name'
             )
             ->where('return_purchases.id', $id)

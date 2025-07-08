@@ -68,19 +68,65 @@ Route::resource('return-sales', 'ReturnSaleController');
 Route::resource('purchases', 'PurchaseController');
 Route::resource('return-purchases', 'ReturnPurchaseController');
 
-Route::prefix('reports')->group(function () {
-    Route::get('/sales', 'ReportController@salesReport')->name('reports.sales');
-    Route::get('/purchases', 'ReportController@purchaseReport')->name('reports.purchases');
-    Route::get('/return-sales', 'ReportController@returnSalesReport')->name('reports.return_sales');
-    Route::get('/return-purchases', 'ReportController@returnPurchaseReport')->name('reports.return_purchases');
-    Route::get('/stock', 'ReportController@stockReport')->name('reports.stock');
-    Route::get('/customer-ledger', 'ReportController@customerLedger')->name('reports.customer_ledger');
-    Route::get('/supplier-ledger', 'ReportController@supplierLedger')->name('reports.supplier_ledger');
-    Route::get('/trial-balance', 'ReportController@trialBalance')->name('reports.trial_balance');
-    Route::get('/profit-loss', 'ReportController@profitLoss')->name('reports.profit_loss');
-    Route::get('/balance-sheet', 'ReportController@balanceSheet')->name('reports.balance_sheet');
-    Route::get('/cash-flow', 'ReportController@cashFlow')->name('reports.cash_flow');
-});
+// Additional Routes for fixing 404 errors
+Route::get('/sale-return', 'ReturnSaleController@index')->name('sale-return');
+Route::get('/media-setting', function() { return view('media.setting'); });
+Route::get('/purchase-add', 'PurchaseController@create')->name('purchase-add');
+Route::get('/order-list', function() { return view('orders.index'); });
+Route::get('/order-detail', function() { return view('orders.detail'); });
+Route::get('/quotations-add', function() { return view('quotations.create'); });
+Route::get('/return-add', 'ReturnSaleController@create')->name('return-add');
+Route::get('/purchase-return', 'ReturnPurchaseController@index')->name('purchase-return');
+Route::get('/purchase-return-add', 'ReturnPurchaseController@create')->name('purchase-return-add');
+
+// Admin & User Management
+Route::get('/admin-list', function() { return view('admin.index'); });
+Route::get('/roles-permission', function() { return view('admin.roles'); });
+Route::get('/billers-list', function() { return view('admin.billers'); });
+
+// Customer & Supplier Management
+Route::get('/customer-edit', function() { return view('people.customer-edit'); });
+
+// Accounts & Financial
+Route::get('/accounts-list', function() { return view('accounts.index'); });
+Route::get('/accounts-balance-sheet', 'ReportController@balanceSheet')->name('accounts-balance-sheet');
+Route::get('/accounts-trial-balance', 'ReportController@trialBalance')->name('accounts-trial-balance');
+Route::get('/accounts-cashFlow', 'ReportController@cashFlow')->name('accounts-cashflow');
+Route::get('/accounts-payment-report', function() { return view('accounts.payment-report'); });
+
+// Expenses
+Route::get('/expenses-type', function() { return view('expenses.types'); });
+
+// Reports
+Route::get('/purchase-report', 'ReportController@purchaseReport')->name('purchase-report');
+Route::get('/sale-report', 'ReportController@salesReport')->name('sale-report');
+Route::get('/supplier-report', 'ReportController@supplierReport')->name('supplier-report');
+Route::get('/customer-report', 'ReportController@customerReport')->name('customer-report');
+Route::get('/stock-report', 'ReportController@stockReport')->name('stock-report');
+Route::get('/stock-adjustment-report', function() { return view('reports.stock-adjustment'); });
+Route::get('/outofstock-report', function() { return view('reports.outofstock'); });
+Route::get('/stock-alert-report', function() { return view('reports.stock-alert'); });
+Route::get('/expense-report', function() { return view('reports.expense'); });
+
+// Settings
+Route::get('/business-setting-general', function() { return view('settings.business'); });
+Route::get('/bussiness-setting', function() { return view('settings.business'); });
+Route::get('/website-setting', function() { return view('settings.website'); });
+Route::get('/menu-bulider', function() { return view('settings.menu'); });
+Route::get('/app-setting', function() { return view('settings.app'); });
+Route::get('/warehouse', function() { return view('settings.warehouse'); });
+Route::get('/language', function() { return view('settings.language'); });
+Route::get('/currency', function() { return view('settings.currency'); });
+Route::get('/payment', function() { return view('settings.payment'); });
+Route::get('/shippingmethods', function() { return view('settings.shipping'); });
+Route::get('/tax', function() { return view('settings.tax'); });
+Route::get('/coupons', function() { return view('settings.coupons'); });
+
+// UI Components
+Route::get('/buttons', function() { return view('ui.buttons'); });
+Route::get('/modals', function() { return view('ui.modals'); });
+Route::get('/alerts', function() { return view('ui.alerts'); });
+Route::get('/purchases/purchase-add', function() { return view('purchases.purchase-add'); });
 
 
 

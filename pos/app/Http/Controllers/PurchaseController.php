@@ -134,7 +134,6 @@ class PurchaseController extends Controller
                 'purchases.*',
                 'suppliers.name as supplier_name',
                 'suppliers.email as supplier_email',
-                'suppliers.phone as supplier_phone',
                 'warehouses.warehouse as warehouse_name',
                 'users.name as user_name'
             )

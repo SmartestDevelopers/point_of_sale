@@ -30,7 +30,7 @@
 											</div>
 											<div class="icons d-flex">
 												
-												<a  href="return-add.html" class="btn ms-2 p-0" 
+												<a  href="{{ url('/return-add') }}" class="btn ms-2 p-0" 
 														id="kt_notes_panel_toggle" data-bs-toggle="tooltip" title="" data-bs-placement="right"
 																			data-original-title="Check out more demos" >
 															<span class="bg-secondary h-30px font-size-h5 w-30px d-flex align-items-center justify-content-center  rounded-circle shadow-sm ">
@@ -109,7 +109,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -137,7 +137,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -165,7 +165,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -193,7 +193,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -221,7 +221,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -249,7 +249,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -277,7 +277,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -305,7 +305,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -333,7 +333,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -361,7 +361,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -389,7 +389,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>
@@ -417,7 +417,7 @@
 																				View
 																			</button>
 																		
-																			<a class="dropdown-item" href="return-add.html">Edit</a>
+																			<a class="dropdown-item" href="{{ url('/return-add') }}">Edit</a>
 																			<a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
 																		</div>
 																		</div>

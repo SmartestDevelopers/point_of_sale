@@ -21,7 +21,7 @@ class ReturnSaleController extends Controller
             ->select(
                 'return_sales.*',
                 'customers.name as customer_name',
-                'warehouses.name as warehouse_name',
+                'warehouses.warehouse as warehouse_name',
                 'users.name as user_name'
             )
             ->orderBy('return_sales.created_at', 'desc')
@@ -138,7 +138,7 @@ class ReturnSaleController extends Controller
                 'customers.name as customer_name',
                 'customers.email as customer_email',
                 'customers.phone as customer_phone',
-                'warehouses.name as warehouse_name',
+                'warehouses.warehouse as warehouse_name',
                 'users.name as user_name'
             )
             ->where('return_sales.id', $id)

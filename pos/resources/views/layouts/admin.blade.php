@@ -327,7 +327,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<div class="collapse nav-collapse" id="catalogPurchase"  data-bs-parent="#accordion">
 											<ul class="nav flex-column">
 												<li class="nav-item">
-													<a href="purchase-list.html" class="nav-link sub-nav-link">
+													<a href="{{url('purchases')}}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -483,7 +483,7 @@ License: You must have a valid license purchased only from themeforest(the above
 													</a>
 												</li>
 												<li class="nav-item">
-													<a href="purchase-return-add.html" class="nav-link sub-nav-link">
+													<a href="{{ url('/purchase-return-add') }}" class="nav-link sub-nav-link">
 														<span class="svg-icon nav-icon d-flex justify-content-center">
 															<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 																<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1045,7 +1045,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<li class="nav-header mt-3">
 										<span class="nav-text font-size-bold">UI Elements</span>
 										<span class="svg-icon nav-icon text-primary">
-											<svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots"
+											<svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi
 												fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 												<path fill-rule="evenodd"
 													d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />

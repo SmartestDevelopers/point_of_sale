@@ -1,6 +1,9 @@
 @extends('layouts.front')
 
 @section('content')
+@if(!$purchase)
+    <div class="alert alert-danger">Purchase not found.</div>
+@else
 <div class="subheader py-2 py-lg-6 subheader-solid">
     <div class="container-fluid">
         <nav aria-label="breadcrumb">
@@ -151,4 +154,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection
