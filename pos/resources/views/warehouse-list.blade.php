@@ -16,36 +16,42 @@
     </div>
     <div class="card card-custom gutter-b bg-white border-0 shadow-sm mb-3">
         <div class="card-body p-2">
-            <div class="d-flex align-items-end flex-nowrap table-header-row" style="background: #f8f9fa; border-radius: 0.5rem; font-weight: 600;">
-                <div style="width: 10%" class="py-2 px-1">ID</div>
-                <div style="width: 20%" class="py-2 px-1">Warehouse</div>
-                <div style="width: 20%" class="py-2 px-1">Phone Number</div>
-                <div style="width: 30%" class="py-2 px-1">Address</div>
-                <div style="width: 10%" class="py-2 px-1">Is Deleted</div>
-                <div style="width: 10%" class="py-2 px-1">Created At</div>
-                <div style="width: 10%" class="py-2 px-1">Updated At</div>
-                <div style="width: 10%" class="py-2 px-1">Actions</div>
-            </div>
-            <div class="">
-            @forelse($warehouses as $warehouse)
-                <div class="d-flex align-items-center flex-nowrap" style="border-bottom:1px solid #eee;">
-                    <div style="width: 10%" class="text-center">{{ $warehouse->id }}</div>
-                    <div style="width: 20%" class="text-center">{{ $warehouse->warehouse }}</div>
-                    <div style="width: 20%" class="text-center">{{ $warehouse->phone_number }}</div>
-                    <div style="width: 30%" class="text-center">{{ $warehouse->address }}</div>
-                    <div style="width: 10%" class="text-center">{{ $warehouse->is_deleted }}</div>
-                    <div style="width: 10%" class="text-center">{{ $warehouse->created_at }}</div>
-                    <div style="width: 10%" class="text-center">{{ $warehouse->updated_at }}</div>
-                    <div style="width: 10%" class="text-center">
-                        <a href="{{ url('/warehouse-edit/'.$warehouse->id) }}" class="btn btn-xs btn-primary mx-1 py-0 px-2" style="font-size: 0.75rem;">Edit</a>
-                        <a href="{{ url('/warehouse-delete/'.$warehouse->id) }}" class="btn btn-xs btn-danger mx-1 py-0 px-2" style="font-size: 0.75rem;" onclick="return confirm('Are you sure?')">Delete</a>
-                    </div>
-                </div>
-            @empty
-                <div class="row">
-                    <div class="col-12 text-center">No warehouses found.</div>
-                </div>
-            @endforelse
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th style="width: 5%">ID</th>
+                            <th style="width: 20%">Warehouse</th>
+                            <th style="width: 20%">Phone Number</th>
+                            <th style="width: 30%">Address</th>
+                            <th style="width: 10%">Is Deleted</th>
+                            <th style="width: 10%">Created At</th>
+                            <th style="width: 10%">Updated At</th>
+                            <th style="width: 10%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($warehouses as $warehouse)
+                        <tr>
+                            <td class="text-center">{{ $warehouse->id }}</td>
+                            <td class="text-center">{{ $warehouse->warehouse }}</td>
+                            <td class="text-center">{{ $warehouse->phone_number }}</td>
+                            <td class="text-center">{{ $warehouse->address }}</td>
+                            <td class="text-center">{{ $warehouse->is_deleted }}</td>
+                            <td class="text-center">{{ $warehouse->created_at }}</td>
+                            <td class="text-center">{{ $warehouse->updated_at }}</td>
+                            <td class="text-center">
+                                <a href="{{ url('/warehouse-edit/'.$warehouse->id) }}" class="btn btn-xs btn-primary mx-1" style="padding:2px 8px;font-size:12px;">Edit</a>
+                                <a href="{{ url('/warehouse-delete/'.$warehouse->id) }}" class="btn btn-xs btn-danger mx-1" style="padding:2px 8px;font-size:12px;" onclick="return confirm('Are you sure?')">Delete</a>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="8" class="text-center">No warehouses found.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

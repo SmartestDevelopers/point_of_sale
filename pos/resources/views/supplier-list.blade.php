@@ -16,46 +16,54 @@
     </div>
     <div class="card card-custom gutter-b bg-white border-0 shadow-sm mb-3">
         <div class="card-body p-2">
-            <div class="d-flex align-items-end flex-nowrap table-header-row" style="background: #f8f9fa; border-radius: 0.5rem; font-weight: 600;">
-                <div style="width: 10%" class="py-2 px-1">ID</div>
-                <div style="width: 10%" class="py-2 px-1">Image</div>
-                <div style="width: 10%" class="py-2 px-1">Name</div>
-                <div style="width: 10%" class="py-2 px-1">Company Name</div>
-                <div style="width: 10%" class="py-2 px-1">VAT Number</div>
-                <div style="width: 10%" class="py-2 px-1">Email</div>
-                <div style="width: 10%" class="py-2 px-1">Phone Number</div>
-                <div style="width: 10%" class="py-2 px-1">Address</div>
-                <div style="width: 10%" class="py-2 px-1">Balance</div>
-                <div style="width: 10%" class="py-2 px-1">Actions</div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th style="width: 5%">ID</th>
+                            <th style="width: 10%">Image</th>
+                            <th style="width: 10%">Name</th>
+                            <th style="width: 10%">Company Name</th>
+                            <th style="width: 10%">VAT Number</th>
+                            <th style="width: 10%">Email</th>
+                            <th style="width: 10%">Phone Number</th>
+                            <th style="width: 15%">Address</th>
+                            <th style="width: 10%">Balance</th>
+                            <th style="width: 10%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($suppliers as $supplier)
+                        <tr>
+                            <td class="text-center">{{ $supplier->id }}</td>
+                            <td class="text-center">
+                                @if($supplier->images)
+                                    <img src="{{ asset('storage/'.$supplier->images) }}" alt="Image" style="width:40px;height:40px;object-fit:cover;">
+                                @else
+                                    <span class="text-muted">No Image</span>
+                                @endif
+                            </td>
+                            <td class="text-center">{{ $supplier->name }}</td>
+                            <td class="text-center">{{ $supplier->company_name }}</td>
+                            <td class="text-center">{{ $supplier->vat_number }}</td>
+                            <td class="text-center">{{ $supplier->email }}</td>
+                            <td class="text-center">{{ $supplier->phone_number }}</td>
+                            <td class="text-center">{{ $supplier->address }}</td>
+                            <td class="text-center">{{ $supplier->balance }}</td>
+                            <td class="text-center">
+                                <a href="{{ url('/supplier-edit/'.$supplier->id) }}" class="btn btn-xs btn-primary mx-1" style="padding:2px 8px;font-size:12px;">Edit</a>
+                                <a href="{{ url('/supplier-delete/'.$supplier->id) }}" class="btn btn-xs btn-danger mx-1" style="padding:2px 8px;font-size:12px;" onclick="return confirm('Are you sure?')">Delete</a>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="10" class="text-center">No suppliers found.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    @forelse($suppliers as $supplier)
-    <div class="d-flex mb-2 align-items-center flex-nowrap" style="border-bottom:1px solid #eee;">
-        <div style="width: 10%" class="text-center">{{ $supplier->id }}</div>
-        <div style="width: 10%" class="text-center">
-            @if($supplier->images)
-                <img src="{{ asset('storage/'.$supplier->images) }}" alt="Image" style="width:40px;height:40px;object-fit:cover;">
-            @else
-                <span class="text-muted">No Image</span>
-            @endif
-        </div>
-        <div style="width: 10%" class="text-center">{{ $supplier->name }}</div>
-        <div style="width: 10%" class="text-center">{{ $supplier->company_name }}</div>
-        <div style="width: 10%" class="text-center">{{ $supplier->vat_number }}</div>
-        <div style="width: 10%" class="text-center">{{ $supplier->email }}</div>
-        <div style="width: 10%" class="text-center">{{ $supplier->phone_number }}</div>
-        <div style="width: 10%" class="text-center">{{ $supplier->address }}</div>
-        <div style="width: 10%" class="text-center">{{ $supplier->balance }}</div>
-        <div style="width: 10%" class="text-center">
-            <a href="{{ url('/supplier-edit/'.$supplier->id) }}" class="btn btn-sm btn-primary mx-1">Edit</a>
-            <a href="{{ url('/supplier-delete/'.$supplier->id) }}" class="btn btn-sm btn-danger mx-1" onclick="return confirm('Are you sure?')">Delete</a>
-        </div>
-    </div>
-    @empty
-    <div class="row">
-        <div class="col-12 text-center">No suppliers found.</div>
-    </div>
-    @endforelse
 </div>
 @endsection
