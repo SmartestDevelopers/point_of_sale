@@ -128,9 +128,7 @@ Route::get('/modals', function() { return view('ui.modals'); });
 Route::get('/alerts', function() { return view('ui.alerts'); });
 Route::get('/purchases/purchase-add', function() { return view('purchases.purchase-add'); });
 Route::get('/warehouse-list', 'WarehouseController@index');
-Route::get('/add-warehouse', 'WarehouseController@addWarehouse')->name('addWarehouse');
-
-
+Route::post('/submit-warehouse', 'WarehouseController@submitWarehouse')->name('submitWarehouse');
 
 
 
