@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class AddProductUnitToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('product_unit')->nullable()->after('name');
+            $table->string('product_unit')->nullable()->after('product_name');
         });
     }
 
@@ -29,4 +29,4 @@ return new class extends Migration
             $table->dropColumn('product_unit');
         });
     }
-};
+}
