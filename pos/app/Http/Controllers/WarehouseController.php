@@ -14,17 +14,8 @@ class WarehouseController extends Controller
     public function index()
     {
         //
-        $warehouse_lists = DB::table('warehouses')->where('is_deleted',0)->get(); 
-        // echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
-
-        // $browser = get_browser(null, true);
-        // print_r($browser);
-
-        // die();
-        // dd($units);
-        // die();
-
-        return view('setting.warehouselist', compact('warehouse_lists'));
+        $warehouses = DB::table('warehouses')->where('is_deleted', 0)->get();
+        return view('warehouse-list', compact('warehouses'));
     }
 
     /**
@@ -32,9 +23,10 @@ class WarehouseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addWarehouse()
     {
         //
+        return view('add-warehouse');
     }
 
     /**
@@ -43,29 +35,26 @@ class WarehouseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function submitWarehouse(Request $request)
     {
         //
 
-        $rows = $request->all();
-
-        // dd($rows);
-
-        $unit_name = $rows['unit_name'];
-        $status = $rows['status'];
-
-        //insert these values into the database
-        $insert = DB::table('product_units')->insert([
-            'unit_name' => $unit_name,
-            'status' => $status
+        $request->validate([
+            'warehouse' => 'required|string|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
         ]);
-        //  dd($insert);
-         if($insert){
-            return redirect()->back()->with('success', 'Product Unit Created Successfully');
-         }else{
-            return redirect()->back()->with('error', 'Product Unit Creation Failed');
-         }
 
+        DB::table('warehouses')->insert([
+            'warehouse' => $request->warehouse,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'is_deleted' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect('/warehouse-list')->with('success', 'Warehouse added successfully!');
     }
 
     /**
@@ -85,9 +74,10 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editWarehouse($id)
     {
-        //
+        $warehouse = DB::table('warehouses')->where('id', $id)->first();
+        return view('add-warehouse', compact('warehouse'));
     }
 
     /**
@@ -97,9 +87,22 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateWarehouse(Request $request, $id)
     {
-        //
+        $request->validate([
+            'warehouse' => 'required|string|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+        ]);
+
+        DB::table('warehouses')->where('id', $id)->update([
+            'warehouse' => $request->warehouse,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'updated_at' => now(),
+        ]);
+
+        return redirect('/warehouse-list')->with('success', 'Warehouse updated successfully!');
     }
 
     /**
@@ -108,8 +111,9 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteWarehouse($id)
     {
-        //
+        DB::table('warehouses')->where('id', $id)->update(['is_deleted' => 1]);
+        return redirect('/warehouse-list')->with('success', 'Warehouse deleted successfully!');
     }
 }
