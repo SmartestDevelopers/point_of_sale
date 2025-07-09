@@ -129,21 +129,23 @@
                                     <div id="products-container">
                                         <div class="product-row row mb-3">
                                             <div class="col-md-4">
-                                                <select class="form-control" name="products[0][product_id]" required>
-                                                    <option value="">Select Product</option>
-                                                    @foreach($products as $product)
-                                                        <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                                <select class="form-control" name="products[0][product_variation_id]" required>
+                                                    <option value="">Select Product Variation</option>
+                                                    @foreach($productVariations as $variation)
+                                                        <option value="{{ $variation->id }}">
+                                                            {{ $variation->options }} - {{ $variation->values }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" class="form-control" name="products[0][qty]" placeholder="Quantity" required>
+                                                <input type="number" class="form-control qty-input" name="products[0][qty]" placeholder="Quantity" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" step="0.01" class="form-control" name="products[0][net_unit_cost]" placeholder="Unit Cost" required>
+                                                <input type="number" step="0.01" class="form-control unit-cost-input" name="products[0][net_unit_cost]" placeholder="Unit Cost" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" step="0.01" class="form-control" name="products[0][total]" placeholder="Total" required>
+                                                <input type="number" step="0.01" class="form-control total-input" name="products[0][total]" placeholder="Total" required readonly>
                                             </div>
                                             <div class="col-md-2">
                                                 <button type="button" class="btn btn-danger remove-product">Remove</button>
@@ -171,27 +173,27 @@
 <script>
 let productIndex = 1;
 
+const productVariationOptions = `@foreach($productVariations as $variation)<option value="{{ $variation->id }}">{{ $variation->options }} - {{ $variation->values }}</option>@endforeach`;
+
 document.getElementById('add-product').addEventListener('click', function() {
     const container = document.getElementById('products-container');
     const newRow = document.createElement('div');
     newRow.className = 'product-row row mb-3';
     newRow.innerHTML = `
         <div class="col-md-4">
-            <select class="form-control" name="products[${productIndex}][product_id]" required>
-                <option value="">Select Product</option>
-                @foreach($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->product_name }}</option>
-                @endforeach
+            <select class="form-control" name="products[${productIndex}][product_variation_id]" required>
+                <option value="">Select Product Variation</option>
+                ${productVariationOptions}
             </select>
         </div>
         <div class="col-md-2">
-            <input type="number" class="form-control" name="products[${productIndex}][qty]" placeholder="Quantity" required>
+            <input type="number" class="form-control qty-input" name="products[${productIndex}][qty]" placeholder="Quantity" required>
         </div>
         <div class="col-md-2">
-            <input type="number" step="0.01" class="form-control" name="products[${productIndex}][net_unit_cost]" placeholder="Unit Cost" required>
+            <input type="number" step="0.01" class="form-control unit-cost-input" name="products[${productIndex}][net_unit_cost]" placeholder="Unit Cost" required>
         </div>
         <div class="col-md-2">
-            <input type="number" step="0.01" class="form-control" name="products[${productIndex}][total]" placeholder="Total" required>
+            <input type="number" step="0.01" class="form-control total-input" name="products[${productIndex}][total]" placeholder="Total" required readonly>
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-danger remove-product">Remove</button>
@@ -199,6 +201,27 @@ document.getElementById('add-product').addEventListener('click', function() {
     `;
     container.appendChild(newRow);
     productIndex++;
+});
+
+function updateTotal(row) {
+    const qty = parseFloat(row.querySelector('.qty-input').value) || 0;
+    const unitCost = parseFloat(row.querySelector('.unit-cost-input').value) || 0;
+    row.querySelector('.total-input').value = (qty * unitCost).toFixed(2);
+}
+
+document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('qty-input') || e.target.classList.contains('unit-cost-input')) {
+        const row = e.target.closest('.product-row');
+        updateTotal(row);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initial row calculation
+    document.querySelectorAll('.product-row').forEach(function(row) {
+        row.querySelector('.qty-input').addEventListener('input', function() { updateTotal(row); });
+        row.querySelector('.unit-cost-input').addEventListener('input', function() { updateTotal(row); });
+    });
 });
 
 document.addEventListener('click', function(e) {

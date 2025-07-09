@@ -40,8 +40,9 @@ class PurchaseController extends Controller
         $suppliers = DB::table('suppliers')->get();
         $warehouses = DB::table('warehouses')->get();
         $products = DB::table('products')->get();
+        $productVariations = DB::table('product_variations')->get();
         
-        return view('purchases.create', compact('suppliers', 'warehouses', 'products'));
+        return view('purchases.create', compact('suppliers', 'warehouses', 'products', 'productVariations'));
     }
 
     /**
@@ -95,14 +96,9 @@ class PurchaseController extends Controller
             foreach ($request->products as $product) {
                 DB::table('product_purchases')->insert([
                     'purchase_id' => $purchaseId,
-                    'product_id' => $product['product_id'],
-                    'variant_id' => $product['variant_id'] ?? null,
+                    'variant_id' => $product['product_variation_id'],
                     'qty' => $product['qty'],
-                    'purchase_unit_id' => $product['purchase_unit_id'],
                     'net_unit_cost' => $product['net_unit_cost'],
-                    'discount' => $product['discount'] ?? 0,
-                    'tax_rate' => $product['tax_rate'] ?? 0,
-                    'tax' => $product['tax'] ?? 0,
                     'total' => $product['total'],
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -221,14 +217,9 @@ class PurchaseController extends Controller
             foreach ($request->products as $product) {
                 DB::table('product_purchases')->insert([
                     'purchase_id' => $id,
-                    'product_id' => $product['product_id'],
-                    'variant_id' => $product['variant_id'] ?? null,
+                    'variant_id' => $product['product_variation_id'],
                     'qty' => $product['qty'],
-                    'purchase_unit_id' => $product['purchase_unit_id'],
                     'net_unit_cost' => $product['net_unit_cost'],
-                    'discount' => $product['discount'] ?? 0,
-                    'tax_rate' => $product['tax_rate'] ?? 0,
-                    'tax' => $product['tax'] ?? 0,
                     'total' => $product['total'],
                     'created_at' => now(),
                     'updated_at' => now(),
