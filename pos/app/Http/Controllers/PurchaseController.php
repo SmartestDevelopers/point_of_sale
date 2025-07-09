@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -70,7 +74,7 @@ class PurchaseController extends Controller
             // Insert purchase record
             $purchaseId = DB::table('purchases')->insertGetId([
                 'reference_no' => $referenceNo,
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->id(),
                 'warehouse_id' => $request->warehouse_id,
                 'supplier_id' => $request->supplier_id,
                 'item' => count($request->products),
@@ -94,8 +98,15 @@ class PurchaseController extends Controller
 
             // Insert product purchases
             foreach ($request->products as $product) {
+                $productId = $this->getProductIdFromVariation($product['product_variation_id']);
+                if (!$productId) {
+                    // Instead of continuing silently, show a user-friendly error
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'Product variation is not linked to a product. Please check your product variations and try again.');
+                }
                 DB::table('product_purchases')->insert([
                     'purchase_id' => $purchaseId,
+                    'product_id' => $productId,
                     'variant_id' => $product['product_variation_id'],
                     'qty' => $product['qty'],
                     'net_unit_cost' => $product['net_unit_cost'],
@@ -217,6 +228,8 @@ class PurchaseController extends Controller
             foreach ($request->products as $product) {
                 DB::table('product_purchases')->insert([
                     'purchase_id' => $id,
+                    // Find the product_id for this variation
+                    'product_id' => $this->getProductIdFromVariation($product['product_variation_id']),
                     'variant_id' => $product['product_variation_id'],
                     'qty' => $product['qty'],
                     'net_unit_cost' => $product['net_unit_cost'],
@@ -259,5 +272,18 @@ class PurchaseController extends Controller
             DB::rollback();
             return redirect()->back()->with('error', 'Error deleting purchase: ' . $e->getMessage());
         }
+    }
+
+    // Helper to get product_id from product_variation_id
+    private function getProductIdFromVariation($variationId)
+    {
+        $variation = DB::table('product_variations')->where('id', $variationId)->first();
+        // Defensive: check for object and product_id property
+        if ($variation && isset($variation->product_id) && $variation->product_id) {
+            return $variation->product_id;
+        }
+        // Optionally, log or throw a custom error here
+        \Illuminate\Support\Facades\Log::error('Product variation with ID ' . $variationId . ' is not linked to a product.');
+        return null;
     }
 }

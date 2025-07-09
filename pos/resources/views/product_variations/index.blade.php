@@ -56,6 +56,13 @@
       </div>
       <div class="modal-body">
         
+				<Label>Product</Label>
+				<input type="text" class="form-control" name="product_id" list="products" required>
+				<datalist id="products">
+					@foreach($products as $product)
+						<option value="{{ $product->product_id }}">
+					@endforeach
+				</datalist>
 				<Label>Options</Label>
 				<input type="text" class="form-control" id="options" name="options" placeholder="Enter Options">
 				<Label class="mt-3">Values</Label>

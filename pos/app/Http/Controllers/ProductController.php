@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return view('catalog.productlist');
+        return view('product.productlist');
     }
 
     /**
@@ -90,7 +90,7 @@ class ProductController extends Controller
     {
         $productUnits = DB::table('product_units')->where('is_deleted','0')->get();
         $productCategories = DB::table('product_categories')->where('is_deleted','0')->get();
-        return view('catalog.addproduct', compact('productUnits', 'productCategories'));
+        return view('product.addproduct', compact('productUnits', 'productCategories'));
     }
 
     public function submitProduct(Request $request){

@@ -16,8 +16,9 @@ class ProductVariationsController extends Controller
         //
 
         $product_variations = DB::table('product_variations')->get(); 
+        $products = DB::table('products')->get();
         
-        return view('product_variations.index', compact('product_variations'));
+        return view('product_variations.index', compact('product_variations', 'products'));
     }
 
     /**
@@ -40,19 +41,20 @@ class ProductVariationsController extends Controller
     {
         //
 
-        $rows = $request->all();
-
-        // dd($rows);
-
-        $options = $rows['options'];
-        $values = $rows['values'];
-
-        //insert these values into the database
-        $insert = DB::table('product_variations')->insert([
-            'options' => $options,
-            'values' => $values
+        $request->validate([
+            'product_name' => 'required|string|exists:products,product_name',
+            'options' => 'required|string',
+            'values' => 'required|string',
         ]);
-        //  dd($insert);
+
+        $product = DB::table('products')->where('product_name', $request->product_name)->first();
+
+        $insert = DB::table('product_variations')->insert([
+            'product_id' => $product->id,
+            'options' => $request->options,
+            'values' => $request->values
+        ]);
+
          if($insert){
             return redirect()->back()->with('success', 'Product Variation Created Successfully');
          }else{
