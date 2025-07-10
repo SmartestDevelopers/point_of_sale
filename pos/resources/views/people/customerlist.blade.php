@@ -48,7 +48,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
     <div class="modal-content">
 	<form id="customerListForm" method="POST" action="{{ route('add-customer.store') }}">
 		@csrf
@@ -57,26 +57,40 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
-				<Label>Customer Group</Label>
-				<input type="text" class="form-control" id="customer_group" name="customer_group" value="" placeholder="Enter Customer Group">
-				<Label>Name</Label>
-				<input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter Name">
-				<Label>Company Nmae</Label>
-				<input type="text" class="form-control" id="company_name" name="company_name" value="" placeholder="Enter Company Name">
-				<Label>Email</Label>
-				<input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter Email">
-				<Label>Phone Number</Label>
-				<input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter Phone Number">
-				<Label>Tax Number</Label>
-				<input type="text" class="form-control" id="tax_number" name="tax_number"  placeholder="Enter Tax Number">
-				<Label>Address</Label>
-				<input type="text" class="form-control" id="address" name="address"  placeholder="Enter Address">
-				<Label>Balance</Label>
-				<input type="text" class="form-control" id="balance" name="balance"  placeholder="Enter Balance">
-	
-				
-		
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <label>Customer Group</label>
+                <input type="text" class="form-control" id="customer_group" name="customer_group" value="" placeholder="Enter Customer Group">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter Name">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>Company Name</label>
+                <input type="text" class="form-control" id="company_name" name="company_name" value="" placeholder="Enter Company Name">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter Email">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>Phone Number</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter Phone Number">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>Tax Number</label>
+                <input type="text" class="form-control" id="tax_number" name="tax_number"  placeholder="Enter Tax Number">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>Address</label>
+                <input type="text" class="form-control" id="address" name="address"  placeholder="Enter Address">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>Balance</label>
+                <input type="text" class="form-control" id="balance" name="balance"  placeholder="Enter Balance">
+            </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
