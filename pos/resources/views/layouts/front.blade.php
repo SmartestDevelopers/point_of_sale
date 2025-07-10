@@ -181,7 +181,7 @@
 										<span class="svg-icon nav-icon">
 											<i class="fas fa-boxes font-size-h4"></i>
 										</span>
-										<span class="nav-text">Catalog</span>
+										<span class="nav-text">Product</span>
 										<i class="fas fa-chevron-right fa-rotate-90"></i>
 									</a>
 									<div class="collapse nav-collapse" id="catalog" data-bs-parent="#accordion">
@@ -358,7 +358,7 @@
 									<div class="collapse nav-collapse" id="order"  data-bs-parent="#accordion">
 										<ul class="nav flex-column">
 											<li class="nav-item">
-												<a href="{{url('order-list')}}" class="nav-link sub-nav-link">
+												<a href="{{url('sales')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
 														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
 															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -367,16 +367,7 @@
 													<span class="nav-text">List</span>
 												</a>
 											</li>
-											<li class="nav-item">
-												<a href="{{url('order-detail')}}" class="nav-link sub-nav-link">
-													<span class="svg-icon nav-icon d-flex justify-content-center">
-														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-														  </svg>
-													</span>
-													<span class="nav-text">Order Detail</span>
-												</a>
-											</li>
+											
 											<li class="nav-item">
 												<a href="{{route('sales.create')}}" class="nav-link sub-nav-link">
 													<span class="svg-icon nav-icon d-flex justify-content-center">
@@ -387,17 +378,7 @@
 													<span class="nav-text">Add Sale</span>
 												</a>
 											</li>
-											<li class="nav-item">
-												<a href="{{url('pos')}}" class="nav-link sub-nav-link">
-													<span class="svg-icon nav-icon d-flex justify-content-center">
-														<svg xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
-															<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-														  </svg>
-													</span>
-													<span class="nav-text">POS</span>
-												</a>
-											</li>
-										
+																				
 										
 										</ul>
 									</div>

@@ -12,7 +12,7 @@
                             <h3 class="card-label mb-0 font-weight-bold text-body">Add Purchase</h3>
                         </div>
                         <div class="card-toolbar">
-                            <a href="{{ route('purchases.index') }}" class="btn btn-secondary font-weight-bold">
+                            <a href="{{ route('return-purchases.index') }}" class="btn btn-secondary font-weight-bold">
                                 <i class="fas fa-arrow-left"></i> Back to List
                             </a>
                         </div>
@@ -22,7 +22,7 @@
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
                         
-                        <form action="{{ route('purchases.store') }}" method="POST">
+                        <form action="{{ route('return-purchases.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-2">
@@ -158,7 +158,7 @@
                                 <button type="submit" class="btn btn-primary font-weight-bold">
                                     <i class="fas fa-save"></i> Save Purchase
                                 </button>
-                                <a href="{{ route('purchases.index') }}" class="btn btn-secondary font-weight-bold">Cancel</a>
+                                <a href="{{ route('return-purchases.index') }}" class="btn btn-secondary font-weight-bold">Cancel</a>
                             </div>
                         </form>
                     </div>
