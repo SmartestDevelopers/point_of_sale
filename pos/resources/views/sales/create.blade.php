@@ -147,11 +147,19 @@
                                 <div class="card-body">
                                     <div id="products-container">
                                         <div class="product-row row mb-3">
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <select class="form-control" name="products[0][product_id]" required>
                                                     <option value="">Select Product</option>
                                                     @foreach($products as $product)
                                                         <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select class="form-control" name="products[0][sale_unit_id]" required>
+                                                    <option value="">Select Unit</option>
+                                                    @foreach($units as $unit)
+                                                        <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -204,11 +212,19 @@ document.getElementById('add-product').addEventListener('click', function() {
     const newRow = document.createElement('div');
     newRow.className = 'product-row row mb-3';
     newRow.innerHTML = `
-        <div class="col-md-4">
+        <div class="col-md-2">
             <select class="form-control" name="products[${productIndex}][product_id]" required>
                 <option value="">Select Product</option>
                 @foreach($products as $product)
                     <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" name="products[${productIndex}][sale_unit_id]" required>
+                <option value="">Select Unit</option>
+                @foreach($units as $unit)
+                    <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
                 @endforeach
             </select>
         </div>

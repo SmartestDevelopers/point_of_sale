@@ -40,8 +40,9 @@ class SaleController extends Controller
         $customers = DB::table('customers')->get();
         $warehouses = DB::table('warehouses')->get();
         $products = DB::table('products')->get();
-        
-        return view('sales.create', compact('customers', 'warehouses', 'products'));
+        $units = DB::table('product_units')->get();
+
+        return view('sales.create', compact('customers', 'warehouses', 'products', 'units'));
     }
 
     /**
