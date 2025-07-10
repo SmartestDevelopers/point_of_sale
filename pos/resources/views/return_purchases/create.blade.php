@@ -9,7 +9,7 @@
                 <div class="card card-custom gutter-b bg-white border-0">
                     <div class="card-header align-items-center border-0">
                         <div class="card-title mb-0">
-                            <h3 class="card-label mb-0 font-weight-bold text-body">Add Purchase</h3>
+                            <h3 class="card-label mb-0 font-weight-bold text-body">Add Return Purchase</h3>
                         </div>
                         <div class="card-toolbar">
                             <a href="{{ route('return-purchases.index') }}" class="btn btn-secondary font-weight-bold">
@@ -156,7 +156,7 @@
 
                             <div class="form-group mt-4">
                                 <button type="submit" class="btn btn-primary font-weight-bold">
-                                    <i class="fas fa-save"></i> Save Purchase
+                                    <i class="fas fa-save"></i> Save Purchase Returns
                                 </button>
                                 <a href="{{ route('return-purchases.index') }}" class="btn btn-secondary font-weight-bold">Cancel</a>
                             </div>
