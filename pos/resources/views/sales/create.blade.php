@@ -162,7 +162,7 @@
                                                 <input type="number" step="0.01" class="form-control" name="products[0][net_unit_price]" placeholder="Unit Price" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" step="0.01" class="form-control" name="products[0][total]" placeholder="Total" required>
+                                                <input type="number" step="0.01" class="form-control" name="products[0][total]" placeholder="Total" required readonly>
                                             </div>
                                             <div class="col-md-2">
                                                 <button type="button" class="btn btn-danger remove-product">Remove</button>
@@ -190,6 +190,15 @@
 <script>
 let productIndex = 1;
 
+function updateTotal(row) {
+    const qtyInput = row.querySelector('input[name$="[qty]"]');
+    const priceInput = row.querySelector('input[name$="[net_unit_price]"]');
+    const totalInput = row.querySelector('input[name$="[total]"]');
+    const qty = parseFloat(qtyInput.value) || 0;
+    const price = parseFloat(priceInput.value) || 0;
+    totalInput.value = (qty * price).toFixed(2);
+}
+
 document.getElementById('add-product').addEventListener('click', function() {
     const container = document.getElementById('products-container');
     const newRow = document.createElement('div');
@@ -210,7 +219,7 @@ document.getElementById('add-product').addEventListener('click', function() {
             <input type="number" step="0.01" class="form-control" name="products[${productIndex}][net_unit_price]" placeholder="Unit Price" required>
         </div>
         <div class="col-md-2">
-            <input type="number" step="0.01" class="form-control" name="products[${productIndex}][total]" placeholder="Total" required>
+            <input type="number" step="0.01" class="form-control" name="products[${productIndex}][total]" placeholder="Total" required readonly>
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-danger remove-product">Remove</button>
@@ -223,6 +232,24 @@ document.getElementById('add-product').addEventListener('click', function() {
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('remove-product')) {
         e.target.closest('.product-row').remove();
+    }
+});
+
+document.addEventListener('input', function(e) {
+    if (e.target.name && (e.target.name.endsWith('[qty]') || e.target.name.endsWith('[net_unit_price]'))) {
+        const row = e.target.closest('.product-row');
+        updateTotal(row);
+    }
+});
+
+// Make the first row's total auto-calculate as well
+window.addEventListener('DOMContentLoaded', function() {
+    const firstRow = document.querySelector('.product-row');
+    if (firstRow) {
+        const qtyInput = firstRow.querySelector('input[name$="[qty]"]');
+        const priceInput = firstRow.querySelector('input[name$="[net_unit_price]"]');
+        qtyInput.addEventListener('input', function() { updateTotal(firstRow); });
+        priceInput.addEventListener('input', function() { updateTotal(firstRow); });
     }
 });
 </script>
