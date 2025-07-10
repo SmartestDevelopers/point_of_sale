@@ -44,9 +44,16 @@ class PurchaseController extends Controller
         $suppliers = DB::table('suppliers')->get();
         $warehouses = DB::table('warehouses')->get();
         $products = DB::table('products')->get();
-        $productVariations = DB::table('product_variations')->get();
+
+        // print_r($products);
+        // die();
+        // Join product_variations with products to get product name
+        // $productVariations = DB::table('product_variations')
+        //     ->join('products', 'product_variations.product_id', '=', 'products.id')
+        //     ->select('product_variations.*', 'products.product_name')
+        //     ->get();
         
-        return view('purchases.create', compact('suppliers', 'warehouses', 'products', 'productVariations'));
+        return view('purchases.create', compact('suppliers', 'warehouses', 'products'));
     }
 
     /**
@@ -69,7 +76,7 @@ class PurchaseController extends Controller
         
         try {
             // Generate reference number if not provided
-            $referenceNo = $request->reference_no ?: 'PUR-' . date('YmdHis') . '-' . rand(1000, 9999);
+            $referenceNo = $request->reference_no ?: 'PUR-' . date('is') . '-' . rand(1000, 9999);
             
             // Insert purchase record
             $purchaseId = DB::table('purchases')->insertGetId([
@@ -277,11 +284,11 @@ class PurchaseController extends Controller
     // Helper to get product_id from product_variation_id
     private function getProductIdFromVariation($variationId)
     {
-        $variation = DB::table('product_variations')->where('id', $variationId)->first();
+        $variation = DB::table('products')->where('id', $variationId)->first();
         // Defensive: check for object and product_id property
-        if ($variation && isset($variation->product_id) && $variation->product_id) {
-            return $variation->product_id;
-        }
+        // if ($variation && isset($variation->product_id) && $variation->product_id) {
+            return $variation->id;
+        // }
         // Optionally, log or throw a custom error here
         \Illuminate\Support\Facades\Log::error('Product variation with ID ' . $variationId . ' is not linked to a product.');
         return null;

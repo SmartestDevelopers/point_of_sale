@@ -130,11 +130,10 @@
                                         <div class="product-row row mb-3">
                                             <div class="col-md-4">
                                                 <select class="form-control" name="products[0][product_variation_id]" required>
-                                                    <option value="">Select Product Variation</option>
-                                                    @foreach($productVariations as $variation)
+                                                    <option value="">Select Product</option>
+                                                    @foreach($products as $variation)
                                                         <option value="{{ $variation->id }}">
-                                                            {{ $variation->options }} - {{ $variation->values }}
-                                                        </option>
+                                                            {{ $variation->product_name }}                                                         </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -173,7 +172,7 @@
 <script>
 let productIndex = 1;
 
-const productVariationOptions = `@foreach($productVariations as $variation)<option value="{{ $variation->id }}">{{ $variation->options }} - {{ $variation->values }}</option>@endforeach`;
+const productVariationOptions = `@foreach($products as $variation)<option value="{{ $variation->id }}">{{ $variation->product_name }} </option>@endforeach`;
 
 document.getElementById('add-product').addEventListener('click', function() {
     const container = document.getElementById('products-container');
@@ -182,7 +181,7 @@ document.getElementById('add-product').addEventListener('click', function() {
     newRow.innerHTML = `
         <div class="col-md-4">
             <select class="form-control" name="products[${productIndex}][product_variation_id]" required>
-                <option value="">Select Product Variation</option>
+                <option value="">Select Product </option>
                 ${productVariationOptions}
             </select>
         </div>

@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         // Fetch products from the add_products table
-        $products = DB::table('add_products')->get();
+        $products = DB::table('products')->get();
         return view('product.productlist', compact('products'));
     }
 
@@ -104,7 +104,7 @@ class ProductController extends Controller
         $product_price = $result['product_price'];
         $product_code = $result['product_code'];
         
-        DB::table('add_products')->insert([
+        DB::table('products')->insert([
             'product_name' => $product_name,
             'product_category' => $product_category,
             'product_unit' => $product_unit,
