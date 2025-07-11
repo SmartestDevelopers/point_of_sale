@@ -158,7 +158,7 @@ class ReturnSaleController extends Controller
 
         // Check if the return sale exists
         if (!$returnSale) {
-            return view('return-sales.show', ['sale' => null]);
+            return view('return_sales.show', ['sale' => null]);
         }
 
         return view('return_sales.show', [
@@ -182,7 +182,7 @@ class ReturnSaleController extends Controller
         
         $productReturnSales = DB::table('product_return_sales')
             ->join('products', 'product_return_sales.product_id', '=', 'products.id')
-            ->select('product_return_sales.*', 'products.name as product_name')
+            ->select('product_return_sales.*', 'products.product_name as product_name')
             ->where('product_return_sales.return_id', $id)
             ->get();
 
