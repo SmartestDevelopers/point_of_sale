@@ -10,7 +10,7 @@
                 <div class="card card-custom gutter-b bg-white border-0">
                     <div class="card-header align-items-center border-0">
                         <div class="card-title mb-0">
-                            <h3 class="card-label mb-0 font-weight-bold text-body">Add Sale</h3>
+                            <h3 class="card-label mb-0 font-weight-bold text-body">Add Return Sale</h3>
                         </div>
                         <div class="card-toolbar">
                             <a href="{{ route('sales.index') }}" class="btn btn-secondary font-weight-bold">
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="sale_status">Sale Status *</label>
+                                        <label for="sale_status">Return Sale Status *</label>
                                         <select class="form-control" id="sale_status" name="sale_status" required>
                                             <option value="0" {{ old('sale_status') == '0' ? 'selected' : '' }}>Draft</option>
                                             <option value="1" {{ old('sale_status') == '1' ? 'selected' : '' }}>Completed</option>
@@ -175,7 +175,7 @@
 
                             <div class="form-group mt-4">
                                 <button type="submit" class="btn btn-primary font-weight-bold">
-                                    <i class="fas fa-save"></i> Save Sale
+                                    <i class="fas fa-save"></i> Save Return Sale
                                 </button>
                                 <a href="{{ route('sales.index') }}" class="btn btn-secondary font-weight-bold">Cancel</a>
                             </div>
