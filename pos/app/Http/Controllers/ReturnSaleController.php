@@ -133,21 +133,21 @@ class ReturnSaleController extends Controller
         $returnSale = DB::table('return_sales')
             ->join('customers', 'return_sales.customer_id', '=', 'customers.id')
             ->join('warehouses', 'return_sales.warehouse_id', '=', 'warehouses.id')
-            ->join('users', 'return_sales.user_id', '=', 'users.id')
+            //->join('users', 'return_sales.user_id', '=', 'users.id')
             ->select(
                 'return_sales.*',
                 'customers.name as customer_name',
                 'customers.email as customer_email',
-                'customers.phone as customer_phone',
+                //'customers.phone as customer_phone',
                 'warehouses.warehouse as warehouse_name',
-                'users.name as user_name'
+                // 'users.name as user_name'
             )
             ->where('return_sales.id', $id)
             ->first();
 
         $productReturnSales = DB::table('product_return_sales')
             ->join('products', 'product_return_sales.product_id', '=', 'products.id')
-            ->select('product_return_sales.*', 'products.name as product_name', 'products.code as product_code')
+            ->select('product_return_sales.*', 'products.product_name as product_name', 'products.product_code as product_code')
             ->where('product_return_sales.return_id', $id)
             ->get();
 
