@@ -179,6 +179,7 @@ class ReturnSaleController extends Controller
         $customers = DB::table('customers')->get();
         $warehouses = DB::table('warehouses')->get();
         $products = DB::table('products')->get();
+        $units = DB::table('product_units')->get();
         
         $productReturnSales = DB::table('product_return_sales')
             ->join('products', 'product_return_sales.product_id', '=', 'products.id')
@@ -186,7 +187,7 @@ class ReturnSaleController extends Controller
             ->where('product_return_sales.return_id', $id)
             ->get();
 
-        return view('return_sales.edit', compact('returnSale', 'customers', 'warehouses', 'products', 'productReturnSales'));
+        return view('return_sales.edit', compact('returnSale', 'customers', 'warehouses', 'products', 'productReturnSales', 'units'));
     }
 
     /**
