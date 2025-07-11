@@ -98,7 +98,7 @@ class ReturnSaleController extends Controller
             // Insert product return sales
             foreach ($request->products as $product) {
                 DB::table('product_return_sales')->insert([
-                    'return_sale_id' => $returnSaleId,
+                    'return_id' => $returnSaleId,
                     'product_id' => $product['product_id'],
                     'variant_id' => $product['variant_id'] ?? null,
                     'qty' => $product['qty'],
@@ -148,7 +148,7 @@ class ReturnSaleController extends Controller
         $productReturnSales = DB::table('product_return_sales')
             ->join('products', 'product_return_sales.product_id', '=', 'products.id')
             ->select('product_return_sales.*', 'products.name as product_name', 'products.code as product_code')
-            ->where('product_return_sales.return_sale_id', $id)
+            ->where('product_return_sales.return_id', $id)
             ->get();
 
         return view('return_sales.show', compact('returnSale', 'productReturnSales'));
@@ -170,7 +170,7 @@ class ReturnSaleController extends Controller
         $productReturnSales = DB::table('product_return_sales')
             ->join('products', 'product_return_sales.product_id', '=', 'products.id')
             ->select('product_return_sales.*', 'products.name as product_name')
-            ->where('product_return_sales.return_sale_id', $id)
+            ->where('product_return_sales.return_id', $id)
             ->get();
 
         return view('return_sales.edit', compact('returnSale', 'customers', 'warehouses', 'products', 'productReturnSales'));
@@ -219,12 +219,12 @@ class ReturnSaleController extends Controller
             ]);
 
             // Delete existing product return sales
-            DB::table('product_return_sales')->where('return_sale_id', $id)->delete();
+            DB::table('product_return_sales')->where('return_id', $id)->delete();
 
             // Insert updated product return sales
             foreach ($request->products as $product) {
                 DB::table('product_return_sales')->insert([
-                    'return_sale_id' => $id,
+                    'return_id' => $id,
                     'product_id' => $product['product_id'],
                     'variant_id' => $product['variant_id'] ?? null,
                     'qty' => $product['qty'],
@@ -260,7 +260,7 @@ class ReturnSaleController extends Controller
         
         try {
             // Delete product return sales first
-            DB::table('product_return_sales')->where('return_sale_id', $id)->delete();
+            DB::table('product_return_sales')->where('return_id', $id)->delete();
             
             // Delete return sale
             DB::table('return_sales')->where('id', $id)->delete();
