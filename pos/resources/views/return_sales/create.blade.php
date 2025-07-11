@@ -156,6 +156,14 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
+    <select class="form-control" name="products[0][sale_unit_id]" required>
+        <option value="">Select Unit</option>
+        @foreach($units as $unit)
+            <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+        @endforeach
+    </select>
+</div>
+                                            <div class="col-md-2">
                                                 <input type="number" class="form-control" name="products[0][qty]" placeholder="Quantity" required>
                                             </div>
                                             <div class="col-md-2">

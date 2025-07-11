@@ -38,14 +38,15 @@ class ReturnSaleController extends Controller
     public function create()
     {
         $customers = DB::table('customers')->get();
-        $warehouses = DB::table('warehouses')->get();
-        $products = DB::table('products')->get();
-        $sales = DB::table('sales')
-            ->join('customers', 'sales.customer_id', '=', 'customers.id')
-            ->select('sales.id', 'sales.reference_no', 'customers.name as customer_name')
-            ->get();
-        
-        return view('return_sales.create', compact('customers', 'warehouses', 'products', 'sales'));
+    $warehouses = DB::table('warehouses')->get();
+    $products = DB::table('products')->get();
+    $units = DB::table('product_units')->get();
+    $sales = DB::table('return_sales')
+        ->join('customers', 'return_sales.customer_id', '=', 'customers.id')
+        ->select('return_sales.id', 'return_sales.reference_no', 'customers.name as customer_name')
+        ->get();
+    
+    return view('return_sales.create', compact('customers', 'warehouses', 'products', 'sales','units'));
     }
 
     /**
