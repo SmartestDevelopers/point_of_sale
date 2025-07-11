@@ -1,8 +1,6 @@
 @extends('layouts.front')
 
 @section('content')
-
-
 <div class="d-flex flex-column-fluid">
     <div class="container-fluid">
         <div class="row">
@@ -23,14 +21,14 @@
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
                         
-                        <form action="{{ route('return-sales.store') }}" method="POST">
+                        <form action="{{ route('return-sales.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="reference_no">Reference No *</label>
                                         <input type="text" class="form-control" id="reference_no" name="reference_no" 
-                                               value="{{ old('reference_no', 'SALE-' . date('YmdHis')) }}" required>
+                                               value="{{ old('reference_no', 'RSL-' .  rand(1000, 9999)) }}" required>
                                         @error('reference_no')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -52,7 +50,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="warehouse_id">Warehouse *</label>
@@ -79,32 +76,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="sale_status">Return Sale Status *</label>
-                                        <select class="form-control" id="sale_status" name="sale_status" required>
-                                            <option value="0" {{ old('sale_status') == '0' ? 'selected' : '' }}>Draft</option>
-                                            <option value="1" {{ old('sale_status') == '1' ? 'selected' : '' }}>Completed</option>
-                                            <option value="2" {{ old('sale_status') == '2' ? 'selected' : '' }}>Pending</option>
-                                        </select>
-                                        @error('sale_status')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="payment_status">Payment Status *</label>
-                                        <select class="form-control" id="payment_status" name="payment_status" required>
-                                            <option value="0" {{ old('payment_status') == '0' ? 'selected' : '' }}>Due</option>
-                                            <option value="1" {{ old('payment_status') == '1' ? 'selected' : '' }}>Paid</option>
-                                            <option value="2" {{ old('payment_status') == '2' ? 'selected' : '' }}>Partial</option>
-                                        </select>
-                                        @error('payment_status')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="row">
@@ -112,7 +83,7 @@
                                     <div class="form-group">
                                         <label for="grand_total">Grand Total *</label>
                                         <input type="number" step="0.01" class="form-control" id="grand_total" name="grand_total" 
-                                               value="{{ old('grand_total', 0) }}" required>
+                                               value="{{ old('grand_total', 0) }}" required readonly>
                                         @error('grand_total')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -120,16 +91,9 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="paid_amount">Paid Amount</label>
-                                        <input type="number" step="0.01" class="form-control" id="paid_amount" name="paid_amount" 
-                                               value="{{ old('paid_amount', 0) }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
                                         <label for="total_price">Total Price</label>
                                         <input type="number" step="0.01" class="form-control" id="total_price" name="total_price" 
-                                               value="{{ old('total_price', 0) }}">
+                                               value="{{ old('total_price', 0) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -139,15 +103,71 @@
                                                value="{{ old('shipping_cost', 0) }}">
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="total_discount">Total Discount</label>
+                                        <input type="number" step="0.01" class="form-control" id="total_discount" name="total_discount" 
+                                               value="{{ old('total_discount', 0) }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="total_tax">Total Tax</label>
+                                        <input type="number" step="0.01" class="form-control" id="total_tax" name="total_tax" 
+                                               value="{{ old('total_tax', 0) }}">
+                                    </div>
+                                </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="order_tax_rate">Order Tax Rate (%)</label>
+                                        <input type="number" step="0.01" class="form-control" id="order_tax_rate" name="order_tax_rate" 
+                                               value="{{ old('order_tax_rate', 0) }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="order_tax">Order Tax</label>
+                                        <input type="number" step="0.01" class="form-control" id="order_tax" name="order_tax" 
+                                               value="{{ old('order_tax', 0) }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="order_discount">Order Discount</label>
+                                        <input type="number" step="0.01" class="form-control" id="order_discount" name="order_discount" 
+                                               value="{{ old('order_discount', 0) }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="document">Document</label>
+                                        <input type="file" class="form-control" id="document" name="document">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="return_note">Return Note</label>
+                                        <textarea class="form-control" id="return_note" name="return_note">{{ old('return_note') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="staff_note">Staff Note</label>
+                                        <textarea class="form-control" id="staff_note" name="staff_note">{{ old('staff_note') }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- Products Section -->
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <div id="products-container">
                                         <div class="product-row row mb-3">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <select class="form-control" name="products[0][product_id]" required>
                                                     <option value="">Select Product</option>
                                                     @foreach($products as $product)
@@ -156,23 +176,29 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-    <select class="form-control" name="products[0][sale_unit_id]" required>
-        <option value="">Select Unit</option>
-        @foreach($units as $unit)
-            <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
-        @endforeach
-    </select>
-</div>
-                                            <div class="col-md-2">
-                                                <input type="number" class="form-control" name="products[0][qty]" placeholder="Quantity" required>
+                                                <select class="form-control" name="products[0][sale_unit_id]" required>
+                                                    <option value="">Select Unit</option>
+                                                    @foreach($units as $unit)
+                                                        <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" step="0.01" class="form-control" name="products[0][net_unit_price]" placeholder="Unit Price" required>
+                                                <input type="number" class="form-control qty" name="products[0][qty]" placeholder="Quantity" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" step="0.01" class="form-control" name="products[0][total]" placeholder="Total" required>
+                                                <input type="number" step="0.01" class="form-control unit-price" name="products[0][net_unit_price]" placeholder="Unit Price" required>
                                             </div>
                                             <div class="col-md-2">
+                                                <input type="number" step="0.01" class="form-control discount" name="products[0][discount]" placeholder="Discount" value="0">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="number" step="0.01" class="form-control tax" name="products[0][tax]" placeholder="Tax" value="0">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="number" step="0.01" class="form-control total" name="products[0][total]" placeholder="Total" readonly>
+                                            </div>
+                                            <div class="col-md-1">
                                                 <button type="button" class="btn btn-danger remove-product">Remove</button>
                                             </div>
                                         </div>
@@ -185,7 +211,7 @@
                                 <button type="submit" class="btn btn-primary font-weight-bold">
                                     <i class="fas fa-save"></i> Save Return Sale
                                 </button>
-                                <a href="{{ route('sales.index') }}" class="btn btn-secondary font-weight-bold">Cancel</a>
+                                <a href="{{ route('return-sales.index') }}" class="btn btn-secondary font-weight-bold">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -203,7 +229,7 @@ document.getElementById('add-product').addEventListener('click', function() {
     const newRow = document.createElement('div');
     newRow.className = 'product-row row mb-3';
     newRow.innerHTML = `
-        <div class="col-md-4">
+        <div class="col-md-3">
             <select class="form-control" name="products[${productIndex}][product_id]" required>
                 <option value="">Select Product</option>
                 @foreach($products as $product)
@@ -212,15 +238,29 @@ document.getElementById('add-product').addEventListener('click', function() {
             </select>
         </div>
         <div class="col-md-2">
-            <input type="number" class="form-control" name="products[${productIndex}][qty]" placeholder="Quantity" required>
+            <select class="form-control" name="products[${productIndex}][sale_unit_id]" required>
+                <option value="">Select Unit</option>
+                @foreach($units as $unit)
+                    <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="col-md-2">
-            <input type="number" step="0.01" class="form-control" name="products[${productIndex}][net_unit_price]" placeholder="Unit Price" required>
+            <input type="number" class="form-control qty" name="products[${productIndex}][qty]" placeholder="Quantity" required>
         </div>
         <div class="col-md-2">
-            <input type="number" step="0.01" class="form-control" name="products[${productIndex}][total]" placeholder="Total" required>
+            <input type="number" step="0.01" class="form-control unit-price" name="products[${productIndex}][net_unit_price]" placeholder="Unit Price" required>
         </div>
         <div class="col-md-2">
+            <input type="number" step="0.01" class="form-control discount" name="products[${productIndex}][discount]" placeholder="Discount" value="0">
+        </div>
+        <div class="col-md-2">
+            <input type="number" step="0.01" class="form-control tax" name="products[${productIndex}][tax]" placeholder="Tax" value="0">
+        </div>
+        <div class="col-md-2">
+            <input type="number" step="0.01" class="form-control total" name="products[${productIndex}][total]" placeholder="Total" readonly>
+        </div>
+        <div class="col-md-1">
             <button type="button" class="btn btn-danger remove-product">Remove</button>
         </div>
     `;
@@ -231,7 +271,50 @@ document.getElementById('add-product').addEventListener('click', function() {
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('remove-product')) {
         e.target.closest('.product-row').remove();
+        updateTotals();
     }
 });
+
+document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('qty') || e.target.classList.contains('unit-price') || 
+        e.target.classList.contains('discount') || e.target.classList.contains('tax')) {
+        const row = e.target.closest('.product-row');
+        const qty = parseFloat(row.querySelector('.qty').value) || 0;
+        const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
+        const discount = parseFloat(row.querySelector('.discount').value) || 0;
+        const tax = parseFloat(row.querySelector('.tax').value) || 0;
+        const totalInput = row.querySelector('.total');
+        totalInput.value = ((qty * unitPrice) - discount + tax).toFixed(2);
+        updateTotals();
+    }
+});
+
+function updateTotals() {
+    const rows = document.querySelectorAll('.product-row');
+    let totalPrice = 0;
+    let totalDiscount = 0;
+    let totalTax = 0;
+    
+    rows.forEach(row => {
+        const qty = parseFloat(row.querySelector('.qty').value) || 0;
+        const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
+        const discount = parseFloat(row.querySelector('.discount').value) || 0;
+        const tax = parseFloat(row.querySelector('.tax').value) || 0;
+        totalPrice += qty * unitPrice;
+        totalDiscount += discount;
+        totalTax += tax;
+    });
+
+    const orderTaxRate = parseFloat(document.getElementById('order_tax_rate').value) || 0;
+    const orderDiscount = parseFloat(document.getElementById('order_discount').value) || 0;
+    const shippingCost = parseFloat(document.getElementById('shipping_cost').value) || 0;
+    
+    const orderTax = (totalPrice * (orderTaxRate / 100)).toFixed(2);
+    document.getElementById('order_tax').value = orderTax;
+    document.getElementById('total_price').value = totalPrice.toFixed(2);
+    document.getElementById('total_discount').value = totalDiscount.toFixed(2);
+    document.getElementById('total_tax').value = totalTax.toFixed(2);
+    document.getElementById('grand_total').value = (totalPrice - totalDiscount + totalTax + parseFloat(orderTax) + shippingCost - orderDiscount).toFixed(2);
+}
 </script>
 @endsection
