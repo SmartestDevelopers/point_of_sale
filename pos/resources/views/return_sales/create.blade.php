@@ -13,7 +13,7 @@
                             <h3 class="card-label mb-0 font-weight-bold text-body">Add Return Sale</h3>
                         </div>
                         <div class="card-toolbar">
-                            <a href="{{ route('sales.index') }}" class="btn btn-secondary font-weight-bold">
+                            <a href="{{ route('return-sales.index') }}" class="btn btn-secondary font-weight-bold">
                                 <i class="fas fa-arrow-left"></i> Back to List
                             </a>
                         </div>
