@@ -124,28 +124,40 @@ class ReturnPurchaseController extends Controller
      */
     public function show($id)
     {
-        $returnPurchase = DB::table('return_purchases')
-            ->leftJoin('suppliers', 'return_purchases.supplier_id', '=', 'suppliers.id')
-            ->join('warehouses', 'return_purchases.warehouse_id', '=', 'warehouses.id')
-            ->join('users', 'return_purchases.user_id', '=', 'users.id')
+        $returnSale = DB::table('return_sales')
             ->select(
-                'return_purchases.*',
-                'suppliers.name as supplier_name',
-                'suppliers.email as supplier_email',
+                'return_sales.*',
+                'customers.name as customer_name',
                 'warehouses.warehouse as warehouse_name',
                 'users.name as user_name'
             )
-            ->where('return_purchases.id', $id)
+            ->leftJoin('customers', 'return_sales.customer_id', '=', 'customers.id')
+            ->leftJoin('warehouses', 'return_sales.warehouse_id', '=', 'warehouses.id')
+            ->leftJoin('users', 'return_sales.user_id', '=', 'users.id') // Changed from biller_id to user_id
+            ->where('return_sales.id', $id)
             ->first();
 
-        $productReturnPurchases = DB::table('product_return_purchases')
-            ->join('products', 'product_return_purchases.product_id', '=', 'products.id')
-            ->select('product_return_purchases.*', 'products.name as product_name', 'products.code as product_code')
-            ->where('product_return_purchases.return_purchase_id', $id)
+        $productReturnSales = DB::table('product_return_sales')
+            ->join('products', 'product_return_sales.product_id', '=', 'products.id')
+            ->join('product_units', 'product_return_sales.sale_unit_id', '=', 'product_units.id')
+            ->select(
+                'product_return_sales.*',
+                'products.product_name as product_name',
+                'product_units.unit_name as unit_name'
+            )
+            ->where('product_return_sales.return_id', $id)
             ->get();
 
-        return view('return_purchases.show', compact('returnPurchase', 'productReturnPurchases'));
+        if (!$returnSale) {
+            return view('return_sales.show', ['sale' => null]);
+        }
+
+        return view('return_sales.show', [
+            'sale' => $returnSale,
+            'productSales' => $productReturnSales
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

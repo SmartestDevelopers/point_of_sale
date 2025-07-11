@@ -128,30 +128,43 @@ class ReturnSaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+   public function show($id)
     {
+        // Fetch the main return sale details
         $returnSale = DB::table('return_sales')
-            ->join('customers', 'return_sales.customer_id', '=', 'customers.id')
-            ->join('warehouses', 'return_sales.warehouse_id', '=', 'warehouses.id')
-            //->join('users', 'return_sales.user_id', '=', 'users.id')
             ->select(
                 'return_sales.*',
                 'customers.name as customer_name',
-                'customers.email as customer_email',
-                //'customers.phone as customer_phone',
                 'warehouses.warehouse as warehouse_name',
-                // 'users.name as user_name'
+                'users.name as user_name'
             )
+            ->leftJoin('customers', 'return_sales.customer_id', '=', 'customers.id')
+            ->leftJoin('warehouses', 'return_sales.warehouse_id', '=', 'warehouses.id')
+            ->leftJoin('users', 'return_sales.biller_id', '=', 'users.id')
             ->where('return_sales.id', $id)
             ->first();
 
+        // Fetch all products associated with the return sale
         $productReturnSales = DB::table('product_return_sales')
             ->join('products', 'product_return_sales.product_id', '=', 'products.id')
-            ->select('product_return_sales.*', 'products.product_name as product_name', 'products.product_code as product_code')
+            ->join('product_units', 'product_return_sales.sale_unit_id', '=', 'product_units.id')
+            ->select(
+                'product_return_sales.*',
+                'products.product_name as product_name',
+                'product_units.unit_name as unit_name'
+            )
             ->where('product_return_sales.return_id', $id)
             ->get();
 
-        return view('return_sales.show', compact('returnSale', 'productReturnSales'));
+        // Check if the return sale exists
+        if (!$returnSale) {
+            return view('return-sales.show', ['sale' => null]);
+        }
+
+        return view('return_sales.show', [
+            'sale' => $returnSale,
+            'productSales' => $productReturnSales
+        ]);
     }
 
     /**
