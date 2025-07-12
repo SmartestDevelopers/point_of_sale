@@ -51,8 +51,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            
-                        
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="supplier_id">Supplier</label>
@@ -79,7 +77,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="payment_status">Payment Status *</label>
@@ -97,7 +94,7 @@
                                     <div class="form-group">
                                         <label for="grand_total">Grand Total *</label>
                                         <input type="number" step="0.01" class="form-control" id="grand_total" name="grand_total" 
-                                               value="{{ old('grand_total', 0) }}" required>
+                                               value="{{ old('grand_total', 0) }}" readonly>
                                         @error('grand_total')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -124,11 +121,10 @@
 
                             <!-- Simple Products Section -->
                             <div class="card mt-1">
-
                                 <div class="card-body">
                                     <div id="products-container">
                                         <div class="product-row row mb-3">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <select class="form-control" name="products[0][product_id]" required>
                                                     <option value="">Select Product</option>
                                                     @foreach($products as $product)
@@ -137,15 +133,23 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" class="form-control" name="products[0][qty]" placeholder="Quantity" required>
+                                                <select class="form-control" name="products[0][purchase_unit_id]" required>
+                                                    <option value="">Select Unit</option>
+                                                    @foreach($units as $unit)
+                                                        <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" step="0.01" class="form-control" name="products[0][net_unit_cost]" placeholder="Unit Cost" required>
+                                                <input type="number" class="form-control qty" name="products[0][qty]" placeholder="Quantity" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="number" step="0.01" class="form-control" name="products[0][total]" placeholder="Total" required>
+                                                <input type="number" step="0.01" class="form-control net_unit_cost" name="products[0][net_unit_cost]" placeholder="Unit Cost" required>
                                             </div>
                                             <div class="col-md-2">
+                                                <input type="number" step="0.01" class="form-control total" name="products[0][total]" placeholder="Total" readonly>
+                                            </div>
+                                            <div class="col-md-1">
                                                 <button type="button" class="btn btn-danger remove-product">Remove</button>
                                             </div>
                                         </div>
@@ -171,12 +175,24 @@
 <script>
 let productIndex = 1;
 
+function updateTotals() {
+    let grandTotal = 0;
+    document.querySelectorAll('.product-row').forEach(row => {
+        const qty = parseFloat(row.querySelector('.qty').value) || 0;
+        const unitCost = parseFloat(row.querySelector('.net_unit_cost').value) || 0;
+        const total = qty * unitCost;
+        row.querySelector('.total').value = total.toFixed(2);
+        grandTotal += total;
+    });
+    document.getElementById('grand_total').value = grandTotal.toFixed(2);
+}
+
 document.getElementById('add-product').addEventListener('click', function() {
     const container = document.getElementById('products-container');
     const newRow = document.createElement('div');
     newRow.className = 'product-row row mb-3';
     newRow.innerHTML = `
-        <div class="col-md-4">
+        <div class="col-md-3">
             <select class="form-control" name="products[${productIndex}][product_id]" required>
                 <option value="">Select Product</option>
                 @foreach($products as $product)
@@ -185,26 +201,47 @@ document.getElementById('add-product').addEventListener('click', function() {
             </select>
         </div>
         <div class="col-md-2">
-            <input type="number" class="form-control" name="products[${productIndex}][qty]" placeholder="Quantity" required>
+            <select class="form-control" name="products[${productIndex}][purchase_unit_id]" required>
+                <option value="">Select Unit</option>
+                @foreach($units as $unit)
+                    <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="col-md-2">
-            <input type="number" step="0.01" class="form-control" name="products[${productIndex}][net_unit_cost]" placeholder="Unit Cost" required>
+            <input type="number" class="form-control qty" name="products[${productIndex}][qty]" placeholder="Quantity" required>
         </div>
         <div class="col-md-2">
-            <input type="number" step="0.01" class="form-control" name="products[${productIndex}][total]" placeholder="Total" required>
+            <input type="number" step="0.01" class="form-control net_unit_cost" name="products[${productIndex}][net_unit_cost]" placeholder="Unit Cost" required>
         </div>
         <div class="col-md-2">
+            <input type="number" step="0.01" class="form-control total" name="products[${productIndex}][total]" placeholder="Total" readonly>
+        </div>
+        <div class="col-md-1">
             <button type="button" class="btn btn-danger remove-product">Remove</button>
         </div>
     `;
     container.appendChild(newRow);
     productIndex++;
+    
+    // Attach event listeners to new inputs
+    newRow.querySelector('.qty').addEventListener('input', updateTotals);
+    newRow.querySelector('.net_unit_cost').addEventListener('input', updateTotals);
 });
 
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('remove-product')) {
         e.target.closest('.product-row').remove();
+        updateTotals();
     }
 });
+
+// Attach event listeners to initial row and update totals on input
+document.querySelectorAll('.qty, .net_unit_cost').forEach(input => {
+    input.addEventListener('input', updateTotals);
+});
+
+// Update totals on page load for pre-filled values
+document.addEventListener('DOMContentLoaded', updateTotals);
 </script>
 @endsection

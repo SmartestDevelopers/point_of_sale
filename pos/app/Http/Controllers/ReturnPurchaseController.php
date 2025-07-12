@@ -39,13 +39,14 @@ class ReturnPurchaseController extends Controller
     {
         $suppliers = DB::table('suppliers')->get();
         $warehouses = DB::table('warehouses')->get();
-        $products = DB::table('products')->get();
+        $products = DB::table('products')->select('id', 'product_name')->get();
         $purchases = DB::table('purchases')
             ->leftJoin('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
             ->select('purchases.id', 'purchases.reference_no', 'suppliers.name as supplier_name')
             ->get();
+            $units = DB::table('product_units')->select('id', 'unit_name')->get();
         
-        return view('return_purchases.create', compact('suppliers', 'warehouses', 'products', 'purchases'));
+        return view('return_purchases.create', compact('suppliers', 'warehouses', 'products', 'purchases','units'));
     }
 
     /**
