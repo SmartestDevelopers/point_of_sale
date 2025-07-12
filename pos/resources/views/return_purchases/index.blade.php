@@ -48,6 +48,9 @@
                                         <td>{{ $returnPurchase->user_name }}</td>
                                         <td>{{ $returnPurchase->created_at }}</td>
                                         <td>
+                                            <a href="{{ route('return-purchases.show', $returnPurchase->id) }}" class="btn btn-sm btn-info">
+                                                <i class="fas fa-eye"></i> View
+                                            </a>
                                             <a href="{{ route('return-purchases.edit', $returnPurchase->id) }}" class="btn btn-sm btn-primary">
                                                 <i class="fas fa-edit"></i> Edit
                                             </a>

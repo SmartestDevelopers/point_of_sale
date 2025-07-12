@@ -109,6 +109,39 @@ class ReturnPurchaseController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $returnPurchase = DB::table('return_purchases')
+            ->leftJoin('suppliers', 'return_purchases.supplier_id', '=', 'suppliers.id')
+            ->join('warehouses', 'return_purchases.warehouse_id', '=', 'warehouses.id')
+            ->join('users', 'return_purchases.user_id', '=', 'users.id')
+            ->select(
+                'return_purchases.*',
+                'suppliers.name as supplier_name',
+                'warehouses.warehouse as warehouse_name',
+                'users.name as user_name'
+            )
+            ->where('return_purchases.id', $id)
+            ->first();
+
+        if (!$returnPurchase) {
+            return redirect()->route('return-purchases.index')->with('error', 'Return purchase not found.');
+        }
+
+        $productReturnPurchases = DB::table('product_return_purchases')
+            ->join('products', 'product_return_purchases.product_id', '=', 'products.id')
+            ->join('product_units', 'product_return_purchases.purchase_unit_id', '=', 'product_units.id')
+            ->select(
+                'product_return_purchases.*',
+                'products.product_name',
+                'product_units.unit_name'
+            )
+            ->where('product_return_purchases.return_id', $id)
+            ->get();
+
+        return view('return_purchases.show', compact('returnPurchase', 'productReturnPurchases'));
+    }
+
     public function edit($id)
     {
         $returnPurchase = DB::table('return_purchases')->where('id', $id)->first();
