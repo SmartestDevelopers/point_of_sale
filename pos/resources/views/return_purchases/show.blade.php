@@ -24,15 +24,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4>Return Purchase Information</h4>
-                                <p><strong>Reference No:</strong> {{ $returnPurchase->reference_no }}</p>
-                                <p><strong>Supplier:</strong> {{ $returnPurchase->supplier_name ?? 'N/A' }}</p>
-                                <p><strong>Warehouse:</strong> {{ $returnPurchase->warehouse_name }}</p>
-                                <p><strong>Total Quantity:</strong> {{ $returnPurchase->total_qty }}</p>
-                                <p><strong>Grand Total:</strong> {{ number_format($returnPurchase->grand_total, 2) }}</p>
-                                <p><strong>Created By:</strong> {{ $returnPurchase->user_name }}</p>
-                                <p><strong>Created At:</strong> {{ $returnPurchase->created_at }}</p>
-                                <p><strong>Return Note:</strong> {{ $returnPurchase->return_note ?? 'N/A' }}</p>
-                                <p><strong>Staff Note:</strong> {{ $returnPurchase->staff_note ?? 'N/A' }}</p>
+                                <table class="table table-borderless">
+                                    <tr>
+                                <td><strong>Reference No:</strong><br/> {{ $returnPurchase->reference_no }}</td>
+                                <td><strong>Supplier:</strong><br/>{{ $returnPurchase->supplier_name ?? 'N/A' }}<td>
+                                <td><strong>Warehouse:</strong><br/> {{ $returnPurchase->warehouse_name }}</td>
+                                <td><strong>Total Quantity:</strong> <br/>{{ $returnPurchase->total_qty }}</td>
+                                <td><strong>Grand Total:</strong> <br/>{{ number_format($returnPurchase->grand_total, 2) }}</td>
+                                <td><strong>Created By:</strong> <br/>{{ $returnPurchase->user_name }}</td>
+                                <td><strong>Created At:</strong> <br/>{{ $returnPurchase->created_at }}</td>
+                                <td><strong>Return Note:</strong><br/> {{ $returnPurchase->return_note ?? 'N/A' }}</td>
+                                <td><strong>Staff Note:</strong> <br/>{{ $returnPurchase->staff_note ?? 'N/A' }}</td>
+                              </tr>
+                                   
+                                </table>
                             </div>
                         </div>
 

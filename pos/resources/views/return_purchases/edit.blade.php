@@ -66,50 +66,12 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="status">Status *</label>
-                                        <select class="form-control" id="status" name="status" required>
-                                            <option value="0" {{ old('status', $returnPurchase->status) == '0' ? 'selected' : '' }}>Ordered</option>
-                                            <option value="1" {{ old('status', $returnPurchase->status) == '1' ? 'selected' : '' }}>Received</option>
-                                            <option value="2" {{ old('status', $returnPurchase->status) == '2' ? 'selected' : '' }}>Pending</option>
-                                        </select>
-                                        @error('status')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="payment_status">Payment Status *</label>
-                                        <select class="form-control" id="payment_status" name="payment_status" required>
-                                            <option value="0" {{ old('payment_status', $returnPurchase->payment_status) == '0' ? 'selected' : '' }}>Due</option>
-                                            <option value="1" {{ old('payment_status', $returnPurchase->payment_status) == '1' ? 'selected' : '' }}>Paid</option>
-                                            <option value="2" {{ old('payment_status', $returnPurchase->payment_status) == '2' ? 'selected' : '' }}>Partial</option>
-                                        </select>
-                                        @error('payment_status')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
                                         <label for="grand_total">Grand Total *</label>
                                         <input type="number" step="0.01" class="form-control" id="grand_total" name="grand_total" 
                                                value="{{ old('grand_total', $returnPurchase->grand_total) }}" readonly>
                                         @error('grand_total')
                                             <div class="text-danger">{{ $message }}</div>
-                                        @error('grand_total')
-                                            <div class="text-danger">{{ $message }}</div>
                                         @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="paid_amount">Paid Amount</label>
-                                        <input type="number" step="0.01" class="form-control" id="paid_amount" name="paid_amount" 
-                                               value="{{ old('paid_amount', $returnPurchase->paid_amount) }}">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -124,6 +86,7 @@
                             <!-- Products Section -->
                             <div class="card mt-1">
                                 <div class="card-body">
+                                    <h4>Products</h4>
                                     <div id="products-container">
                                         @foreach($productReturnPurchases as $index => $product)
                                             <div class="product-row row mb-3">

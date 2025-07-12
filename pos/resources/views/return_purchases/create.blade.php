@@ -28,7 +28,7 @@
                                     <div class="form-group">
                                         <label for="reference_no">Reference No *</label>
                                         <input type="text" class="form-control" id="reference_no" name="reference_no" 
-                                               value="{{ old('reference_no', 'PUR-' . date('YmdHis')) }}" required>
+                                               value="{{ old('reference_no', 'PUR-' . date('is')) }}" required>
                                         @error('reference_no')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
