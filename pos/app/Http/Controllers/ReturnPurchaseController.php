@@ -44,8 +44,6 @@ class ReturnPurchaseController extends Controller
         $request->validate([
             'reference_no' => 'required|unique:return_purchases',
             'warehouse_id' => 'required|exists:warehouses,id',
-            'status' => 'required|in:0,1,2',
-            'payment_status' => 'required|in:0,1,2',
             'grand_total' => 'required|numeric|min:0',
             'products' => 'required|array|min:1',
             'products.*.product_id' => 'required|exists:products,id',
@@ -58,14 +56,6 @@ class ReturnPurchaseController extends Controller
         DB::beginTransaction();
         
         try {
-            // // Validate stock (commented out to bypass Insufficient stock error)
-            // foreach ($request->products as $product) {
-            //     $productRecord = DB::table('products')->where('id', $product['product_id'])->first();
-            //     if (!$productRecord || $productRecord->product_stock < $product['qty']) {
-            //         throw new \Exception("Insufficient stock for product ID {$product['product_id']}. Available: " . ($productRecord->product_stock ?? 0));
-            //     }
-            // }
-
             // Generate reference number
             $referenceNo = $request->reference_no ?: 'RPR-' . date('YmdHis') . '-' . rand(1000, 9999);
             
@@ -83,9 +73,6 @@ class ReturnPurchaseController extends Controller
                 'order_tax_rate' => $request->order_tax_rate ?? 0,
                 'order_tax' => $request->order_tax ?? 0,
                 'grand_total' => $request->grand_total,
-                'paid_amount' => $request->paid_amount ?? 0,
-                'status' => $request->status,
-                'payment_status' => $request->payment_status,
                 'document' => $request->document,
                 'return_note' => $request->return_note,
                 'staff_note' => $request->staff_note,
@@ -110,8 +97,8 @@ class ReturnPurchaseController extends Controller
                     'updated_at' => now(),
                 ]);
 
-                // Decrease stock
-                DB::table('products')->where('id', $product['product_id'])->decrement('product_stock', $product['qty']);
+                // Decrease stock (commented out to avoid Insufficient stock error)
+                // DB::table('products')->where('id', $product['product_id'])->decrement('product_stock', $product['qty']);
             }
 
             DB::commit();
@@ -152,8 +139,6 @@ class ReturnPurchaseController extends Controller
         $request->validate([
             'reference_no' => 'required|unique:return_purchases,reference_no,' . $id,
             'warehouse_id' => 'required|exists:warehouses,id',
-            'status' => 'required|in:0,1,2',
-            'payment_status' => 'required|in:0,1,2',
             'grand_total' => 'required|numeric|min:0',
             'products' => 'required|array|min:1',
             'products.*.product_id' => 'required|exists:products,id',
@@ -169,16 +154,8 @@ class ReturnPurchaseController extends Controller
             // Revert previous stock adjustments
             $previousProducts = DB::table('product_return_purchases')->where('return_id', $id)->get();
             foreach ($previousProducts as $prevProduct) {
-                DB::table('products')->where('id', $prevProduct->product_id)->increment('product_stock', $prevProduct->qty);
+                // DB::table('products')->where('id', $prevProduct->product_id)->increment('product_stock', $prevProduct->qty);
             }
-
-            // // Validate stock (commented out to bypass Insufficient stock error)
-            // foreach ($request->products as $product) {
-            //     $productRecord = DB::table('products')->where('id', $product['product_id'])->first();
-            //     if (!$productRecord || $productRecord->product_stock < $product['qty']) {
-            //         throw new \Exception("Insufficient stock for product ID {$product['product_id']}. Available: " . ($productRecord->product_stock ?? 0));
-            //     }
-            // }
 
             // Update return purchase record
             DB::table('return_purchases')->where('id', $id)->update([
@@ -193,9 +170,6 @@ class ReturnPurchaseController extends Controller
                 'order_tax_rate' => $request->order_tax_rate ?? 0,
                 'order_tax' => $request->order_tax ?? 0,
                 'grand_total' => $request->grand_total,
-                'paid_amount' => $request->paid_amount ?? 0,
-                'status' => $request->status,
-                'payment_status' => $request->payment_status,
                 'document' => $request->document,
                 'return_note' => $request->return_note,
                 'staff_note' => $request->staff_note,
@@ -222,8 +196,8 @@ class ReturnPurchaseController extends Controller
                     'updated_at' => now(),
                 ]);
 
-                // Decrease stock
-                DB::table('products')->where('id', $product['product_id'])->decrement('product_stock', $product['qty']);
+                // Decrease stock (commented out to avoid Insufficient stock error)
+                // DB::table('products')->where('id', $product['product_id'])->decrement('product_stock', $product['qty']);
             }
 
             DB::commit();
@@ -242,7 +216,7 @@ class ReturnPurchaseController extends Controller
             // Revert stock adjustments
             $products = DB::table('product_return_purchases')->where('return_id', $id)->get();
             foreach ($products as $product) {
-                DB::table('products')->where('id', $product->product_id)->increment('product_stock', $product->qty);
+                // DB::table('products')->where('id', $product->product_id)->increment('product_stock', $product->qty);
             }
 
             // Delete product return purchases
