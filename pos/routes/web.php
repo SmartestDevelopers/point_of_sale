@@ -62,9 +62,17 @@ Route::get('/record', 'RecordController@index')->name('index');
 
 Route::get('/quotations-list', 'QuotationController@index')->name('index');
 
+Route::get('/stocks', 'StockController@index')->name('stocks.index');
+Route::get('/stock-add', 'StockController@create')->name('stocks.create');
+Route::post('/stocks', 'StockController@store')->name('stocks.store');
+Route::get('/stocks/{id}', 'StockController@show')->name('stocks.show');
+Route::get('/stocks/{id}/edit', 'StockController@edit')->name('stocks.edit');
+Route::put('/stocks/{id}', 'StockController@update')->name('stocks.update');
+Route::delete('/stocks/{id}', 'StockController@destroy')->name('stocks.destroy');
 
 Route::resource('sales', 'SaleController');
 Route::resource('return-sales', 'ReturnSaleController');
+
 Route::resource('purchases', 'PurchaseController');
 Route::resource('return-purchases', 'ReturnPurchaseController');
 

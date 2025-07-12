@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class ReturnPurchaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $returnPurchases = DB::table('return_purchases')
@@ -30,11 +25,6 @@ class ReturnPurchaseController extends Controller
         return view('return_purchases.index', compact('returnPurchases'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $suppliers = DB::table('suppliers')->get();
@@ -44,32 +34,39 @@ class ReturnPurchaseController extends Controller
             ->leftJoin('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
             ->select('purchases.id', 'purchases.reference_no', 'suppliers.name as supplier_name')
             ->get();
-            $units = DB::table('product_units')->select('id', 'unit_name')->get();
+        $units = DB::table('product_units')->select('id', 'unit_name')->get();
         
-        return view('return_purchases.create', compact('suppliers', 'warehouses', 'products', 'purchases','units'));
+        return view('return_purchases.create', compact('suppliers', 'warehouses', 'products', 'purchases', 'units'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
             'reference_no' => 'required|unique:return_purchases',
-            'warehouse_id' => 'required',
+            'warehouse_id' => 'required|exists:warehouses,id',
             'products' => 'required|array',
+            'products.*.product_id' => 'required|exists:products,id',
+            'products.*.purchase_unit_id' => 'required|exists:product_units,id',
+            'products.*.qty' => 'required|numeric|min:1',
+            'products.*.net_unit_cost' => 'required|numeric|min:0',
+            'products.*.total' => 'required|numeric|min:0',
         ]);
 
         DB::beginTransaction();
         
         try {
-            // Generate reference number if not provided
+            // Validate stock
+            foreach ($request->products as $product) {
+                $productRecord = DB::table('products')->where('id', $product['product_id'])->first();
+                if (!$productRecord || $productRecord->product_stock < $product['qty']) {
+                    throw new \Exception("Insufficient stock for product ID {$product['product_id']}. Available: " . ($productRecord->product_stock ?? 0));
+                }
+            }
+
+            // Generate reference number
             $referenceNo = $request->reference_no ?: 'RPR-' . date('YmdHis') . '-' . rand(1000, 9999);
             
-            // Insert return purchase record
+            // Insert return purchase
             $returnPurchaseId = DB::table('return_purchases')->insertGetId([
                 'reference_no' => $referenceNo,
                 'user_id' => auth()->user()->id,
@@ -93,7 +90,7 @@ class ReturnPurchaseController extends Controller
             // Insert product return purchases
             foreach ($request->products as $product) {
                 DB::table('product_return_purchases')->insert([
-                    'return_purchase_id' => $returnPurchaseId,
+                    'return_id' => $returnPurchaseId,
                     'product_id' => $product['product_id'],
                     'variant_id' => $product['variant_id'] ?? null,
                     'qty' => $product['qty'],
@@ -106,100 +103,60 @@ class ReturnPurchaseController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
+
+                // Decrease stock
+                DB::table('products')->where('id', $product['product_id'])->decrement('product_stock', $product['qty']);
             }
 
             DB::commit();
             return redirect()->route('return-purchases.index')->with('success', 'Return purchase created successfully!');
-            
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'Error creating return purchase: ' . $e->getMessage());
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $returnSale = DB::table('return_sales')
-            ->select(
-                'return_sales.*',
-                'customers.name as customer_name',
-                'warehouses.warehouse as warehouse_name',
-                'users.name as user_name'
-            )
-            ->leftJoin('customers', 'return_sales.customer_id', '=', 'customers.id')
-            ->leftJoin('warehouses', 'return_sales.warehouse_id', '=', 'warehouses.id')
-            ->leftJoin('users', 'return_sales.user_id', '=', 'users.id') // Changed from biller_id to user_id
-            ->where('return_sales.id', $id)
-            ->first();
-
-        $productReturnSales = DB::table('product_return_sales')
-            ->join('products', 'product_return_sales.product_id', '=', 'products.id')
-            ->join('product_units', 'product_return_sales.sale_unit_id', '=', 'product_units.id')
-            ->select(
-                'product_return_sales.*',
-                'products.product_name as product_name',
-                'product_units.unit_name as unit_name'
-            )
-            ->where('product_return_sales.return_id', $id)
-            ->get();
-
-        if (!$returnSale) {
-            return view('return_sales.show', ['sale' => null]);
-        }
-
-        return view('return_sales.show', [
-            'sale' => $returnSale,
-            'productSales' => $productReturnSales
-        ]);
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $returnPurchase = DB::table('return_purchases')->where('id', $id)->first();
         $suppliers = DB::table('suppliers')->get();
         $warehouses = DB::table('warehouses')->get();
-        $products = DB::table('products')->get();
+        $products = DB::table('products')->select('id', 'product_name')->get();
+        $units = DB::table('product_units')->select('id', 'unit_name')->get();
         
         $productReturnPurchases = DB::table('product_return_purchases')
             ->join('products', 'product_return_purchases.product_id', '=', 'products.id')
-            ->select('product_return_purchases.*', 'products.name as product_name')
-            ->where('product_return_purchases.return_purchase_id', $id)
+            ->select('product_return_purchases.*', 'products.product_name as product_name')
+            ->where('product_return_purchases.return_id', $id)
             ->get();
 
-        return view('return_purchases.edit', compact('returnPurchase', 'suppliers', 'warehouses', 'products', 'productReturnPurchases'));
+        return view('return_purchases.edit', compact('returnPurchase', 'suppliers', 'warehouses', 'products', 'productReturnPurchases', 'units'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
             'reference_no' => 'required|unique:return_purchases,reference_no,' . $id,
-            'warehouse_id' => 'required',
+            'warehouse_id' => 'required|exists:warehouses,id',
             'products' => 'required|array',
+            'products.*.product_id' => 'required|exists:products,id',
+            'products.*.purchase_unit_id' => 'required|exists:product_units,id',
+            'products.*.qty' => 'required|numeric|min:1',
+            'products.*.net_unit_cost' => 'required|numeric|min:0',
+            'products.*.total' => 'required|numeric|min:0',
         ]);
 
         DB::beginTransaction();
         
         try {
+            // Validate stock
+            foreach ($request->products as $product) {
+                $productRecord = DB::table('products')->where('id', $product['product_id'])->first();
+                if (!$productRecord || $productRecord->product_stock < $product['qty']) {
+                    throw new \Exception("Insufficient stock for product ID {$product['product_id']}. Available: " . ($productRecord->product_stock ?? 0));
+                }
+            }
+
             // Update return purchase record
             DB::table('return_purchases')->where('id', $id)->update([
                 'reference_no' => $request->reference_no,
@@ -220,12 +177,12 @@ class ReturnPurchaseController extends Controller
             ]);
 
             // Delete existing product return purchases
-            DB::table('product_return_purchases')->where('return_purchase_id', $id)->delete();
+            DB::table('product_return_purchases')->where('return_id', $id)->delete();
 
             // Insert updated product return purchases
             foreach ($request->products as $product) {
                 DB::table('product_return_purchases')->insert([
-                    'return_purchase_id' => $id,
+                    'return_id' => $id,
                     'product_id' => $product['product_id'],
                     'variant_id' => $product['variant_id'] ?? null,
                     'qty' => $product['qty'],
@@ -238,37 +195,32 @@ class ReturnPurchaseController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
+
+                // Decrease stock
+                DB::table('products')->where('id', $product['product_id'])->decrement('product_stock', $product['qty']);
             }
 
             DB::commit();
             return redirect()->route('return-purchases.index')->with('success', 'Return purchase updated successfully!');
-            
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'Error updating return purchase: ' . $e->getMessage());
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         DB::beginTransaction();
         
         try {
             // Delete product return purchases first
-            DB::table('product_return_purchases')->where('return_purchase_id', $id)->delete();
+            DB::table('product_return_purchases')->where('return_id', $id)->delete();
             
             // Delete return purchase
             DB::table('return_purchases')->where('id', $id)->delete();
             
             DB::commit();
             return redirect()->route('return-purchases.index')->with('success', 'Return purchase deleted successfully!');
-            
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'Error deleting return purchase: ' . $e->getMessage());
